@@ -1,0 +1,299 @@
+index.html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Absürd Haberler Kulübü</title>
+  <style>
+    /* ===========================
+       Genel Reset & Temel Ayarlar
+       =========================== */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121214;
+      color: #f1f1f1;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    /* =================
+       Başlık Stili
+       ================= */
+    header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #ff4081; /* canlı pembe */
+      text-shadow: 0 0 8px #ff4081aa;
+      user-select: none;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      color: #ccc;
+      font-style: italic;
+    }
+
+    /* ===================
+       Haber Listesi Konteyner
+       =================== */
+    main {
+      width: 100%;
+      max-width: 720px;
+    }
+
+    /* ===================
+       Her Haber Kutusu
+       =================== */
+    .news-item {
+      background: #1e1e1e;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.7);
+      cursor: pointer;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    .news-item:hover {
+      background: #2a2a2a;
+    }
+
+    /* ====================
+       Başlık Bölümü
+       ==================== */
+    .news-title {
+      padding: 1rem 1.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    /* Açılıp kapanmayı gösteren ok */
+    .news-title::after {
+      content: "▼";
+      font-size: 1rem;
+      color: #ff4081;
+      transition: transform 0.3s ease;
+    }
+    /* Aktif ise ok yukarı döner */
+    .news-item.active .news-title::after {
+      transform: rotate(-180deg);
+    }
+
+    /* =======================
+       Detay İçerik Bölümü
+       ======================= */
+    .news-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.5rem;
+      font-size: 1rem;
+      color: #ddd;
+      line-height: 1.4;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    /* Aktif olduğunda detay görünür */
+    .news-item.active .news-content {
+      max-height: 500px; /* yeterince büyük olmalı */
+      padding: 1rem 1.5rem 1.5rem;
+    }
+
+    /* =======================
+       Responsive Tasarım
+       ======================= */
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .news-title {
+        font-size: 1.1rem;
+      }
+      main {
+        padding: 0 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Absürd Haberler Kulübü</h1>
+    <p>Gerçekten Olmayan, Ama Çok Komik Haberler</p>
+  </header>
+
+  <main id="news-list" aria-live="polite">
+    <!-- Haberler JavaScript ile buraya gelecek -->
+  </main>
+
+  <script>
+    /* 
+      Haber verisi burada JSON formatında.
+      İstersen kolayca düzenleyebilirsin.
+    */
+    const newsData = [
+      {
+        friend: "Eyüp",
+        profession: "Müzisyen, saz çalar",
+        headlines: [
+          {
+            title: "Eyüp, sazıyla uzaylıları bile dans ettirdi!",
+            content: "Geçen gece Eyüp, sazıyla öyle bir ezgi çaldı ki, gökyüzünde beliren gizemli bir uzaylı gemisi bile ritme kapılarak dans etmeye başladı. Komşular hâlâ etkisinden çıkamadı."
+          },
+          {
+            title: "Eyüp’ün sazı kendini tamir ediyor, 7/24 konser modunda!",
+            content: "Teknolojiyi takip eden Eyüp, sazını tamir eden mini robotlarla donattı. Artık sazı bozulsa bile kendi kendine tamir oluyor ve Eyüp hiç ara vermeden çalabiliyor."
+          }
+        ]
+      },
+      {
+        friend: "Mevlüt",
+        profession: "CNC operatörü",
+        headlines: [
+          {
+            title: "Mevlüt, CNC makinesini robot köpeğe dönüştürdü!",
+            content: "Mevlüt, CNC operatörlüğü yetmedi, makinayı modifiye edip işe robot köpek yaptı. Şimdi ofiste kahve servisi yapıyor ve ofis ortamı çok daha eğlenceli hale geldi."
+          },
+          {
+            title: "CNC makinesine kahve koyan Mevlüt, makinenin hayatı değişti dedi!",
+            content: "Mevlüt, makineye kahve eklediği sırada bir anda makinenin üretim hızı %200 arttı. Fabrika patronu hala sebebini anlayabilmiş değil."
+          }
+        ]
+      },
+      {
+        friend: "Esat",
+        profession: "Müteahhit",
+        headlines: [
+          {
+            title: "Esat, evin duvarlarını marshmallow’dan yaptı!",
+            content: "Müteahhit Esat, yeni projesinde tamamen yenilebilir ve yumuşacık marshmallow duvarları kullandı. Çocuklar bayıldı, büyükler ise şeker komasına girdi."
+          },
+          {
+            title: "Esat’ın şantiyesinde inşaat robotları iş bırakıp piknik yapmaya başladı!",
+            content: "Robot işçiler, şantiyede üretimi durdurup maske takıp piknik yapmaya başladı. İşverenler ne yapacağını şaşırdı."
+          }
+        ]
+      },
+      {
+        friend: "Eşref",
+        profession: "Yazılımcı ve girişimci",
+        headlines: [
+          {
+            title: "Eşref, kod yazarken kahve fincanıyla yarış yapıyor!",
+            content: "Yazılımcı Eşref, kahve fincanını klavyenin yanına yerleştirip onu kod satırlarıyla yarışa soktu. Fincan daha çok kahve kazanıyor."
+          },
+          {
+            title: "Eşref’in uygulaması insanların rüyalarını kod satırlarına çeviriyor!",
+            content: "Yeni geliştirdiği uygulama sayesinde rüyalar gerçek zamanlı olarak kod satırlarına dönüştürülüyor. Program hatası olursa rüya çöker."
+          }
+        ]
+      },
+      {
+        friend: "Fehmi",
+        profession: "İstihbarat ajanı",
+        headlines: [
+          {
+            title: "Fehmi, düşmanını güldürüp sırlarını ele geçiriyor!",
+            content: "İstihbarat ajanı Fehmi, rakip ajanları absürd esprilerle o kadar çok güldürüyor ki, sırları istemeden kendileri veriyor."
+          },
+          {
+            title: "Fehmi, kahve siparişinden dünya barışını sağladı!",
+            content: "Bir kahve siparişi esnasında yaşanan diyalog, uluslararası anlaşmalara ilham oldu. Fehmi’nin kahve diplomasi teknikleri konuşuluyor."
+          }
+        ]
+      },
+      {
+        friend: "Ali",
+        profession: "Hidrolik firmasında müdür olmak isteyen çalışan",
+        headlines: [
+          {
+            title: "Ali, hidrolik sistemlerle dans etmeyi öğrendi!",
+            content: "Ali, fabrikada hidrolik sistemlerin hareketlerini dans figürlerine dönüştürdü. İş arkadaşları şimdi iş çıkışlarında onun gösterisini izliyor."
+          },
+          {
+            title: "Ali, müdürlük sınavını robotlarla yapacakmış!",
+            content: "Ali’nin yeni stratejisi: Müdürlük sınavını robotlar düzenleyecek ve yapay zekaya göre değerlendirecekler. İnsanlar şaşkın."
+          }
+        ]
+      },
+      {
+        friend: "Barış",
+        profession: "Teknik ressam",
+        headlines: [
+          {
+            title: "Barış, teknik çizimleriyle çizgi roman kahramanı yarattı!",
+            content: "Teknik ressam Barış, detaylı çizimleriyle yepyeni bir süper kahraman tasarladı. Hikayesi absürd ama çizimleri çok gerçekçi."
+          },
+          {
+            title: "Barış’ın çizimleri canlandı, ofiste kaos çıktı!",
+            content: "Son çizimlerinde hayat bulan karakterler ofiste dolaşmaya başladı. Barış ve ekipleri, kahramanları sakinleştirmeye çalışıyor."
+          }
+        ]
+      }
+    ];
+
+    // Haberleri listeleyen fonksiyon
+    function renderNews() {
+      const container = document.getElementById('news-list');
+      container.innerHTML = ''; // Temizle
+
+      newsData.forEach(friendData => {
+        friendData.headlines.forEach((news, index) => {
+          // Haber öğesi oluştur
+          const newsItem = document.createElement('article');
+          newsItem.className = 'news-item';
+          newsItem.setAttribute('tabindex', '0');
+          newsItem.setAttribute('role', 'button');
+          newsItem.setAttribute('aria-expanded', 'false');
+          newsItem.setAttribute('aria-controls', `news-content-${friendData.friend}-${index}`);
+
+          // Başlık div'i
+          const titleDiv = document.createElement('div');
+          titleDiv.className = 'news-title';
+          titleDiv.textContent = `[${friendData.friend} - ${friendData.profession}] ${news.title}`;
+
+          // İçerik div'i
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'news-content';
+          contentDiv.id = `news-content-${friendData.friend}-${index}`;
+          contentDiv.textContent = news.content;
+
+          // Başlığa tıklanınca aç/kapa
+          function toggleNews() {
+            const isActive = newsItem.classList.toggle('active');
+            newsItem.setAttribute('aria-expanded', isActive);
+          }
+
+          titleDiv.addEventListener('click', toggleNews);
+          newsItem.addEventListener('keydown', e => {
+            // Enter veya boşluk tuşuyla da aç/kapa yapılabilir
+            if(e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              toggleNews();
+            }
+          });
+
+          // Elementleri birbirine bağla
+          newsItem.appendChild(titleDiv);
+          newsItem.appendChild(contentDiv);
+          container.appendChild(newsItem);
+        });
+      });
+    }
+
+    // Sayfa yüklendiğinde haberleri göster
+    document.addEventListener('DOMContentLoaded', renderNews);
+  </script>
+</body>
+</html>
