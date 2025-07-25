@@ -99,15 +99,21 @@
   </style>
 </head>
 <body>
-  <header>
+  <header id="anasayfa">
     <h1>Absürd Haberler</h1>
     <p>Gündemin Dibi - %100 Gerçek Dışı Haberler</p>
   </header>
   <nav>
+    <a href="#anasayfa" onclick="scrollToSection('anasayfa')">Ana Sayfa</a>
     <a href="#sondakika" onclick="scrollToSection('sondakika')">Son Dakika</a>
     <a href="#populer" onclick="scrollToSection('populer')">Popüler</a>
     <a href="#iletisim" onclick="scrollToSection('iletisim')">İletişim</a>
   </nav>
+
+  <div class="container" id="anasayfa-section">
+    <h2>Hoş Geldiniz!</h2>
+    <p>Absürd haberlerin sonsuz kaynağına hoş geldiniz. Gülmeye hazır olun, çünkü burada mantık tatilde!</p>
+  </div>
 
   <div class="container" id="sondakika">
     <h2>Son Dakika</h2>
@@ -150,17 +156,26 @@
       modal.style.display = "none";
     }
 
-    const lastMinuteNews = Array.from({length: 50}, (_, i) => ({
-      title: `Son Dakika ${i+1}: ${i%2==0 ? "Uzaylılar Bakkal Bastı" : "İnekler Uçmayı Öğrendi"}`,
-      img: "https://picsum.photos/300/200?random=" + i,
-      content: `Olay yerine ilk ulaşan gazeteciler, olayın yaşandığı bölgede inanılmaz manzaralarla karşılaştı. Haberin detayları şöyle gelişti: ${i+1}. olayda vatandaşlar şaşkınlıklarını gizleyemedi.`
-    }));
+    const names = ["Eyüp", "Barış", "Eşref", "Mevlüt", "Ali", "Cem", "Burcu", "Merve"];
+    const professions = ["saz çaldı", "bozuk tost yedi", "evde kertenkele besledi", "çatıya çıktı", "robot yaptı"];
 
-    const popularNews = Array.from({length: 50}, (_, i) => ({
-      title: `Popüler Haber ${i+1}: ${i%2==0 ? "Karpuzdan Araba Yaptılar" : "Tavukla Röportaj"}`,
-      img: "https://picsum.photos/300/200?random=" + (i + 100),
-      content: `Bu haber sosyal medyada milyonlara ulaştı. İçeriğin detayı: ${i+1}. haberde uzmanlar şaşkın, halk ise gülmekten yerlere yattı.`
-    }));
+    const lastMinuteNews = Array.from({length: 20}, (_, i) => {
+      const name = names[i % names.length];
+      const prof = professions[i % professions.length];
+      return {
+        title: `Son Dakika ${i+1}: ${name} ${prof}!`,
+        img: "https://picsum.photos/300/200?random=" + i,
+        content: `${name} bugün gündeme bomba gibi düştü. ${prof} olayı sırasında mahalleli şaşkınlık yaşadı. Görgü tanıkları olayı şöyle anlattı: "Böyle bir şey daha önce görmedik!" Haberin ayrıntılarına göre olay yerinde yaşanan gelişmeler herkesi şok etti. ${i+1}. haberin sonunda, uzmanlar bu olayın benzerlerinin yaşanabileceğini söylüyor.`
+      };
+    });
+
+    const popularNews = Array.from({length: 20}, (_, i) => {
+      return {
+        title: `Popüler Haber ${i+1}: ${i % 2 === 0 ? "Penguenlere Ehliyet Verildi" : "Çamaşır Makinesiyle Seyahat"}`,
+        img: "https://picsum.photos/300/200?random=" + (i + 100),
+        content: `Bu haber sosyal medyada büyük yankı uyandırdı. Vatandaşlar "Böyle bir şey mümkün mü?" diye sorarken, yetkililer araştırma başlattı. ${i+1}. habere göre, olay yerinde çekilen videolar milyonlarca kez izlendi. Uzmanlar bu durumu açıklamakta zorlanıyor.`
+      }
+    });
 
     function renderNews(newsArray, containerId) {
       const grid = document.getElementById(containerId);
