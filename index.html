@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Absürd Haberler Kulübü - Genişletilmiş</title>
+  <title>Absürd Haberler Kulübü - Genişletilmiş 50 Haber</title>
   <meta name="description" content="Absürd, komik ve absürt haberlerin tek adresi! Eyüp, Mevlüt, Barış ve arkadaşlarından absürd haberler burada!">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -17,7 +17,7 @@
 
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: #f0f4f8;
+      background-color: #fff;
       color: #1e293b;
       line-height: 1.6;
       min-height: 100vh;
@@ -87,7 +87,7 @@
     .ticker span {
       display: inline-block;
       padding-left: 100%;
-      animation: tickerMove 20s linear infinite;
+      animation: tickerMove 25s linear infinite;
     }
 
     @keyframes tickerMove {
@@ -141,10 +141,10 @@
     }
 
     .card {
-      background-color: white;
+      background-color: #f9fafb;
       border-radius: 15px;
       padding: 1rem 1.5rem;
-      box-shadow: 0 5px 15px rgb(30 64 175 / 0.2);
+      box-shadow: 0 5px 15px rgb(30 64 175 / 0.1);
       cursor: pointer;
       user-select: none;
       transition: box-shadow 0.3s ease;
@@ -152,7 +152,7 @@
     }
 
     .card:hover {
-      box-shadow: 0 8px 25px rgb(30 64 175 / 0.35);
+      box-shadow: 0 8px 25px rgb(30 64 175 / 0.25);
     }
 
     .card-header {
@@ -307,7 +307,7 @@
       <button class="nav-btn" data-target="iletisim">İletişim</button>
     </nav>
     <div class="ticker" aria-live="polite">
-      <span id="ticker-content">Eyüp Mars'ta saz çaldı! • Mevlüt uzaya CNC makinesi gönderdi! • Barış yapay zekaya karşı satranç kazandı! • Eşref 3D yazıcıyla simit bastı! • Fehmi gizli görevde yakalandı! • Ali hidrolik fabrikasında terfi bekliyor! • Barış 1 saatte 7 tost yedi! • Mevlüt CNC ile döner kesti! • Eyüp sazla meteor yönlendirdi! • Fatma yeni galaksi keşfetti! • Can uzaylılarla dost oldu! • Seda ışın kılıcıyla gösteri yaptı! •</span>
+      <span id="ticker-content">Eyüp Mars'ta saz çaldı! • Mevlüt uzaya CNC makinesi gönderdi! • Barış yapay zekaya karşı satranç kazandı! • Eşref 3D yazıcıyla simit bastı! • Fehmi gizli görevde yakalandı! • Ali hidrolik fabrikasında terfi bekliyor! • Barış 1 saatte 7 tost yedi! • Mevlüt CNC ile döner kesti! • Eyüp sazla meteor yönlendirdi! • Fatma yeni galaksi keşfetti! • Can uzaylılarla dost oldu! • Seda ışın kılıcıyla gösteri yaptı! • Kerem 10 saat kesintisiz çalıştı! • Emre kedi robotu tasarladı! • Ayşe zaman makinesiyle geçmişe gitti! • Zeynep robotik yemek pişirdi! • Murat yatırım projesi duyurdu! •</span>
     </div>
   </header>
 
@@ -335,144 +335,57 @@
     (() => {
       'use strict';
 
-      // Haber verileri - toplam 17 tane absürd haber, görsellerle beraber
       const newsData = [
-        {
-          id: 1,
-          kategori: 'sondakika',
-          baslik: "Eyüp, Mars'ta İlk Saz Resitalini Verdi",
-          tarih: "25 Temmuz 2025",
-          icerik: "NASA astronotları şaşkın! Eyüp, Mars yüzeyinde saz çalıp türkü söyledi. Bilim insanları rezonansı hâlâ çözmeye çalışıyor.",
-          img: "https://via.placeholder.com/900x450.png?text=Ey%C3%BCp+Mars+Saz"
-        },
-        {
-          id: 2,
-          kategori: 'sondakika',
-          baslik: "Mevlüt'ün CNC Makinesi Uzayda!",
-          tarih: "24 Temmuz 2025",
-          icerik: "Türkiye'nin ilk CNC makinesi uzaya çıktı. Mevlüt 'artık galaksiler arası üretim zamanı' dedi.",
-          img: "https://via.placeholder.com/900x450.png?text=CNC+Uzayda"
-        },
-        {
-          id: 3,
-          kategori: 'populer',
-          baslik: "Barış, Yapay Zekayı Satrançta Yendi!",
-          tarih: "23 Temmuz 2025",
-          icerik: "Barış, 12 hamlede GPT-9'u mat etti. 'Sadece mantık değil, biraz da gönül işi bu' dedi.",
-          img: "https://via.placeholder.com/900x450.png?text=Bar%C4%B1%C5%9F+vs+AI"
-        },
-        {
-          id: 4,
-          kategori: 'populer',
-          baslik: "Eşref, 3D Yazıcıyla Simit Bastı",
-          tarih: "22 Temmuz 2025",
-          icerik: "Eşref, sabah işe gitmeden önce 3D yazıcıdan sıcak simit bastı. 'Artık fırına gitmeyeceğim' dedi.",
-          img: "https://via.placeholder.com/900x450.png?text=3D+Simit"
-        },
-        {
-          id: 5,
-          kategori: 'sondakika',
-          baslik: "Fehmi Gizli Görevde Yakalandı",
-          tarih: "21 Temmuz 2025",
-          icerik: "Fehmi, gizli bir operasyonda yakalandı ama kimse ne yaptığını bilmiyor. Dedikodular aldı başını gidiyor.",
-          img: "https://via.placeholder.com/900x450.png?text=Fehmi+Gizli+Görev"
-        },
-        {
-          id: 6,
-          kategori: 'populer',
-          baslik: "Ali, Hidrolik Fabrikasında Terfi Bekliyor",
-          tarih: "20 Temmuz 2025",
-          icerik: "Ali, hidrolik firmasında müdür olmak için sabırsızlanıyor. Patron ise onu sınava sokmayı planlıyor.",
-          img: "https://via.placeholder.com/900x450.png?text=Ali+Hidrolik"
-        },
-        {
-          id: 7,
-          kategori: 'all',
-          baslik: "Barış 1 Saatte 7 Tost Yedi",
-          tarih: "19 Temmuz 2025",
-          icerik: "Barış, tam 7 tost yedi ve kimse bunu hala anlamış değil.",
-          img: "https://via.placeholder.com/900x450.png?text=Bar%C4%B1%C5%9F+Tost"
-        },
-        {
-          id: 8,
-          kategori: 'all',
-          baslik: "Mevlüt CNC ile Döner Kesti",
-          tarih: "18 Temmuz 2025",
-          icerik: "Mevlüt CNC makinesi ile döner kesti, ama yine de ustalığını konuşturdu.",
-          img: "https://via.placeholder.com/900x450.png?text=Mevl%C3%BCt+D%C3%B6ner"
-        },
-        {
-          id: 9,
-          kategori: 'all',
-          baslik: "Eyüp Sazla Meteor Yönlendirdi",
-          tarih: "17 Temmuz 2025",
-          icerik: "Eyüp sazıyla meteorları yönlendirdi, bilim dünyası şoke oldu.",
-          img: "https://via.placeholder.com/900x450.png?text=Ey%C3%BCp+Meteor"
-        },
-        {
-          id: 10,
-          kategori: 'all',
-          baslik: "Fatma Yeni Galaksi Keşfetti",
-          tarih: "16 Temmuz 2025",
-          icerik: "Fatma, teleskopla yeni bir galaksi keşfetti. Astronomlar bu durumu doğruladı.",
-          img: "https://via.placeholder.com/900x450.png?text=Galaksi+Ke%C5%9Ffi"
-        },
-        {
-          id: 11,
-          kategori: 'sondakika',
-          baslik: "Can Uzaylılarla Dost Oldu",
-          tarih: "15 Temmuz 2025",
-          icerik: "Can, gizemli uzaylılarla tanıştı ve dostluk kurdu. Dünya için umut verici gelişmeler.",
-          img: "https://via.placeholder.com/900x450.png?text=Uzayl%C4%B1+Dostluk"
-        },
-        {
-          id: 12,
-          kategori: 'populer',
-          baslik: "Seda Işın Kılıcıyla Gösteri Yaptı",
-          tarih: "14 Temmuz 2025",
-          icerik: "Seda, ışın kılıcıyla muhteşem bir gösteri sundu. Sosyal medya ayağa kalktı.",
-          img: "https://via.placeholder.com/900x450.png?text=I%C5%9F%C4%B1n+K%C4%B1l%C4%B1c%C4%B1+Show"
-        },
-        {
-          id: 13,
-          kategori: 'all',
-          baslik: "Murat Yeni Yatırım Projesi Açıkladı",
-          tarih: "13 Temmuz 2025",
-          icerik: "Murat, teknoloji alanında dev bir yatırım projesini kamuoyuna duyurdu.",
-          img: "https://via.placeholder.com/900x450.png?text=Yat%C4%B1r%C4%B1m+Projesi"
-        },
-        {
-          id: 14,
-          kategori: 'all',
-          baslik: "Zeynep Robotik Yemek Pişirdi",
-          tarih: "12 Temmuz 2025",
-          icerik: "Zeynep'in geliştirdiği robot, evde lezzetli yemekler pişiriyor.",
-          img: "https://via.placeholder.com/900x450.png?text=Robotik+Mutfak"
-        },
-        {
-          id: 15,
-          kategori: 'populer',
-          baslik: "Kerem 10 Saat Kesintisiz Çalıştı",
-          tarih: "11 Temmuz 2025",
-          icerik: "Kerem, 10 saat aralıksız çalıştı ve sosyal medyada efsane oldu.",
-          img: "https://via.placeholder.com/900x450.png?text=Kesintisiz+Çal%C4%B1%C5%9Fma"
-        },
-        {
-          id: 16,
-          kategori: 'all',
-          baslik: "Emre Kedi Robotu Tasarladı",
-          tarih: "10 Temmuz 2025",
-          icerik: "Emre, kedi şeklinde sevimli bir robot tasarladı ve patentini aldı.",
-          img: "https://via.placeholder.com/900x450.png?text=Kedi+Robot"
-        },
-        {
-          id: 17,
-          kategori: 'all',
-          baslik: "Ayşe Zaman Makinesiyle Geçmişe Gitti",
-          tarih: "09 Temmuz 2025",
-          icerik: "Ayşe, zaman makinesiyle geçmişe gidip büyük tarihi anlara tanıklık etti.",
-          img: "https://via.placeholder.com/900x450.png?text=Zaman+Makinesi"
-        }
+        { id: 1, kategori: 'sondakika', baslik: "Eyüp, Mars'ta İlk Saz Resitalini Verdi", tarih: "25 Temmuz 2025", icerik: "NASA astronotları şaşkın! Eyüp, Mars yüzeyinde saz çalıp türkü söyledi. Bilim insanları rezonansı hâlâ çözmeye çalışıyor.", img: "https://via.placeholder.com/900x450.png?text=Ey%C3%BCp+Mars+Saz" },
+        { id: 2, kategori: 'sondakika', baslik: "Mevlüt'ün CNC Makinesi Uzayda!", tarih: "24 Temmuz 2025", icerik: "Türkiye'nin ilk CNC makinesi uzaya çıktı. Mevlüt 'artık galaksiler arası üretim zamanı' dedi.", img: "https://via.placeholder.com/900x450.png?text=CNC+Uzayda" },
+        { id: 3, kategori: 'populer', baslik: "Barış, Yapay Zekayı Satrançta Yendi!", tarih: "23 Temmuz 2025", icerik: "Barış, 12 hamlede GPT-9'u mat etti. 'Sadece mantık değil, biraz da gönül işi bu' dedi.", img: "https://via.placeholder.com/900x450.png?text=Bar%C4%B1%C5%9F+vs+AI" },
+        { id: 4, kategori: 'populer', baslik: "Eşref, 3D Yazıcıyla Simit Bastı", tarih: "22 Temmuz 2025", icerik: "Eşref, sabah işe gitmeden önce 3D yazıcıdan sıcak simit bastı. 'Artık fırına gitmeyeceğim' dedi.", img: "https://via.placeholder.com/900x450.png?text=3D+Simit" },
+        { id: 5, kategori: 'sondakika', baslik: "Fehmi Gizli Görevde Yakalandı", tarih: "21 Temmuz 2025", icerik: "Fehmi, gizli bir operasyonda yakalandı ama kimse ne yaptığını bilmiyor. Dedikodular aldı başını gidiyor.", img: "https://via.placeholder.com/900x450.png?text=Fehmi+Gizli+Görev" },
+        { id: 6, kategori: 'populer', baslik: "Ali, Hidrolik Fabrikasında Terfi Bekliyor", tarih: "20 Temmuz 2025", icerik: "Ali, hidrolik firmasında müdür olmak için sabırsızlanıyor. Patron ise onu sınava sokmayı planlıyor.", img: "https://via.placeholder.com/900x450.png?text=Ali+Hidrolik" },
+        { id: 7, kategori: 'all', baslik: "Barış 1 Saatte 7 Tost Yedi", tarih: "19 Temmuz 2025", icerik: "Barış, tam 7 tost yedi ve kimse bunu hala anlamış değil.", img: "https://via.placeholder.com/900x450.png?text=Bar%C4%B1%C5%9F+Tost" },
+        { id: 8, kategori: 'all', baslik: "Mevlüt CNC ile Döner Kesti", tarih: "18 Temmuz 2025", icerik: "Mevlüt CNC makinesi ile döner kesti, ama yine de ustalığını konuşturdu.", img: "https://via.placeholder.com/900x450.png?text=Mevl%C3%BCt+D%C3%B6ner" },
+        { id: 9, kategori: 'all', baslik: "Eyüp Sazla Meteor Yönlendirdi", tarih: "17 Temmuz 2025", icerik: "Eyüp sazıyla meteorları yönlendirdi, bilim dünyası şoke oldu.", img: "https://via.placeholder.com/900x450.png?text=Ey%C3%BCp+Meteor" },
+        { id: 10, kategori: 'all', baslik: "Fatma Yeni Galaksi Keşfetti", tarih: "16 Temmuz 2025", icerik: "Fatma, teleskopla yeni bir galaksi keşfetti. Astronomlar bu durumu doğruladı.", img: "https://via.placeholder.com/900x450.png?text=Galaksi+Ke%C5%9Ffi" },
+        { id: 11, kategori: 'sondakika', baslik: "Can Uzaylılarla Dost Oldu", tarih: "15 Temmuz 2025", icerik: "Can, gizemli uzaylılarla tanıştı ve dostluk kurdu. Dünya için umut verici gelişmeler.", img: "https://via.placeholder.com/900x450.png?text=Uzayl%C4%B1+Dostluk" },
+        { id: 12, kategori: 'populer', baslik: "Seda Işın Kılıcıyla Gösteri Yaptı", tarih: "14 Temmuz 2025", icerik: "Seda, ışın kılıcıyla muhteşem bir gösteri sundu. Sosyal medya ayağa kalktı.", img: "https://via.placeholder.com/900x450.png?text=I%C5%9F%C4%B1n+K%C4%B1l%C4%B1c%C4%B1+Show" },
+        { id: 13, kategori: 'all', baslik: "Murat Yeni Yatırım Projesi Açıkladı", tarih: "13 Temmuz 2025", icerik: "Murat, teknoloji alanında dev bir yatırım projesini kamuoyuna duyurdu.", img: "https://via.placeholder.com/900x450.png?text=Yat%C4%B1r%C4%B1m+Projesi" },
+        { id: 14, kategori: 'all', baslik: "Zeynep Robotik Yemek Pişirdi", tarih: "12 Temmuz 2025", icerik: "Zeynep'in geliştirdiği robot, evde lezzetli yemekler pişiriyor.", img: "https://via.placeholder.com/900x450.png?text=Robotik+Mutfak" },
+        { id: 15, kategori: 'populer', baslik: "Kerem 10 Saat Kesintisiz Çalıştı", tarih: "11 Temmuz 2025", icerik: "Kerem, 10 saat aralıksız çalıştı ve sosyal medyada efsane oldu.", img: "https://via.placeholder.com/900x450.png?text=Kesintisiz+Çal%C4%B1%C5%9Fma" },
+        { id: 16, kategori: 'all', baslik: "Emre Kedi Robotu Tasarladı", tarih: "10 Temmuz 2025", icerik: "Emre, kedi şeklinde sevimli bir robot tasarladı ve patentini aldı.", img: "https://via.placeholder.com/900x450.png?text=Kedi+Robot" },
+        { id: 17, kategori: 'all', baslik: "Ayşe Zaman Makinesiyle Geçmişe Gitti", tarih: "09 Temmuz 2025", icerik: "Ayşe, zaman makinesiyle geçmişe gidip büyük tarihi anlara tanıklık etti.", img: "https://via.placeholder.com/900x450.png?text=Zaman+Makinesi" },
+        { id: 18, kategori: 'all', baslik: "Deniz Rüzgar Enerjisiyle Yelken Açtı", tarih: "08 Temmuz 2025", icerik: "Deniz, yelkenlisiyle rüzgar enerjisinden maksimum faydayı sağladı.", img: "https://via.placeholder.com/900x450.png?text=R%C3%BCzgar+Enerjisi" },
+        { id: 19, kategori: 'populer', baslik: "Fatma Kedi Gibi Tırmanıyor", tarih: "07 Temmuz 2025", icerik: "Fatma, tırmanışta kedilerden ilham aldı ve rekor kırdı.", img: "https://via.placeholder.com/900x450.png?text=Kedi+T%C4%B1rman%C4%B1%C5%9F" },
+        { id: 20, kategori: 'sondakika', baslik: "Murat Mars'ta İlk Evini İnşa Etti", tarih: "06 Temmuz 2025", icerik: "Murat, Mars'ta kolonileşme için ilk evi inşa etti ve dünyaya mesaj yolladı.", img: "https://via.placeholder.com/900x450.png?text=Mars+Evi" },
+        { id: 21, kategori: 'all', baslik: "Ali Yeni Gitar Modeli Çıkardı", tarih: "05 Temmuz 2025", icerik: "Ali, elektro gitar tasarımında devrim yaptı ve piyasaya sundu.", img: "https://via.placeholder.com/900x450.png?text=Elektro+Gitar" },
+        { id: 22, kategori: 'all', baslik: "Seda Uzayda Yoga Yaptı", tarih: "04 Temmuz 2025", icerik: "Seda, uzay istasyonunda yoga yaparak rahatladı.", img: "https://via.placeholder.com/900x450.png?text=Uzay+Yoga" },
+        { id: 23, kategori: 'all', baslik: "Kerem Yapay Zekaya Kod Yazdı", tarih: "03 Temmuz 2025", icerik: "Kerem, yapay zeka algoritması yazdı ve ödül aldı.", img: "https://via.placeholder.com/900x450.png?text=Kod+Yazma" },
+        { id: 24, kategori: 'populer', baslik: "Eşref 3D Yazıcıyla Maket Ev Yaptı", tarih: "02 Temmuz 2025", icerik: "Eşref, minyatür maket evini 3D yazıcı ile bastı.", img: "https://via.placeholder.com/900x450.png?text=Maket+Ev" },
+        { id: 25, kategori: 'all', baslik: "Emre Drone Yarışında Şampiyon Oldu", tarih: "01 Temmuz 2025", icerik: "Emre, drone yarışlarını kazanarak adını duyurdu.", img: "https://via.placeholder.com/900x450.png?text=Drone+Yar%C4%B1%C5%9F" },
+        { id: 26, kategori: 'all', baslik: "Ayşe Sanal Gerçeklikte Gezi Yaptı", tarih: "30 Haziran 2025", icerik: "Ayşe, VR ile dünyanın dört bir yanını gezdi.", img: "https://via.placeholder.com/900x450.png?text=VR+Gezi" },
+        { id: 27, kategori: 'all', baslik: "Deniz Elektrikli Araba Tasarladı", tarih: "29 Haziran 2025", icerik: "Deniz, çevre dostu elektrikli araba üretti.", img: "https://via.placeholder.com/900x450.png?text=Elektrikli+Araba" },
+        { id: 28, kategori: 'populer', baslik: "Fatma Yeni Roman Yazdı", tarih: "28 Haziran 2025", icerik: "Fatma, bestseller romanıyla gündemde.", img: "https://via.placeholder.com/900x450.png?text=Roman" },
+        { id: 29, kategori: 'all', baslik: "Murat Uzay Teleskopu Geliştirdi", tarih: "27 Haziran 2025", icerik: "Murat, yeni teleskopla yıldızları daha net gördü.", img: "https://via.placeholder.com/900x450.png?text=Teleskop" },
+        { id: 30, kategori: 'all', baslik: "Ali Yenilenebilir Enerji Projesi Başlattı", tarih: "26 Haziran 2025", icerik: "Ali, güneş ve rüzgar enerjisini birleştirdi.", img: "https://via.placeholder.com/900x450.png?text=Yenilenebilir+Enerji" },
+        { id: 31, kategori: 'all', baslik: "Seda Mars'ta Bahçe Kurdu", tarih: "25 Haziran 2025", icerik: "Seda, Mars'ta ilk botanik bahçeyi kurdu.", img: "https://via.placeholder.com/900x450.png?text=Mars+Bah%C3%A7e" },
+        { id: 32, kategori: 'populer', baslik: "Kerem 3D Modelleme Yarışmasını Kazandı", tarih: "24 Haziran 2025", icerik: "Kerem, uluslararası yarışmada ödül aldı.", img: "https://via.placeholder.com/900x450.png?text=3D+Modelleme" },
+        { id: 33, kategori: 'all', baslik: "Eşref Yeni Müzik Albümü Çıkardı", tarih: "23 Haziran 2025", icerik: "Eşref'in albümü dijital platformlarda rekor kırdı.", img: "https://via.placeholder.com/900x450.png?text=Müzik+Albümü" },
+        { id: 34, kategori: 'all', baslik: "Emre Robot Futbol Takımı Kurdu", tarih: "22 Haziran 2025", icerik: "Emre'nin robot takımı ligde şampiyon oldu.", img: "https://via.placeholder.com/900x450.png?text=Robot+Futbol" },
+        { id: 35, kategori: 'all', baslik: "Ayşe Sanal Sanatlar Sergisi Açtı", tarih: "21 Haziran 2025", icerik: "Ayşe'nin VR sanat sergisi büyük ilgi gördü.", img: "https://via.placeholder.com/900x450.png?text=Sanal+Sanatlar" },
+        { id: 36, kategori: 'all', baslik: "Deniz Akıllı Ev Sistemleri Geliştirdi", tarih: "20 Haziran 2025", icerik: "Deniz, evdeki tüm cihazları akıllandırdı.", img: "https://via.placeholder.com/900x450.png?text=Ak%C4%B1ll%C4%B1+Ev" },
+        { id: 37, kategori: 'populer', baslik: "Fatma Uzayda Maraton Koştu", tarih: "19 Haziran 2025", icerik: "Fatma, uzay istasyonunda maraton koşarak tarihe geçti.", img: "https://via.placeholder.com/900x450.png?text=Uzay+Maraton" },
+        { id: 38, kategori: 'all', baslik: "Murat Yeni Yazılım Platformu Başlattı", tarih: "18 Haziran 2025", icerik: "Murat, yazılım dünyasında devrim yaratacak platformu duyurdu.", img: "https://via.placeholder.com/900x450.png?text=Yaz%C4%B1l%C4%B1m+Platformu" },
+        { id: 39, kategori: 'all', baslik: "Ali Yüksek Hızlı Tren Tasarladı", tarih: "17 Haziran 2025", icerik: "Ali, şehirlerarası ulaşımı hızlandıracak tren geliştirdi.", img: "https://via.placeholder.com/900x450.png?text=Y%C3%BCksek+H%C4%B1zl%C4%B1+Tren" },
+        { id: 40, kategori: 'all', baslik: "Seda Dijital Müzik Festivali Düzenledi", tarih: "16 Haziran 2025", icerik: "Seda, online müzik festivaliyle milyonları buluşturdu.", img: "https://via.placeholder.com/900x450.png?text=M%C3%BCzik+Festivali" },
+        { id: 41, kategori: 'populer', baslik: "Kerem Mars'ta İlk Parkı Açtı", tarih: "15 Haziran 2025", icerik: "Kerem, Mars'ta ilk halka açık parkı hizmete sundu.", img: "https://via.placeholder.com/900x450.png?text=Mars+Park" },
+        { id: 42, kategori: 'all', baslik: "Eşref Yeni Klasik Gitar Tasarladı", tarih: "14 Haziran 2025", icerik: "Eşref, klasik gitar yapımında ustalığını gösterdi.", img: "https://via.placeholder.com/900x450.png?text=Klasik+Gitar" },
+        { id: 43, kategori: 'all', baslik: "Emre Elektrikli Bisiklet Üretti", tarih: "13 Haziran 2025", icerik: "Emre, çevre dostu elektrikli bisikleti piyasaya sundu.", img: "https://via.placeholder.com/900x450.png?text=Elektrikli+Bisiklet" },
+        { id: 44, kategori: 'all', baslik: "Ayşe Sanal Gerçeklikte Müzik Dinledi", tarih: "12 Haziran 2025", icerik: "Ayşe, VR gözlükle yeni albümün keyfini çıkardı.", img: "https://via.placeholder.com/900x450.png?text=VR+M%C3%BCzik" },
+        { id: 45, kategori: 'all', baslik: "Deniz Mars'ta Tarım Projesi Başlattı", tarih: "11 Haziran 2025", icerik: "Deniz, Mars toprağında ilk tarım ürünlerini yetiştirdi.", img: "https://via.placeholder.com/900x450.png?text=Mars+Tar%C4%B1m" },
+        { id: 46, kategori: 'populer', baslik: "Fatma Yapay Zeka ile Roman Yazdı", tarih: "10 Haziran 2025", icerik: "Fatma, yapay zeka desteğiyle roman yazdı ve çok beğenildi.", img: "https://via.placeholder.com/900x450.png?text=AI+Roman" },
+        { id: 47, kategori: 'all', baslik: "Murat Yeni Elektrikli Uçak Tasarladı", tarih: "09 Haziran 2025", icerik: "Murat, çevreci elektrikli uçak tasarımını açıkladı.", img: "https://via.placeholder.com/900x450.png?text=Elektrikli+U%C3%A7ak" },
+        { id: 48, kategori: 'all', baslik: "Ali Mars'ta İlk Konserini Verdi", tarih: "08 Haziran 2025", icerik: "Ali, Mars'ta düzenlenen ilk konserin başrolündeydi.", img: "https://via.placeholder.com/900x450.png?text=Mars+Konser" },
+        { id: 49, kategori: 'all', baslik: "Seda Yeni Moda Trendini Başlattı", tarih: "07 Haziran 2025", icerik: "Seda, yeni stil trendiyle moda dünyasını salladı.", img: "https://via.placeholder.com/900x450.png?text=Moda+Trend" },
+        { id: 50, kategori: 'populer', baslik: "Kerem Uzayda İlk Kafeyi Açtı", tarih: "06 Haziran 2025", icerik: "Kerem, uzay istasyonunda kafe açarak tarihi bir işe imza attı.", img: "https://via.placeholder.com/900x450.png?text=Uzay+Kafe" }
       ];
 
       const newsSection = document.getElementById('news-section');
@@ -493,7 +406,7 @@
 
         if (filterText.trim().length > 0) {
           const lowerFilter = filterText.toLowerCase();
-          filteredNews = filteredNews.filter(n => 
+          filteredNews = filteredNews.filter(n =>
             n.baslik.toLowerCase().includes(lowerFilter) ||
             n.icerik.toLowerCase().includes(lowerFilter)
           );
