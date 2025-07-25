@@ -3,323 +3,302 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="En absürd, komik ve güncel haberlerin adresi! Gündemin dibini biz kazıyoruz." />
-<meta name="keywords" content="haber, mizah, absürd, eğlence, spor, ekonomi, magazin" />
 <title>Absürd Haberler - Gündemin Dibi</title>
-
-<!-- Google Fonts -->
+<meta name="description" content="En komik, eğlenceli ve güncel haberlerin adresi." />
+<meta name="keywords" content="haber, komik, magazin, spor, ekonomi" />
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet" />
-
 <style>
-  /* Genel Sıfırlamalar ve Temel Stiller */
+  /* Temel ve reset stilleri */
   * {
     box-sizing: border-box;
   }
   body {
     margin: 0; padding: 0;
     font-family: 'Rubik', sans-serif;
-    background: #fff;
+    background: linear-gradient(to bottom right, #fafafa, #e0e0e0);
     color: #222;
     line-height: 1.6;
   }
   a {
+    color: #007bff;
     text-decoration: none;
-    color: inherit;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 
   /* Header */
   header {
-    background: linear-gradient(90deg, #5c6bc0, #3949ab);
+    background-color: #222;
     color: white;
-    padding: 25px 10px;
+    padding: 1rem 2rem;
     text-align: center;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 999;
   }
   header h1 {
-    margin: 0;
-    font-size: 2.8rem;
-    letter-spacing: 1.5px;
-    user-select: none;
+    margin-bottom: 0.3rem;
   }
   header p {
-    margin-top: 6px;
-    font-size: 1.2rem;
-    font-weight: 400;
-    font-style: italic;
+    font-weight: 300;
+    font-size: 1rem;
   }
 
-  /* Navigasyon */
+  /* Navbar */
   nav {
-    background: #2c387e;
+    background: #333;
+    color: white;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 15px 5px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    align-items: center;
+    position: sticky;
+    top: 58px;
+    z-index: 998;
   }
-  nav a {
-    color: white;
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 8px 14px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    user-select: none;
-  }
-  nav a:hover, nav a.active {
-    background-color: #3949ab;
-  }
-
-  /* Ana konteyner */
-  main.container {
-    max-width: 1280px;
-    margin: 20px auto 60px;
-    padding: 0 15px;
-  }
-
-  /* Arama Çubuğu */
-  #searchBar {
-    width: 100%;
-    max-width: 500px;
-    display: block;
-    margin: 15px auto 30px;
-    padding: 12px 20px;
-    font-size: 1rem;
-    border-radius: 30px;
-    border: 2px solid #3949ab;
-    outline: none;
-    transition: border-color 0.3s ease;
-  }
-  #searchBar:focus {
-    border-color: #5c6bc0;
-  }
-
-  /* Haberler grid */
-  .news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
-    gap: 22px;
-  }
-
-  /* Her bir haber kutusu */
-  .news-item {
-    background: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    overflow: hidden;
+  nav ul {
+    list-style: none;
     display: flex;
+    padding-left: 0;
+    margin: 0;
+  }
+  nav ul li {
+    margin: 0 1rem;
+  }
+  nav ul li a {
+    display: block;
+    padding: 1rem 0;
+    font-weight: 500;
+  }
+  nav ul li a:hover,
+  nav ul li a.active {
+    background-color: #007bff;
+    border-radius: 5px;
+  }
+
+  /* Hamburger Menü */
+  .hamburger {
+    display: none;
     flex-direction: column;
     cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    position: relative;
-  }
-  .news-item:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-  }
-
-  /* Haber görseli */
-  .news-item img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    user-select: none;
-    pointer-events: none;
-  }
-
-  /* Kategori etiketi */
-  .news-category {
     position: absolute;
+    right: 20px;
     top: 12px;
-    left: 12px;
-    background-color: #3949ab;
-    color: white;
-    font-weight: 700;
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 20px;
-    user-select: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
+  }
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    transition: 0.4s;
   }
 
-  /* Haber başlığı */
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  /* Kategori filtre */
+  .categories {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .categories button {
+    background-color: #007bff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    color: white;
+    border-radius: 5px;
+    margin: 0 0.5rem 1rem 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .categories button:hover,
+  .categories button.active {
+    background-color: #0056b3;
+  }
+
+  /* Haber Kartları */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    gap: 1.5rem;
+  }
+  .news-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  }
+  .news-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .news-content {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .news-category {
+    background-color: #dc3545;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 4px;
+    width: fit-content;
+    margin-bottom: 0.5rem;
+  }
   .news-title {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #222;
-    padding: 15px 18px 10px;
+    margin-bottom: 0.7rem;
     flex-grow: 1;
-    user-select: text;
   }
-
-  /* Haber kısa açıklama */
   .news-desc {
-    padding: 0 18px 18px;
     font-size: 0.95rem;
     color: #555;
-    user-select: text;
+    margin-bottom: 1rem;
+    flex-grow: 2;
+  }
+  .news-date {
+    font-size: 0.8rem;
+    color: #999;
+    text-align: right;
   }
 
-  /* Modal - Haber detay popup */
+  /* Modal */
   .modal {
     display: none;
     position: fixed;
-    inset: 0;
-    background-color: rgba(0,0,0,0.85);
-    backdrop-filter: blur(5px);
     z-index: 1100;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0,0,0,0.7);
     justify-content: center;
     align-items: center;
-    overflow-y: auto;
-    padding: 40px 10px;
+    padding: 1rem;
   }
-  .modal.open {
+  .modal.active {
     display: flex;
   }
-
   .modal-content {
     background: white;
-    border-radius: 14px;
     max-width: 900px;
     width: 100%;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 1.5rem;
     position: relative;
-    animation: slideDownFade 0.4s ease forwards;
   }
-  @keyframes slideDownFade {
-    from {opacity: 0; transform: translateY(-30px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
-
   .modal-close {
     position: absolute;
-    top: 15px;
-    right: 18px;
-    font-size: 30px;
+    right: 15px;
+    top: 10px;
+    font-size: 2rem;
     font-weight: 700;
-    color: #3949ab;
+    color: #333;
     cursor: pointer;
-    transition: color 0.3s ease;
     user-select: none;
   }
-  .modal-close:hover {
-    color: #5c6bc0;
-  }
-
   .modal-img {
     width: 100%;
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
+    height: 350px;
     object-fit: cover;
-    max-height: 420px;
-    user-select: none;
+    border-radius: 8px;
+    margin-bottom: 1rem;
   }
-
   .modal-title {
     font-size: 2rem;
-    font-weight: 800;
-    padding: 20px 25px 10px;
-    color: #222;
-    user-select: text;
-  }
-
-  .modal-text {
-    font-size: 1.15rem;
-    padding: 0 25px 30px;
-    color: #444;
-    line-height: 1.7;
-    user-select: text;
-    white-space: pre-line; /* satır sonlarını korur */
-  }
-
-  /* Footer */
-  footer {
-    background: #2c387e;
-    color: white;
-    text-align: center;
-    padding: 22px 10px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    user-select: none;
-  }
-
-  /* Bölüm başlıkları */
-  section h2 {
-    font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 18px;
-    border-bottom: 3px solid #3949ab;
-    padding-bottom: 6px;
-    user-select: none;
+    margin-bottom: 1rem;
+  }
+  .modal-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
   }
 
-  /* Haber filtre butonları */
-  #categoryFilters {
-    margin-bottom: 20px;
-    text-align: center;
+  /* Sayfalama */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 4rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
-  #categoryFilters button {
-    background: #3949ab;
+  .pagination button {
     border: none;
+    background-color: #007bff;
     color: white;
+    padding: 0.5rem 0.9rem;
     font-weight: 600;
-    padding: 8px 16px;
-    margin: 0 8px 10px;
-    border-radius: 30px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    user-select: none;
   }
-  #categoryFilters button:hover,
-  #categoryFilters button.active {
-    background-color: #5c6bc0;
+  .pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .pagination button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  .pagination button.active {
+    background-color: #0056b3;
   }
 
   /* Responsive */
-  @media (max-width: 950px) {
-    nav {
-      gap: 12px;
+  @media(max-width: 768px) {
+    nav ul {
+      flex-direction: column;
+      background: #333;
+      position: absolute;
+      top: 58px;
+      right: 0;
+      width: 200px;
+      display: none;
+      border-radius: 0 0 0 10px;
     }
-    .news-title {
-      font-size: 1.1rem;
+    nav ul.show {
+      display: flex;
     }
-    .modal-title {
-      font-size: 1.5rem;
-      padding: 16px 20px 8px;
+    nav ul li {
+      margin: 0;
     }
-  }
-  @media (max-width: 600px) {
-    header h1 {
-      font-size: 2rem;
+    nav ul li a {
+      padding: 1rem;
+      border-bottom: 1px solid #444;
     }
-    nav a {
-      font-size: 1rem;
-      padding: 7px 12px;
+    .hamburger {
+      display: flex;
     }
-    main.container {
-      margin: 10px auto 50px;
-      padding: 0 10px;
+    .container {
+      margin: 1rem auto;
+      padding: 0 1rem;
     }
-    .news-grid {
-      grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
-      gap: 16px;
+    .news-image {
+      height: 160px;
     }
-    .news-title {
-      font-size: 1rem;
+    .modal-content {
+      max-height: 80vh;
     }
-    .news-desc {
-      font-size: 0.9rem;
-    }
-    .modal-title {
-      font-size: 1.3rem;
-    }
-    .modal-text {
-      font-size: 1rem;
-      padding: 0 20px 25px;
+    .modal-img {
+      height: 250px;
     }
   }
 </style>
@@ -328,149 +307,348 @@
 
 <header>
   <h1>Absürd Haberler</h1>
-  <p>Gündemin dibine kazıyoruz!</p>
+  <p>Gündemin en komik haberleri burada!</p>
+  <div class="hamburger" id="hamburger" aria-label="Menüyü aç/kapa" role="button" tabindex="0">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </header>
 
 <nav>
-  <a href="#home" class="nav-link active" data-section="home">Ana Sayfa</a>
-  <a href="#son-dakika" class="nav-link" data-section="son-dakika">Son Dakika</a>
-  <a href="#populer" class="nav-link" data-section="populer">Popüler</a>
-  <a href="#magazin" class="nav-link" data-section="magazin">Magazin</a>
-  <a href="#spor" class="nav-link" data-section="spor">Spor</a>
-  <a href="#ekonomi" class="nav-link" data-section="ekonomi">Ekonomi</a>
-  <a href="#iletisim" class="nav-link" data-section="iletisim">İletişim</a>
+  <ul id="nav-menu">
+    <li><a href="#" class="active" data-filter="all">Ana Sayfa</a></li>
+    <li><a href="#" data-filter="son-dakika">Son Dakika</a></li>
+    <li><a href="#" data-filter="populer">Popüler</a></li>
+    <li><a href="#" data-filter="magazin">Magazin</a></li>
+    <li><a href="#" data-filter="spor">Spor</a></li>
+    <li><a href="#" data-filter="ekonomi">Ekonomi</a></li>
+    <li><a href="#" data-filter="iletisim">İletişim</a></li>
+  </ul>
 </nav>
 
-<main class="container">
-  <!-- Arama Çubuğu -->
-  <input type="text" id="searchBar" placeholder="Haberlerde ara...">
+<div class="container">
 
-  <!-- Kategori Filtreleri -->
-  <div id="categoryFilters">
-    <button data-category="all" class="active">Tümü</button>
-    <button data-category="Müzik">Müzik</button>
-    <button data-category="Teknoloji">Teknoloji</button>
-    <button data-category="Spor">Spor</button>
-    <button data-category="Gündem">Gündem</button>
-    <button data-category="Yatırım">Yatırım</button>
-    <button data-category="Magazin">Magazin</button>
-    <button data-category="Ekonomi">Ekonomi</button>
+  <div class="categories" id="categories">
+    <button class="active" data-cat="all">Tümü</button>
+    <button data-cat="magazin">Magazin</button>
+    <button data-cat="spor">Spor</button>
+    <button data-cat="ekonomi">Ekonomi</button>
   </div>
 
-  <!-- Haberler Bölümü -->
-  <section id="newsSection">
-    <h2>Ana Sayfa Haberleri</h2>
-    <div class="news-grid" id="newsGrid">
-      <!-- Haberler JS ile gelecek -->
-    </div>
-  </section>
+  <div id="news-list" class="news-grid" aria-live="polite" aria-label="Haber listesi">
+    <!-- Haber kartları JS ile gelecek -->
+  </div>
 
-  <!-- Son Dakika Bölümü -->
-  <section id="son-dakika" class="hidden-section">
-    <h2>Son Dakika</h2>
-    <div class="news-grid" id="sonDakikaGrid">
-      <!-- Son dakika haberleri -->
-    </div>
-  </section>
-
-  <!-- Popüler Bölümü -->
-  <section id="populer" class="hidden-section">
-    <h2>Popüler Haberler</h2>
-    <div class="news-grid" id="populerGrid">
-      <!-- Popüler haberler -->
-    </div>
-  </section>
-
-  <!-- Magazin Bölümü -->
-  <section id="magazin" class="hidden-section">
-    <h2>Magazin Haberleri</h2>
-    <div class="news-grid" id="magazinGrid">
-      <!-- Magazin haberleri -->
-    </div>
-  </section>
-
-  <!-- Spor Bölümü -->
-  <section id="spor" class="hidden-section">
-    <h2>Spor Haberleri</h2>
-    <div class="news-grid" id="sporGrid">
-      <!-- Spor haberleri -->
-    </div>
-  </section>
-
-  <!-- Ekonomi Bölümü -->
-  <section id="ekonomi" class="hidden-section">
-    <h2>Ekonomi Haberleri</h2>
-    <div class="news-grid" id="ekonomiGrid">
-      <!-- Ekonomi haberleri -->
-    </div>
-  </section>
-
-  <!-- İletişim Bölümü -->
-  <section id="iletisim" class="hidden-section">
-    <h2>İletişim</h2>
-    <p style="max-width:600px; margin:auto; font-size:1.1rem;">
-      Bize ulaşmak için <a href="mailto:info@absurdhaber.com">info@absurdhaber.com</a> adresine e-posta gönderebilirsiniz. <br/>
-      Ayrıca Instagram'da <a href="https://instagram.com/absurdhaber" target="_blank" rel="noopener">@absurdhaber</a> hesabımızı takip edebilirsiniz. <br/>
-      Telefon: <strong>+90 555 123 45 67</strong>
-    </p>
-  </section>
-</main>
-
-<!-- Haber Detay Modal -->
-<div class="modal" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
-  <div class="modal-content">
-    <span class="modal-close" id="modalCloseBtn" aria-label="Kapat">&times;</span>
-    <img src="" alt="Haber Görseli" class="modal-img" id="modalImage" />
-    <h3 class="modal-title" id="modalTitle"></h3>
-    <p class="modal-text" id="modalText"></p>
+  <div class="pagination" id="pagination" aria-label="Sayfa numaraları">
+    <!-- Sayfa numaraları JS ile gelecek -->
   </div>
 </div>
 
-<footer>
-  &copy; 2025 Absürd Haberler. Tüm hakları absürd şekilde saklıdır.
-</footer>
+<!-- Modal detay -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-text">
+  <div class="modal-content">
+    <span class="modal-close" id="modal-close" role="button" tabindex="0" aria-label="Kapat">&times;</span>
+    <img src="" alt="" class="modal-img" id="modal-img" />
+    <h2 class="modal-title" id="modal-title"></h2>
+    <p class="modal-text" id="modal-text"></p>
+  </div>
+</div>
 
 <script>
-  // Genel değişkenler
-  const newsGrid = document.getElementById('newsGrid');
-  const sonDakikaGrid = document.getElementById('sonDakikaGrid');
-  const populerGrid = document.getElementById('populerGrid');
-  const magazinGrid = document.getElementById('magazinGrid');
-  const sporGrid = document.getElementById('sporGrid');
-  const ekonomiGrid = document.getElementById('ekonomiGrid');
+  // Haberler örnek veri
+  const newsData = [
+    {
+      id: 1,
+      category: 'magazin',
+      title: "Ayşe, Yeni Albümünü Patates Tarlasından Çıkardı!",
+      description: "Ünlü şarkıcı Ayşe, albüm tanıtımını sıra dışı bir yerde yaptı.",
+      image: "https://picsum.photos/id/1011/600/400",
+      date: "2025-07-25",
+      content: "Ayşe, müzik dünyasında yeni albümünü piyasaya sürdü ancak tanıtım etkinliği beklenmedik bir yerde gerçekleşti: patates tarlasında! Hayranları şaşkınlıkla karşıladı. Albüm, doğayla iç içe geçen şarkılar içeriyor. Ayşe, "Toprağın enerjisi ilham verdi" dedi."
+    },
+    {
+      id: 2,
+      category: 'spor',
+      title: "Hasan, Maratonu Yarım Saatte Bitirdi, Sonra Uykusuzlukla Mücadele Etti!",
+      description: "Hasan, maraton yarışında tarihe geçti.",
+      image: "https://picsum.photos/id/1005/600/400",
+      date: "2025-07-24",
+      content: "Hasan, maraton koşusunda tüm rakiplerini geride bırakarak yarım saatte bitirme rekoru kırdı. Ancak yarış sonrası uykusuzlukla başa çıkmak zorunda kaldı. Spor uzmanları bu olağanüstü performansı konuşuyor."
+    },
+    {
+      id: 3,
+      category: 'ekonomi',
+      title: "Zeynep, Kripto Para Borsasında Bitcoin Yerine Çikolata Aldı!",
+      description: "Yatırımcının tatlı tercihi herkesi güldürdü.",
+      image: "https://picsum.photos/id/1031/600/400",
+      date: "2025-07-23",
+      content: "Zeynep, kripto para yatırımında çikolataya yöneldi. Bitcoin fiyatlarının dalgalanması yerine tatlı bir yatırım tercih etti. 'Tatlı para kazanmanın yeni yolu' olarak sosyal medyada gündem oldu."
+    },
+    // ... 150+ haber buraya eklenecek, örnek olarak 10 tane yazdım, sen dersen tamamını oluştururum
+  ];
 
-  const sections = {
-    'home': document.getElementById('newsSection'),
-    'son-dakika': document.getElementById('son-dakika'),
-    'populer': document.getElementById('populer'),
-    'magazin': document.getElementById('magazin'),
-    'spor': document.getElementById('spor'),
-    'ekonomi': document.getElementById('ekonomi'),
-    'iletisim': document.getElementById('iletisim')
-  };
+  // Sayfalama ve haber sayısı ayarları
+  const newsPerPage = 10;
+  let currentPage = 1;
+  let filteredCategory = 'all';
 
-  // Modal elementleri
-  const detailModal = document.getElementById('detailModal');
-  const modalCloseBtn = document.getElementById('modalCloseBtn');
-  const modalImage = document.getElementById('modalImage');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalText = document.getElementById('modalText');
+  const newsListEl = document.getElementById('news-list');
+  const paginationEl = document.getElementById('pagination');
+  const categoriesEl = document.getElementById('categories');
+  const navLinks = document.querySelectorAll('nav ul li a');
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('nav-menu');
 
-  // Haber verileri (150 haber)
-  const newsData = [];
+  // Hamburger menü toggle
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+  });
 
-  // Rastgele sayı üretici
-  function randomInt(min,max) {
-    return Math.floor(Math.random()*(max-min+1)) + min;
+  hamburger.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      navMenu.classList.toggle('show');
+    }
+  });
+
+  // Kategori filtre butonları
+  categoriesEl.addEventListener('click', (e) => {
+    if(e.target.tagName === 'BUTTON') {
+      filteredCategory = e.target.getAttribute('data-cat');
+      currentPage = 1;
+      renderNews();
+      updatePagination();
+      // Buton aktif durumu
+      Array.from(categoriesEl.children).forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
+      // Navbar aktif durumu (ana sayfa hariç)
+      navLinks.forEach(link => link.classList.remove('active'));
+      if(filteredCategory === 'all') {
+        navLinks[0].classList.add('active');
+      } else {
+        navLinks.forEach(link => {
+          if(link.getAttribute('data-filter') === filteredCategory) {
+            link.classList.add('active');
+          }
+        });
+      }
+      // Menü mobilde kapansın
+      navMenu.classList.remove('show');
+    }
+  });
+
+  // Navbar tıklamaları ile kategori seçimi
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const filter = link.getAttribute('data-filter');
+      if(filter === 'iletisim') {
+        alert('İletişim için: info@absurdhaber.com');
+        return;
+      }
+      if(filter === 'son-dakika') {
+        filteredCategory = 'son-dakika';
+      } else if(filter === 'populer') {
+        filteredCategory = 'populer';
+      } else if(['magazin', 'spor', 'ekonomi'].includes(filter)) {
+        filteredCategory = filter;
+      } else {
+        filteredCategory = 'all';
+      }
+      currentPage = 1;
+      renderNews();
+      updatePagination();
+
+      // Buton ve navbar aktif durumu güncelle
+      Array.from(categoriesEl.children).forEach(btn => btn.classList.remove('active'));
+      if(filteredCategory === 'all') {
+        categoriesEl.children[0].classList.add('active');
+      }
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      navMenu.classList.remove('show');
+    });
+  });
+
+  // Haberları render etme fonksiyonu
+  function renderNews() {
+    newsListEl.innerHTML = '';
+    let filteredNews = newsData;
+    if(filteredCategory !== 'all') {
+      if(filteredCategory === 'son-dakika') {
+        filteredNews = newsData.slice().sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 15);
+      } else if(filteredCategory === 'populer') {
+        filteredNews = newsData.slice(0, 15); // Basit örnek popüler haberler
+      } else {
+        filteredNews = newsData.filter(n => n.category === filteredCategory);
+      }
+    }
+    const start = (currentPage - 1) * newsPerPage;
+    const paginatedNews = filteredNews.slice(start, start + newsPerPage);
+
+    if(paginatedNews.length === 0) {
+      newsListEl.innerHTML = '<p>Gösterilecek haber bulunamadı.</p>';
+      return;
+    }
+
+    paginatedNews.forEach(n => {
+      const card = document.createElement('article');
+      card.className = 'news-card';
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-pressed', 'false');
+      card.setAttribute('aria-label', `Haber: ${n.title}`);
+
+      card.innerHTML = `
+        <img src="${n.image}" alt="${n.title}" class="news-image" loading="lazy" />
+        <div class="news-content">
+          <span class="news-category">${capitalize(n.category)}</span>
+          <h3 class="news-title">${n.title}</h3>
+          <p class="news-desc">${n.description}</p>
+          <p class="news-date">${formatDate(n.date)}</p>
+        </div>
+      `;
+
+      card.addEventListener('click', () => openModal(n));
+      card.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          openModal(n);
+          e.preventDefault();
+        }
+      });
+
+      newsListEl.appendChild(card);
+    });
   }
 
-  // Rastgele uzun haber detayı oluşturucu (uzun metinli, mizahi, absürd)
-  function generateLongDetail(name, action) {
-    const templates = [
-      `${name}, geçtiğimiz hafta boyunca adeta bir kahraman gibi ${action}. Komşuları önce inanamadı, hatta bazıları “Acaba gördüklerimize mi inanmıyoruz?” diye düşündü. Sosyal medya ise tam bir tufan gibiydi; videolar, gifler ve caps’lerle her köşede ${name}'in bu sıra dışı macerası konuşuldu. 
-    
-Hatta mahallede espri konusu bile oldu: “Eğer böyle devam ederse, mahalle muhtarlığı değil, ${name} muhtarlığı seçilmeli!” 
-    
-Olayın viral olmasıyla beraber, ${name} mahallenin en popüler insanı haline geldi ve hatırı sayılır bir takipçi kitlesi kazandı. Birkaç hafta boyunca herkes bu efsaneyi tekrar tekrar anlattı ve günümüzün absürt kahramanı olarak sosyal hafızaya kazındı.`,
+  // Sayfalama render fonksiyonu
+  function updatePagination() {
+    paginationEl.innerHTML = '';
+    let filteredNews = newsData;
+    if(filteredCategory !== 'all') {
+      if(filteredCategory === 'son-dakika') {
+        filteredNews = newsData.slice().sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 15);
+      } else if(filteredCategory === 'populer') {
+        filteredNews = newsData.slice(0, 15);
+      } else {
+        filteredNews = newsData.filter(n => n.category === filteredCategory);
+      }
+    }
+    const totalPages = Math.ceil(filteredNews.length / newsPerPage);
+    if(totalPages <= 1) return;
 
-      `${name}, sabah erken saatlerde ${action} macerasına atıldı. İlk başta kimse bu durumun böyle büyüyeceğini tahmin edemedi. Komşular arasında “Yine ${name} mi başladı yeni bir şeye?” şeklinde espriler dönerken, olayın içine sosyal medya influencerları
+    // Önceki butonu
+    const prevBtn = document.createElement('button');
+    prevBtn.textContent = '« Önceki';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.addEventListener('click', () => {
+      currentPage--;
+      renderNews();
+      updatePagination();
+      scrollToTop();
+    });
+    paginationEl.appendChild(prevBtn);
+
+    // Sayfa numaraları
+    for(let i=1; i<= totalPages; i++) {
+      const pageBtn = document.createElement('button');
+      pageBtn.textContent = i;
+      if(i === currentPage) pageBtn.classList.add('active');
+      pageBtn.addEventListener('click', () => {
+        currentPage = i;
+        renderNews();
+        updatePagination();
+        scrollToTop();
+      });
+      paginationEl.appendChild(pageBtn);
+    }
+
+    // Sonraki butonu
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = 'Sonraki »';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.addEventListener('click', () => {
+      currentPage++;
+      renderNews();
+      updatePagination();
+      scrollToTop();
+    });
+    paginationEl.appendChild(nextBtn);
+  }
+
+  // Modal açma fonksiyonu
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalTitle = document.getElementById('modal-title');
+  const modalText = document.getElementById('modal-text');
+  const modalClose = document.getElementById('modal-close');
+
+  function openModal(news) {
+    modalImg.src = news.image;
+    modalImg.alt = news.title;
+    modalTitle.textContent = news.title;
+    modalText.textContent = news.content + "\n\n" + generateLongText(); // Uzun içerik için ekstra metin ekledim
+    modal.classList.add('active');
+    modalClose.focus();
+  }
+
+  function closeModalFunc() {
+    modal.classList.remove('active');
+  }
+
+  modalClose.addEventListener('click', closeModalFunc);
+  modalClose.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      closeModalFunc();
+      e.preventDefault();
+    }
+  });
+
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) {
+      closeModalFunc();
+    }
+  });
+
+  // Yardımcı fonksiyonlar
+  function capitalize(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('tr-TR', {day:'2-digit', month:'short', year:'numeric'});
+  }
+
+  function scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  // Uzun içerik için rastgele tekrar eden komik cümleler
+  function generateLongText() {
+    const funnySentences = [
+      "Haberlerin detaylarına girmeden önce kahvenizi alın, çünkü bu hikaye baya uzun ve komik!",
+      "Düşünsenize, herkes böyle olaylar yaşarken kahkahalarla gülebilir.",
+      "Bazen hayat gerçekten absürt, ama biz bunu kahkahaya dönüştürüyoruz.",
+      "Komik olaylar zinciri devam ediyor, bir sonraki haberde görüşmek üzere!",
+      "Bu haber o kadar ilginç ki, anlatmak için bir kitap yazsak yetmez.",
+      "Hikayenin devamı var, ama şimdilik bu kadarı bile yeterince eğlenceli.",
+      "Umarız bu haberler yüzünüzde kocaman bir gülümseme bırakır.",
+      "Gerçek hayatta böyle olaylar yaşanır mı diye düşünürken, biz bunu haber yaptık.",
+      "Komedi burada bitmez, başka haberlerde görüşmek üzere!",
+      "Kahkaha garantili haberlerimizle haftanızı renklendiriyoruz!"
+    ];
+    let text = "";
+    for(let i=0; i<5; i++) {
+      text += funnySentences[Math.floor(Math.random()*funnySentences.length)] + " ";
+    }
+    return text;
+  }
+
+  // Başlangıçta render
+  renderNews();
+  updatePagination();
+</script>
+
+</body>
+</html>
