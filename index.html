@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Absürd Haberler Kulübü</title>
+  <title>Absürd Haberler Kulübü - Genişletilmiş</title>
   <meta name="description" content="Absürd, komik ve absürt haberlerin tek adresi! Eyüp, Mevlüt, Barış ve arkadaşlarından absürd haberler burada!">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* Genel Reset */
+    /* Reset ve Temel Stiller */
     * {
       margin: 0;
       padding: 0;
@@ -23,6 +23,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      scroll-behavior: smooth;
     }
 
     header {
@@ -86,7 +87,7 @@
     .ticker span {
       display: inline-block;
       padding-left: 100%;
-      animation: tickerMove 15s linear infinite;
+      animation: tickerMove 20s linear infinite;
     }
 
     @keyframes tickerMove {
@@ -101,7 +102,7 @@
 
     /* Ana Container */
     .container {
-      max-width: 900px;
+      max-width: 960px;
       margin: 2rem auto 3rem;
       padding: 0 1rem;
       flex-grow: 1;
@@ -118,7 +119,7 @@
 
     .search-box input {
       width: 100%;
-      max-width: 450px;
+      max-width: 500px;
       padding: 0.75rem 1rem;
       font-size: 1.1rem;
       border: 2px solid #1e40af;
@@ -136,7 +137,7 @@
     .news-list {
       display: flex;
       flex-direction: column;
-      gap: 1.3rem;
+      gap: 1.5rem;
     }
 
     .card {
@@ -147,6 +148,7 @@
       cursor: pointer;
       user-select: none;
       transition: box-shadow 0.3s ease;
+      overflow: hidden;
     }
 
     .card:hover {
@@ -157,6 +159,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .card-header h2 {
@@ -165,6 +168,7 @@
       font-weight: 700;
       flex-grow: 1;
       cursor: pointer;
+      user-select: text;
     }
 
     .card-header .date {
@@ -174,6 +178,7 @@
       white-space: nowrap;
       user-select: text;
       font-weight: 500;
+      margin-top: 0.2rem;
     }
 
     .card-content {
@@ -184,10 +189,11 @@
       color: #334155;
       font-size: 1rem;
       line-height: 1.4;
+      user-select: text;
     }
 
     .card-content.open {
-      max-height: 500px; /* yeterince büyük */
+      max-height: 600px;
     }
 
     .card-content p {
@@ -199,6 +205,7 @@
       border-radius: 12px;
       margin-top: 0.5rem;
       user-select: none;
+      pointer-events: none;
     }
 
     /* Sidebar */
@@ -258,6 +265,15 @@
       text-decoration: underline;
     }
 
+    /* İletişim Bölümü */
+    #iletisim {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 5px 20px rgb(30 64 175 / 0.1);
+      margin-top: 1.5rem;
+    }
+
     /* Responsive */
     @media (max-width: 700px) {
       nav {
@@ -266,6 +282,16 @@
 
       .card-header h2 {
         font-size: 1.1rem;
+      }
+
+      .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .card-header .date {
+        margin-left: 0;
+        margin-top: 0.3rem;
       }
     }
   </style>
@@ -281,7 +307,7 @@
       <button class="nav-btn" data-target="iletisim">İletişim</button>
     </nav>
     <div class="ticker" aria-live="polite">
-      <span id="ticker-content">Eyüp Mars'ta saz çaldı! • Mevlüt uzaya CNC makinesi gönderdi! • Barış yapay zekaya karşı satranç kazandı! • Eşref 3D yazıcıyla simit bastı! • Fehmi gizli görevde yakalandı! • Ali hidrolik fabrikasında terfi bekliyor! •</span>
+      <span id="ticker-content">Eyüp Mars'ta saz çaldı! • Mevlüt uzaya CNC makinesi gönderdi! • Barış yapay zekaya karşı satranç kazandı! • Eşref 3D yazıcıyla simit bastı! • Fehmi gizli görevde yakalandı! • Ali hidrolik fabrikasında terfi bekliyor! • Barış 1 saatte 7 tost yedi! • Mevlüt CNC ile döner kesti! • Eyüp sazla meteor yönlendirdi! • Fatma yeni galaksi keşfetti! • Can uzaylılarla dost oldu! • Seda ışın kılıcıyla gösteri yaptı! •</span>
     </div>
   </header>
 
@@ -291,11 +317,11 @@
       <div id="search-desc" style="display:none;">Haber başlıkları ve içeriklerinde arama yapabilirsiniz.</div>
     </section>
 
-    <section id="news-section" class="news-list" aria-live="polite">
-      <!-- Haber kartları JS ile buraya yüklenecek -->
+    <section id="news-section" class="news-list" aria-live="polite" tabindex="0">
+      <!-- Haberler buraya JS ile yüklenecek -->
     </section>
 
-    <section id="iletisim" style="display:none; background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 5px 20px rgb(30 64 175 / 0.1);">
+    <section id="iletisim" style="display:none;">
       <h2>İletişim</h2>
       <p>Her türlü soru, öneri veya iş birliği için bize <a href="mailto:absurdhaberler@example.com">absurdhaberler@example.com</a> adresinden ulaşabilirsiniz.</p>
     </section>
@@ -309,7 +335,7 @@
     (() => {
       'use strict';
 
-      // Haber verileri
+      // Haber verileri - toplam 17 tane absürd haber, görsellerle beraber
       const newsData = [
         {
           id: 1,
@@ -317,7 +343,7 @@
           baslik: "Eyüp, Mars'ta İlk Saz Resitalini Verdi",
           tarih: "25 Temmuz 2025",
           icerik: "NASA astronotları şaşkın! Eyüp, Mars yüzeyinde saz çalıp türkü söyledi. Bilim insanları rezonansı hâlâ çözmeye çalışıyor.",
-          img: "https://via.placeholder.com/800x400.png?text=Ey%C3%BCp+Mars+Saz"
+          img: "https://via.placeholder.com/900x450.png?text=Ey%C3%BCp+Mars+Saz"
         },
         {
           id: 2,
@@ -325,7 +351,7 @@
           baslik: "Mevlüt'ün CNC Makinesi Uzayda!",
           tarih: "24 Temmuz 2025",
           icerik: "Türkiye'nin ilk CNC makinesi uzaya çıktı. Mevlüt 'artık galaksiler arası üretim zamanı' dedi.",
-          img: "https://via.placeholder.com/800x400.png?text=CNC+Uzayda"
+          img: "https://via.placeholder.com/900x450.png?text=CNC+Uzayda"
         },
         {
           id: 3,
@@ -333,7 +359,7 @@
           baslik: "Barış, Yapay Zekayı Satrançta Yendi!",
           tarih: "23 Temmuz 2025",
           icerik: "Barış, 12 hamlede GPT-9'u mat etti. 'Sadece mantık değil, biraz da gönül işi bu' dedi.",
-          img: "https://via.placeholder.com/800x400.png?text=Bar%C4%B1%C5%9F+vs+AI"
+          img: "https://via.placeholder.com/900x450.png?text=Bar%C4%B1%C5%9F+vs+AI"
         },
         {
           id: 4,
@@ -341,7 +367,7 @@
           baslik: "Eşref, 3D Yazıcıyla Simit Bastı",
           tarih: "22 Temmuz 2025",
           icerik: "Eşref, sabah işe gitmeden önce 3D yazıcıdan sıcak simit bastı. 'Artık fırına gitmeyeceğim' dedi.",
-          img: "https://via.placeholder.com/800x400.png?text=3D+Simit"
+          img: "https://via.placeholder.com/900x450.png?text=3D+Simit"
         },
         {
           id: 5,
@@ -349,7 +375,7 @@
           baslik: "Fehmi Gizli Görevde Yakalandı",
           tarih: "21 Temmuz 2025",
           icerik: "Fehmi, gizli bir operasyonda yakalandı ama kimse ne yaptığını bilmiyor. Dedikodular aldı başını gidiyor.",
-          img: "https://via.placeholder.com/800x400.png?text=Fehmi+Gizli+Görev"
+          img: "https://via.placeholder.com/900x450.png?text=Fehmi+Gizli+Görev"
         },
         {
           id: 6,
@@ -357,7 +383,7 @@
           baslik: "Ali, Hidrolik Fabrikasında Terfi Bekliyor",
           tarih: "20 Temmuz 2025",
           icerik: "Ali, hidrolik firmasında müdür olmak için sabırsızlanıyor. Patron ise onu sınava sokmayı planlıyor.",
-          img: "https://via.placeholder.com/800x400.png?text=Ali+Hidrolik"
+          img: "https://via.placeholder.com/900x450.png?text=Ali+Hidrolik"
         },
         {
           id: 7,
@@ -365,7 +391,7 @@
           baslik: "Barış 1 Saatte 7 Tost Yedi",
           tarih: "19 Temmuz 2025",
           icerik: "Barış, tam 7 tost yedi ve kimse bunu hala anlamış değil.",
-          img: "https://via.placeholder.com/800x400.png?text=Bar%C4%B1%C5%9F+Tost"
+          img: "https://via.placeholder.com/900x450.png?text=Bar%C4%B1%C5%9F+Tost"
         },
         {
           id: 8,
@@ -373,7 +399,7 @@
           baslik: "Mevlüt CNC ile Döner Kesti",
           tarih: "18 Temmuz 2025",
           icerik: "Mevlüt CNC makinesi ile döner kesti, ama yine de ustalığını konuşturdu.",
-          img: "https://via.placeholder.com/800x400.png?text=Mevl%C3%BCt+D%C3%B6ner"
+          img: "https://via.placeholder.com/900x450.png?text=Mevl%C3%BCt+D%C3%B6ner"
         },
         {
           id: 9,
@@ -381,11 +407,74 @@
           baslik: "Eyüp Sazla Meteor Yönlendirdi",
           tarih: "17 Temmuz 2025",
           icerik: "Eyüp sazıyla meteorları yönlendirdi, bilim dünyası şoke oldu.",
-          img: "https://via.placeholder.com/800x400.png?text=Ey%C3%BCp+Meteor"
+          img: "https://via.placeholder.com/900x450.png?text=Ey%C3%BCp+Meteor"
+        },
+        {
+          id: 10,
+          kategori: 'all',
+          baslik: "Fatma Yeni Galaksi Keşfetti",
+          tarih: "16 Temmuz 2025",
+          icerik: "Fatma, teleskopla yeni bir galaksi keşfetti. Astronomlar bu durumu doğruladı.",
+          img: "https://via.placeholder.com/900x450.png?text=Galaksi+Ke%C5%9Ffi"
+        },
+        {
+          id: 11,
+          kategori: 'sondakika',
+          baslik: "Can Uzaylılarla Dost Oldu",
+          tarih: "15 Temmuz 2025",
+          icerik: "Can, gizemli uzaylılarla tanıştı ve dostluk kurdu. Dünya için umut verici gelişmeler.",
+          img: "https://via.placeholder.com/900x450.png?text=Uzayl%C4%B1+Dostluk"
+        },
+        {
+          id: 12,
+          kategori: 'populer',
+          baslik: "Seda Işın Kılıcıyla Gösteri Yaptı",
+          tarih: "14 Temmuz 2025",
+          icerik: "Seda, ışın kılıcıyla muhteşem bir gösteri sundu. Sosyal medya ayağa kalktı.",
+          img: "https://via.placeholder.com/900x450.png?text=I%C5%9F%C4%B1n+K%C4%B1l%C4%B1c%C4%B1+Show"
+        },
+        {
+          id: 13,
+          kategori: 'all',
+          baslik: "Murat Yeni Yatırım Projesi Açıkladı",
+          tarih: "13 Temmuz 2025",
+          icerik: "Murat, teknoloji alanında dev bir yatırım projesini kamuoyuna duyurdu.",
+          img: "https://via.placeholder.com/900x450.png?text=Yat%C4%B1r%C4%B1m+Projesi"
+        },
+        {
+          id: 14,
+          kategori: 'all',
+          baslik: "Zeynep Robotik Yemek Pişirdi",
+          tarih: "12 Temmuz 2025",
+          icerik: "Zeynep'in geliştirdiği robot, evde lezzetli yemekler pişiriyor.",
+          img: "https://via.placeholder.com/900x450.png?text=Robotik+Mutfak"
+        },
+        {
+          id: 15,
+          kategori: 'populer',
+          baslik: "Kerem 10 Saat Kesintisiz Çalıştı",
+          tarih: "11 Temmuz 2025",
+          icerik: "Kerem, 10 saat aralıksız çalıştı ve sosyal medyada efsane oldu.",
+          img: "https://via.placeholder.com/900x450.png?text=Kesintisiz+Çal%C4%B1%C5%9Fma"
+        },
+        {
+          id: 16,
+          kategori: 'all',
+          baslik: "Emre Kedi Robotu Tasarladı",
+          tarih: "10 Temmuz 2025",
+          icerik: "Emre, kedi şeklinde sevimli bir robot tasarladı ve patentini aldı.",
+          img: "https://via.placeholder.com/900x450.png?text=Kedi+Robot"
+        },
+        {
+          id: 17,
+          kategori: 'all',
+          baslik: "Ayşe Zaman Makinesiyle Geçmişe Gitti",
+          tarih: "09 Temmuz 2025",
+          icerik: "Ayşe, zaman makinesiyle geçmişe gidip büyük tarihi anlara tanıklık etti.",
+          img: "https://via.placeholder.com/900x450.png?text=Zaman+Makinesi"
         }
       ];
 
-      // Sayfadaki elementler
       const newsSection = document.getElementById('news-section');
       const searchInput = document.getElementById('search-input');
       const navButtons = document.querySelectorAll('nav button');
@@ -394,108 +483,97 @@
 
       let currentCategory = 'all';
 
-      // Haberleri render et
-      function renderNews(filter = '', category = 'all') {
-        const keyword = filter.trim().toLowerCase();
+      function renderNews(filterText = '', category = 'all') {
         newsSection.innerHTML = '';
+        let filteredNews = newsData;
 
-        // Haberleri filtrele
-        const filteredNews = newsData.filter(news => {
-          const inCategory = (category === 'all') || (news.kategori === category) || (category === 'populer' && news.kategori === 'populer') || (category === 'sondakika' && news.kategori === 'sondakika') || (category === 'all');
-          const matchesSearch =
-            news.baslik.toLowerCase().includes(keyword) ||
-            news.icerik.toLowerCase().includes(keyword);
-          return inCategory && matchesSearch;
-        });
+        if (category !== 'all') {
+          filteredNews = filteredNews.filter(n => n.kategori === category);
+        }
+
+        if (filterText.trim().length > 0) {
+          const lowerFilter = filterText.toLowerCase();
+          filteredNews = filteredNews.filter(n => 
+            n.baslik.toLowerCase().includes(lowerFilter) ||
+            n.icerik.toLowerCase().includes(lowerFilter)
+          );
+        }
 
         if (filteredNews.length === 0) {
-          newsSection.innerHTML = '<p style="text-align:center; font-weight:bold; color:#64748b;">Aradığınız kriterde haber bulunamadı.</p>';
+          newsSection.innerHTML = '<p style="text-align:center; padding: 2rem; font-size:1.2rem; color:#64748b;">Aramanıza uygun haber bulunamadı.</p>';
           return;
         }
 
-        filteredNews.forEach(news => {
-          // Kart oluştur
+        filteredNews.forEach(item => {
           const card = document.createElement('article');
           card.classList.add('card');
-          card.setAttribute('tabindex', '0');
-          card.setAttribute('aria-expanded', 'false');
 
-          // Kart başlığı ve tarih
-          const header = document.createElement('div');
-          header.classList.add('card-header');
+          // Başlık ve tarih
+          const headerDiv = document.createElement('div');
+          headerDiv.classList.add('card-header');
 
           const title = document.createElement('h2');
-          title.textContent = news.baslik;
+          title.textContent = item.baslik;
+          title.tabIndex = 0;
           title.setAttribute('role', 'button');
-          title.setAttribute('aria-controls', `content-${news.id}`);
-          title.setAttribute('tabindex', '0');
-          title.style.userSelect = 'text';
-
-          const date = document.createElement('span');
-          date.classList.add('date');
-          date.textContent = news.tarih;
-
-          header.appendChild(title);
-          header.appendChild(date);
-          card.appendChild(header);
-
-          // İçerik
-          const content = document.createElement('div');
-          content.classList.add('card-content');
-          content.id = `content-${news.id}`;
-
-          const p = document.createElement('p');
-          p.textContent = news.icerik;
-
-          const img = document.createElement('img');
-          img.src = news.img;
-          img.alt = news.baslik;
-
-          content.appendChild(p);
-          content.appendChild(img);
-
-          card.appendChild(content);
-          newsSection.appendChild(card);
-
-          // Başlığa tıklanınca aç/kapa işlemi
-          function toggleContent() {
-            const isOpen = content.classList.contains('open');
-            if (isOpen) {
-              content.classList.remove('open');
-              card.setAttribute('aria-expanded', 'false');
-            } else {
-              // Diğerlerini kapat
-              document.querySelectorAll('.card-content.open').forEach(openContent => {
-                openContent.classList.remove('open');
-                openContent.parentElement.setAttribute('aria-expanded', 'false');
-              });
-              content.classList.add('open');
-              card.setAttribute('aria-expanded', 'true');
-              // Scroll konumunu ayarla
-              content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }
-
-          title.addEventListener('click', toggleContent);
+          title.setAttribute('aria-expanded', 'false');
+          title.addEventListener('click', () => {
+            toggleContent();
+          });
           title.addEventListener('keydown', e => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
               toggleContent();
             }
           });
+
+          function toggleContent() {
+            const expanded = title.getAttribute('aria-expanded') === 'true';
+            if (expanded) {
+              content.classList.remove('open');
+              title.setAttribute('aria-expanded', 'false');
+            } else {
+              content.classList.add('open');
+              title.setAttribute('aria-expanded', 'true');
+            }
+          }
+
+          const date = document.createElement('span');
+          date.classList.add('date');
+          date.textContent = item.tarih;
+
+          headerDiv.appendChild(title);
+          headerDiv.appendChild(date);
+
+          // İçerik ve görsel
+          const content = document.createElement('div');
+          content.classList.add('card-content');
+
+          const p = document.createElement('p');
+          p.textContent = item.icerik;
+
+          const img = document.createElement('img');
+          img.src = item.img;
+          img.alt = item.baslik;
+
+          content.appendChild(p);
+          content.appendChild(img);
+
+          card.appendChild(headerDiv);
+          card.appendChild(content);
+
+          newsSection.appendChild(card);
         });
       }
 
-      // Menü butonlarına tıklama
+      // Menü butonları olayları
       navButtons.forEach(btn => {
         btn.addEventListener('click', () => {
           if (btn.classList.contains('active')) return;
-
           navButtons.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
 
           currentCategory = btn.getAttribute('data-target');
-
           if (currentCategory === 'iletisim') {
             newsSection.style.display = 'none';
             iletisimSection.style.display = 'block';
@@ -507,20 +585,16 @@
         });
       });
 
-      // Arama kutusuna yazma
+      // Arama işlemi
       searchInput.addEventListener('input', e => {
         renderNews(e.target.value, currentCategory);
       });
 
-      // İlk render
+      // İlk sayfa yüklemede tüm haberleri göster
       renderNews();
 
-      // Ticker içeriğini sonsuz yap (tek tek sonuna tekrar ekleyelim)
-      function duplicateTicker() {
-        tickerContent.textContent += " • " + tickerContent.textContent;
-      }
-      duplicateTicker();
-
+      // Ticker içeriğini sonsuz hale getir (tekrar ekle)
+      tickerContent.textContent += " • " + tickerContent.textContent;
     })();
   </script>
 </body>
