@@ -3,230 +3,127 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="En absürd ve eğlenceli haberlerin adresi! Gündemin dibini biz kazıyoruz." />
+  <meta name="keywords" content="haber, absürd, gündem, mizah, eğlence" />
+  <meta property="og:title" content="Absürd Haberler - Gündemin Dibi" />
+  <meta property="og:description" content="En absürd ve eğlenceli haberlerin adresi! Gündemin dibini biz kazıyoruz." />
+  <meta property="og:image" content="https://example.com/og-image.jpg" />
   <title>Absürd Haberler - Gündemin Dibi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #dbe9f4, #ffffff);
-      color: #111;
-    }
-    header {
-      background: linear-gradient(90deg, #2c3e50, #4ca1af);
-      color: white;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    nav {
-      background: #34495e;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 15px;
-      display: inline-block;
-      transition: background 0.3s;
-    }
-    nav a:hover {
-      background: #1abc9c;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 40px;
-    }
-    .news {
-      background: #fdfdfd;
-      padding: 35px;
-      border-radius: 18px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-    }
-    .news:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
-    .news img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .modal {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.75);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-    }
-    .modal-content {
-      background: #fff;
-      padding: 40px;
-      max-width: 850px;
-      width: 95%;
-      max-height: 90vh;
-      overflow-y: auto;
-      border-radius: 18px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-    .modal-content img {
-      width: 100%;
-      height: auto;
-      margin-bottom: 30px;
-      border-radius: 12px;
-    }
-    .modal-content h3 {
-      font-size: 34px;
-      margin-bottom: 25px;
-    }
-    .modal-content p {
-      font-size: 22px;
-      line-height: 2;
-    }
-    .close-btn {
-      float: right;
-      font-size: 30px;
-      cursor: pointer;
-    }
-    footer {
-      background: linear-gradient(90deg, #2c3e50, #4ca1af);
-      color: white;
-      text-align: center;
-      padding: 26px;
-      margin-top: 50px;
-    }
-    @media(max-width: 600px){
-      nav {
-        flex-direction: column;
-      }
-    }
+    * {box-sizing: border-box; margin: 0; padding: 0;}
+    body {font-family: 'Rubik', sans-serif; line-height: 1.6; background: linear-gradient(to bottom right, #fafafa, #e0e0e0); color: #333;}
+    header {background: #222; color: #fff; padding: 20px 0; text-align: center;}
+    nav {background: #444; padding: 10px 0; text-align: center;}
+    nav a {color: #fff; margin: 0 15px; text-decoration: none; font-weight: 500;}
+    nav a:hover {text-decoration: underline;}
+    .container {max-width: 1200px; margin: auto; padding: 20px;}
+    .news-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;}
+    .news {background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; cursor: pointer; transition: transform 0.3s;}
+    .news:hover {transform: scale(1.02);}
+    .news img {width: 100%; height: auto;}
+    .news h3 {padding: 10px; font-size: 20px;}
+    .news p {padding: 0 10px 10px;}
+    .news-category {position: absolute; background: crimson; color: #fff; padding: 4px 8px; font-size: 12px; top: 10px; left: 10px; border-radius: 4px;}
+    .modal {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; overflow: auto;}
+    .modal-content {background: #fff; padding: 20px; border-radius: 10px; width: 90%; max-width: 800px; position: relative;}
+    .modal-content img {width: 100%; height: auto; margin-bottom: 15px; border-radius: 6px;}
+    .modal-content h3 {margin-bottom: 10px; font-size: 24px;}
+    .modal-content p {font-size: 18px; line-height: 1.8;}
+    .close-btn {position: absolute; top: 10px; right: 15px; font-size: 28px; color: #333; cursor: pointer;}
+    footer {background: #333; color: #fff; text-align: center; padding: 20px; margin-top: 40px;}
+    @media(max-width: 600px){.news h3{font-size: 18px;} .modal-content p{font-size: 16px;}}
   </style>
 </head>
 <body>
-  <header id="anasayfa">
+  <header>
     <h1>Absürd Haberler</h1>
-    <p>Gündemin Dibi - %100 Gerçek Dışı Haberler</p>
+    <p>Gündemin dibine kazıyoruz!</p>
   </header>
   <nav>
-    <a href="#anasayfa" onclick="scrollToSection('anasayfa')">Ana Sayfa</a>
-    <a href="#sondakika" onclick="scrollToSection('sondakika')">Son Dakika</a>
-    <a href="#populer" onclick="scrollToSection('populer')">Popüler</a>
-    <a href="#iletisim" onclick="scrollToSection('iletisim')">İletişim</a>
+    <a href="#home">Ana Sayfa</a>
+    <a href="#son-dakika">Son Dakika</a>
+    <a href="#populer">Popüler</a>
+    <a href="#iletisim">İletişim</a>
   </nav>
-
-  <div class="container" id="anasayfa-section">
-    <h2>Hoş Geldiniz!</h2>
-    <p>Absürd haberlerin sonsuz kaynağına hoş geldiniz. Gülmeye hazır olun, çünkü burada mantık tatilde!</p>
+  <div class="container" id="home">
+    <h2 style="margin-bottom: 20px;">Ana Sayfa</h2>
+    <div class="news-grid">
+      <div class="news" onclick="openModal('modal1')">
+        <span class="news-category">Müzik</span>
+        <img src="https://picsum.photos/id/237/600/400" alt="haber">
+        <h3>Eyüp, Sazıyla Taksim Meydanı'nı Trafiğe Kapattı</h3>
+        <p>Kendini müzikle ifade eden Eyüp, Taksim'de spontane bir konser verdi.</p>
+      </div>
+      <div class="news" onclick="openModal('modal2')">
+        <span class="news-category">Teknoloji</span>
+        <img src="https://picsum.photos/id/1015/600/400" alt="haber">
+        <h3>Barış, Kodla Uzaya Mesaj Gönderdi</h3>
+        <p>"Merhaba uzaylı dostlar!" mesajı dünya dışına ulaştı mı?</p>
+      </div>
+      <div class="news" onclick="openModal('modal3')">
+        <span class="news-category">Spor</span>
+        <img src="https://picsum.photos/id/1021/600/400" alt="haber">
+        <h3>Zeki, Halı Saha Maçında Drone'la Hakemlik Yaptı</h3>
+        <p>Teknoloji spora da el attı! Zeki’nin sıra dışı çözümü gündem oldu.</p>
+      </div>
+    </div>
   </div>
 
-  <div class="container" id="sondakika">
+  <div class="modal" id="modal1">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+      <img src="https://picsum.photos/id/237/1000/600" alt="haber">
+      <h3>Eyüp, Sazıyla Taksim Meydanı'nı Trafiğe Kapattı</h3>
+      <p>Eyüp, Taksim Meydanı'nda sabah 7'de elinde sazıyla belirdi. Müziği o kadar etkileyiciydi ki insanlar yolları kapattı ve tüm trafik akışı durdu. Belediye zabıtaları bile eşlik etti. O sırada çalan "Çökertme" türküsü sosyal medyada viral oldu. Etkinlik yaklaşık 3 saat sürdü. Eyüp daha sonra "Sadece içimden geldi" açıklamasında bulundu.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal2">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+      <img src="https://picsum.photos/id/1015/1000/600" alt="haber">
+      <h3>Barış, Kodla Uzaya Mesaj Gönderdi</h3>
+      <p>Gecenin bir vakti yazdığı Python scripti ile Barış, dünya dışı medeniyetlere "Selam" demeye karar verdi. Anten olarak televizyon kablosunu kullandı. Komşular sinyal aldıklarını iddia etti. Henüz yanıt gelmedi ama umutlu bekleyiş sürüyor. NASA'nın bile radarına girmeyi başaran bu olay, Reddit'te gündem oldu.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal3">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
+      <img src="https://picsum.photos/id/1021/1000/600" alt="haber">
+      <h3>Zeki, Halı Saha Maçında Drone'la Hakemlik Yaptı</h3>
+      <p>Halı saha maçında tarafsızlığı sağlamak isteyen Zeki, drone ile maçın üstünden hakemlik yaptı. Drone'un kamerası tüm pozisyonları kaydetti. Bazı oyuncular gökyüzünden gelen sarı kartlara şaşırdı. Sistem başarıyla çalıştı ve maçın sonunda herkes memnundu. Spor tarihine geçecek bir deneyim oldu.</p>
+    </div>
+  </div>
+
+  <div class="container" id="son-dakika">
     <h2>Son Dakika</h2>
-    <div class="news-grid" id="sondakika-grid"></div>
+    <p>Yeni gelen absürd haberler burada listeleniyor. Gelişmeleri anlık takip edin. Şehirde bir vatandaş, kendini güneşe karşı savunmak için şemsiye yerine peynir kullanmaya başladı. Detaylar birazdan!</p>
   </div>
 
   <div class="container" id="populer">
     <h2>Popüler Haberler</h2>
-    <div class="news-grid" id="populer-grid"></div>
+    <p>En çok konuşulan, en çok tıklanan haberler burada. Örneğin "Barış'ın Uzaylı Projesi" sosyal medyada 1 milyon izlenmeye ulaştı!</p>
   </div>
 
   <div class="container" id="iletisim">
     <h2>İletişim</h2>
-    <p>Bize ulaşmak isterseniz <strong>iletisim@absurdhaber.com</strong> adresine mail atabilirsiniz.</p>
-  </div>
-
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <img id="modal-img" src="" alt="" />
-      <h3 id="modal-title"></h3>
-      <p id="modal-content-text"></p>
-    </div>
+    <p>Bize ulaşmak için <a href="mailto:info@absurdhaber.com">info@absurdhaber.com</a> adresine e-posta gönderebilirsiniz. Ayrıca Instagram'da <strong>@absurdhaber</strong> hesabımızı takip edebilirsiniz.</p>
   </div>
 
   <footer>
-    <p>&copy; 2025 Absürd Haberler | Gerçeklerin Ötesinde</p>
+    <p>&copy; 2025 Absürd Haberler. Tüm hakları absürd şekilde saklıdır.</p>
   </footer>
 
   <script>
-    const modal = document.getElementById("modal");
-    const modalTitle = document.getElementById("modal-title");
-    const modalContent = document.getElementById("modal-content-text");
-    const modalImg = document.getElementById("modal-img");
-
-    function openModal(title, content, imgSrc) {
-      modalTitle.innerText = title;
-      modalContent.innerText = content;
-      modalImg.src = imgSrc;
-      modalImg.alt = title;
-      modal.style.display = "flex";
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
     }
-    function closeModal() {
-      modal.style.display = "none";
-    }
-
-    const names = ["Eyüp", "Barış", "Eşref", "Mevlüt", "Ali", "Cem", "Burcu", "Merve"];
-    const professions = ["bugün parkta gitar çaldı", "fırından çıkan ekmekleri imzaladı", "robotik kedi eğitimi verdi", "sokak lambası ile muhabbet etti", "kendi gölgesine çay ısmarladı"];
-
-    const lastMinuteNews = Array.from({length: 20}, (_, i) => {
-      const name = names[i % names.length];
-      const prof = professions[i % professions.length];
-      return {
-        title: `Son Dakika ${i+1}: ${name} ${prof}`,
-        img: "https://picsum.photos/600/400?random=" + i,
-        content: `${name} ile ilgili ilginç bir olay yaşandı. Olay şu şekilde gelişti: ${prof}. Tanıkların ifadesine göre olay saat ${9+i}:00 civarında meydana geldi. Yerel halk olan biteni şaşkınlıkla izlerken sosyal medya çalkalandı. Psikologlar bu davranışı özgürlük arayışıyla ilişkilendirdi. Yetkililer araştırma başlattı.`
-      };
-    });
-
-    const popularNews = Array.from({length: 20}, (_, i) => {
-      return {
-        title: `Popüler Haber ${i+1}: ${i % 2 === 0 ? "Dronla Tavla Oynayan Adam" : "Dalgıçlar Metroda Su Altı Partisi Verdi"}`,
-        img: "https://picsum.photos/600/400?random=" + (i + 100),
-        content: `Bu haber gündeme damga vurdu. İnsanlar olayın gerçek olup olmadığını tartışıyor. Sosyal medya coştu, görüntüler viral oldu. Uzmanlar toplu eğlencelerin bireysel rahatlama ihtiyacından doğduğunu belirtiyor. Olay, kentte günün konusu haline geldi.`
-      }
-    });
-
-    function renderNews(newsArray, containerId) {
-      const grid = document.getElementById(containerId);
-      newsArray.forEach(news => {
-        const el = document.createElement("div");
-        el.classList.add("news");
-        el.innerHTML = `
-          <img src="${news.img}" alt="${news.title}" />
-          <h3>${news.title}</h3>
-          <p>${news.content.slice(0, 120)}...</p>
-        `;
-        el.onclick = () => openModal(news.title, news.content, news.img);
-        grid.appendChild(el);
-      });
-    }
-
-    renderNews(lastMinuteNews, "sondakika-grid");
-    renderNews(popularNews, "populer-grid");
-
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
     }
   </script>
 </body>
