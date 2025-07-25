@@ -27,15 +27,14 @@
       text-align: center;
     }
     header h1 { font-size: 2rem; }
-    nav {
-      margin-top: 1rem;
-    }
+    nav { margin-top: 1rem; }
     nav a {
       color: #fff;
       margin: 0 1rem;
       text-decoration: none;
       font-weight: bold;
     }
+    nav a:hover { text-decoration: underline; }
     .ticker {
       background: #facc15;
       color: #1f2937;
@@ -43,6 +42,11 @@
       font-weight: bold;
       overflow: hidden;
       white-space: nowrap;
+      animation: slide 30s linear infinite;
+    }
+    @keyframes slide {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
     .container {
       max-width: 960px;
@@ -81,6 +85,7 @@
       margin-top: 1rem;
       border-radius: 8px;
     }
+    button:hover { opacity: 0.9; }
     footer {
       background-color: #1e293b;
       color: #fff;
@@ -121,9 +126,7 @@
       padding: 1rem;
       margin-top: 2rem;
     }
-    .comment-section h4 {
-      margin-bottom: 1rem;
-    }
+    .comment-section h4 { margin-bottom: 1rem; }
     .comment-section textarea {
       width: 100%;
       height: 100px;
@@ -186,6 +189,7 @@
       <a href="#">İletişim</a>
     </nav>
   </header>
+
   <div class="ticker">Son Dakika: Eyüp Mars'ta saz çaldı! | Mevlüt uzaya CNC makinesi gönderdi! | Barış, yapay zekaya karşı satranç kazandı!</div>
 
   <div class="container">
@@ -194,31 +198,31 @@
     </div>
 
     <div class="card">
-      <h2>Eyüp, Mars'ta İlk Saz Resitalini Verdi</h2>
+      <h2>Ali, Kuantum Bilgisayarıyla Tavla Oynadı</h2>
       <div class="date">25 Temmuz 2025</div>
-      <p>NASA astronotları şaşkın! Eyüp, Mars yüzeyinde saz çalıp türkü söyledi. Bilim insanları rezonansı hâlâ çözmeye çalışıyor.</p>
-      <img src="https://via.placeholder.com/800x400.png?text=Ey%C3%BCp+Mars+Saz" alt="Eyüp Mars'ta Saz">
+      <p>"Zar değil, kader" dedi Ali. Cambridge üniversitesi olayı araştırmaya başladı.</p>
+      <img src="https://via.placeholder.com/800x400.png?text=Kuantum+Tavla" alt="Kuantum Tavla">
     </div>
 
     <div class="card">
-      <h2>Mevlüt'ün CNC Makinesi Uzayda!</h2>
+      <h2>Mevlüt, CNC ile Mars'ta Seramik Bardak Yaptı</h2>
       <div class="date">24 Temmuz 2025</div>
-      <p>Türkiye'nin ilk CNC makinesi uzaya çıktı. Mevlüt "artık galaksiler arası üretim zamanı" dedi.</p>
-      <img src="https://via.placeholder.com/800x400.png?text=CNC+Uzayda" alt="Mevlüt CNC Uzay">
+      <p>NASA yetkilileri: "Tarihi bir an. Mars'ta ilk çay içimi gerçekleşti."</p>
+      <img src="https://via.placeholder.com/800x400.png?text=Mars+Seramik" alt="Mars CNC Seramik">
     </div>
 
     <div class="card">
-      <h2>Barış, Yapay Zekayı Satrançta Yendi!</h2>
+      <h2>Barış, Antarktika'da WiFi Dağıttı</h2>
       <div class="date">23 Temmuz 2025</div>
-      <p>Barış, 12 hamlede GPT-9'u mat etti. "Sadece mantık değil, biraz da gönül işi bu" dedi.</p>
-      <img src="https://via.placeholder.com/800x400.png?text=Bar%C4%B1%C5%9F+vs+AI" alt="Barış vs AI">
+      <p>Penguenler sabahlara kadar YouTube izliyor. "Barış sayesinde artık sosyaliz" dedi biri.</p>
+      <img src="https://via.placeholder.com/800x400.png?text=Antarktika+Wifi" alt="Wifi Penguen">
     </div>
 
     <div class="card">
-      <h2>Eşref, 3D Yazıcıyla Simit Bastı</h2>
+      <h2>Eşref, Rüyasında Kod Yazdı, Proje Çalıştı</h2>
       <div class="date">22 Temmuz 2025</div>
-      <p>Eşref, sabah işe gitmeden önce 3D yazıcıdan sıcak simit bastı. "Artık fırına gitmeyeceğim" dedi.</p>
-      <img src="https://via.placeholder.com/800x400.png?text=3D+Simit" alt="3D Simit">
+      <p>Eşref sabah uyandığında projeyi GitHub'a yüklemişti. Uyurgezer yazılımcılara umut oldu.</p>
+      <img src="https://via.placeholder.com/800x400.png?text=Uyurgezer+Kod" alt="Uyurken Kod">
     </div>
 
     <div class="comment-section">
@@ -233,6 +237,7 @@
         <li><a href="#">Barış 1 saatte 7 tost yedi</a></li>
         <li><a href="#">Mevlüt CNC ile döner kesti</a></li>
         <li><a href="#">Eyüp sazla meteor yönlendirdi</a></li>
+        <li><a href="#">Ali, Matrix'e giriş yaptı</a></li>
       </ul>
     </div>
 
