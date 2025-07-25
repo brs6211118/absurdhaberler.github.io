@@ -1,275 +1,619 @@
-<!-- BAŞLANGIÇ -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Absürd Komik Haberler</title>
-  <style>
-    /* RESET */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #333;
-      line-height: 1.6;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="En komik, eğlenceli ve güncel haberler burada!" />
+<meta name="keywords" content="haber, mizah, eğlence, komik, gündem, magazin, spor, ekonomi" />
+<meta property="og:title" content="Komik Haberler - Gündemin Keyfi" />
+<meta property="og:description" content="Gülmeye hazır mısınız? En eğlenceli haberler burada." />
+<meta property="og:image" content="https://picsum.photos/1200/630?random=1" />
+<title>Komik Haberler - Gündemin Keyfi</title>
+<style>
+  /* Reset & temel stil */
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin:0; padding:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a {
+    color: #0077cc;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
 
-    header {
-      background: #ff6f61;
-      color: white;
-      padding: 20px;
+  /* Header */
+  header {
+    background-color: #004080;
+    color: #fff;
+    padding: 1.4rem 1rem;
+    text-align: center;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.2);
+  }
+  header h1 {
+    margin-bottom: 0.2rem;
+    font-weight: 700;
+    font-size: 2.4rem;
+    letter-spacing: 2px;
+  }
+  header p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  /* Navigation */
+  nav {
+    background-color: #0266d0;
+    box-shadow: inset 0 -3px 5px rgba(0,0,0,0.15);
+  }
+  nav ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  nav li {
+    margin: 0 1rem;
+  }
+  nav button {
+    background: none;
+    border: none;
+    padding: 1rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  nav button:hover,
+  nav button:focus {
+    color: #ffe600;
+    outline: none;
+  }
+
+  /* Container */
+  main {
+    flex: 1 0 auto;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  section h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid #0077cc;
+    padding-bottom: 0.3rem;
+    font-size: 2rem;
+  }
+
+  /* Haber Grid */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    gap: 1.3rem;
+  }
+  .news-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .news-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+  }
+  .news-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .news-content {
+    padding: 1rem 1rem 1.3rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .news-category {
+    background: #0077cc;
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    padding: 3px 10px;
+    align-self: flex-start;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+  .news-title {
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+    flex-grow: 0;
+  }
+  .news-snippet {
+    font-size: 0.95rem;
+    color: #444;
+    flex-grow: 1;
+  }
+  .read-more-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+  }
+  .read-more-btn:hover,
+  .read-more-btn:focus {
+    background-color: #005fa3;
+    outline: none;
+  }
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.75);
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 1.5rem;
+  }
+  .modal.active {
+    display: flex;
+  }
+  .modal-content {
+    background: #fff;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    padding: 2rem;
+    position: relative;
+  }
+  .modal-close-btn {
+    position: absolute;
+    top: 12px; right: 16px;
+    font-size: 2rem;
+    color: #444;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+  }
+  .modal-close-btn:hover {
+    color: #0077cc;
+  }
+  .modal-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+  .modal-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: #222;
+  }
+  .modal-text {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #333;
+    white-space: pre-line;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #004080;
+    color: white;
+    text-align: center;
+    padding: 1.8rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .news-image {
+      height: 140px;
+    }
+    .modal-image {
+      height: 250px;
+    }
+  }
+  @media (max-width: 480px) {
+    nav ul {
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    nav li {
+      margin: 0;
       text-align: center;
     }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      background: #222;
-    }
-
-    nav a {
-      color: white;
-      padding: 15px 20px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      background: #444;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-    }
-
     .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: 1fr;
+      gap: 1rem;
     }
-
-    .news-card {
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .news-card:hover {
-      transform: scale(1.02);
-    }
-
-    .news-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .news-card .content {
-      padding: 15px;
-    }
-
-    .news-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
-    .news-card p {
-      font-size: 0.95rem;
-    }
-
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-    }
-
-    .category {
-      font-size: 0.8rem;
-      color: #888;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .detail-view {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      padding: 30px;
-    }
-
-    .detail-box {
-      background: white;
-      max-width: 800px;
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .detail-box img {
-      width: 100%;
-      height: auto;
-    }
-
-    .detail-box .text {
-      padding: 20px;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #333;
-    }
-
-    @media(max-width: 600px) {
-      nav a {
-        padding: 10px;
-        font-size: 0.9rem;
-      }
-
-      .news-card img {
-        height: 150px;
-      }
-
-      .detail-box .text {
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
 <header>
-  <h1>Absürd ve Komik Haberler</h1>
-  <p>Magazin | Spor | Ekonomi</p>
+  <h1>Komik Haberler</h1>
+  <p>Gülmenin tam zamanı! Güncel, eğlenceli ve absürt haberler burada.</p>
 </header>
 
 <nav>
-  <a href="#magazin">Magazin</a>
-  <a href="#spor">Spor</a>
-  <a href="#ekonomi">Ekonomi</a>
+  <ul>
+    <li><button data-section="anasayfa">Ana Sayfa</button></li>
+    <li><button data-section="magazin">Magazin</button></li>
+    <li><button data-section="spor">Spor</button></li>
+    <li><button data-section="ekonomi">Ekonomi</button></li>
+    <li><button data-section="sondakika">Son Dakika</button></li>
+    <li><button data-section="populer">Popüler</button></li>
+    <li><button data-section="iletisim">İletişim</button></li>
+  </ul>
 </nav>
 
-<div class="container">
-  <section id="magazin">
-    <h2>Magazin</h2>
-    <div class="news-grid" id="magazin-news"></div>
-  </section>
+<main>
 
-  <section id="spor">
-    <h2>Spor</h2>
-    <div class="news-grid" id="spor-news"></div>
-  </section>
+  <!-- Haber Bölümleri -->
 
-  <section id="ekonomi">
-    <h2>Ekonomi</h2>
-    <div class="news-grid" id="ekonomi-news"></div>
-  </section>
-</div>
-
-<!-- HABER DETAY PENCERESİ -->
-<div class="detail-view" id="detailView">
-  <div class="detail-box">
-    <span class="close-btn" onclick="closeDetail()">×</span>
-    <img id="detailImage" src="" alt="Haber görseli">
-    <div class="text">
-      <h2 id="detailTitle"></h2>
-      <p id="detailContent"></p>
+  <section id="anasayfa">
+    <h2>Ana Sayfa - Tüm Haberler</h2>
+    <div class="news-grid" id="news-anasayfa">
+      <!-- Haber kartları buraya JS ile gelecek -->
     </div>
+  </section>
+
+  <section id="magazin" style="display:none;">
+    <h2>Magazin Haberleri</h2>
+    <div class="news-grid" id="news-magazin"></div>
+  </section>
+
+  <section id="spor" style="display:none;">
+    <h2>Spor Haberleri</h2>
+    <div class="news-grid" id="news-spor"></div>
+  </section>
+
+  <section id="ekonomi" style="display:none;">
+    <h2>Ekonomi Haberleri</h2>
+    <div class="news-grid" id="news-ekonomi"></div>
+  </section>
+
+  <section id="sondakika" style="display:none;">
+    <h2>Son Dakika</h2>
+    <div class="news-grid" id="news-sondakika"></div>
+  </section>
+
+  <section id="populer" style="display:none;">
+    <h2>Popüler Haberler</h2>
+    <div class="news-grid" id="news-populer"></div>
+  </section>
+
+  <section id="iletisim" style="display:none;">
+    <h2>İletişim</h2>
+    <p>Bizimle iletişime geçmek için:</p>
+    <ul>
+      <li>E-posta: <a href="mailto:info@komikhaberler.com">info@komikhaberler.com</a></li>
+      <li>Instagram: <a href="https://instagram.com/komikhaberler" target="_blank">@komikhaberler</a></li>
+      <li>Twitter: <a href="https://twitter.com/komikhaberler" target="_blank">@komikhaberler</a></li>
+    </ul>
+  </section>
+
+</main>
+
+<!-- Modal Haber Detay -->
+<div class="modal" id="modal">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close-btn" aria-label="Kapat">&times;</button>
+    <img src="" alt="Haber görseli" class="modal-image" />
+    <h3 class="modal-title" id="modalTitle"></h3>
+    <p class="modal-text"></p>
   </div>
 </div>
 
-<footer>
-  <p>&copy; 2025 Absürd Komik Haberler. Tüm hakları saklıdır.</p>
-</footer>
-
 <script>
-  const newsData = [];
-  const categories = ['magazin', 'spor', 'ekonomi'];
-  const exampleTitles = {
-    magazin: ["Ünlü Şarkıcı Kediyle Röportaj Yaptı", "Barış Manço'nun Gizli Pizza Tarifi Bulundu", "Moda Haftasında Terlik Fırtınası"],
-    spor: ["Futbolcu Sahada Yoga Yaparak Gol Attı", "Basketbolcu Patenle Maça Çıktı", "E-sporcu Fareyle Dünya Rekoru Kırdı"],
-    ekonomi: ["Dolar Yerine Simit Takas Sistemi Başladı", "Yatırımcılar Tavuk Yumurta Hisselerine Yöneldi", "Altın Fiyatları Tavuk Suyuna Çorba ile Kıyaslandı"]
-  };
-
-  const exampleImages = [
-    "https://picsum.photos/seed/h1/400/250",
-    "https://picsum.photos/seed/h2/400/250",
-    "https://picsum.photos/seed/h3/400/250",
-    "https://picsum.photos/seed/h4/400/250",
-    "https://picsum.photos/seed/h5/400/250",
-    "https://picsum.photos/seed/h6/400/250",
+  // Haber verileri (150+ adet, komik ve absürt)
+  const newsData = [
+    // Magazin Haberleri
+    {
+      id: 1,
+      category: "Magazin",
+      title: "Ünlü Oyuncu Ayşe, Kediyle Konuştuğunu İtiraf Etti",
+      snippet: "Ayşe Hanım, kedisiyle yaptığı sohbetleri Instagram'da paylaştı.",
+      image: "https://picsum.photos/id/1005/600/400",
+      details: `Ayşe, kedi sesi taklitleriyle ünlü oldu. Son röportajında "Kedimle derin sohbetler yapıyoruz, o bana hayat dersi veriyor." dedi. Takipçileri şaşkınlık içinde, kedinin ise gazeteye yorum yapması bekleniyor.`,
+    },
+    {
+      id: 2,
+      category: "Magazin",
+      title: "Murat, Yıldızlarla Selfie Çekmeye Çalışırken Uçtu",
+      snippet: "Selfie modası uçaklarda da başladı!",
+      image: "https://picsum.photos/id/1011/600/400",
+      details: `Murat, yıldızlarla selfie çekme hevesiyle evinin çatısından atlarken komşuları panikledi. Neyse ki yastıklarla dolu havuza indi ve sadece hafif sıyrıklarla kurtuldu. Sosyal medyada 'uçan Murat' etiketi trend oldu.`,
+    },
+    {
+      id: 3,
+      category: "Magazin",
+      title: "Yeni Dizi Setinde Robotlar Oyunculara Kahve Servisi Yapıyor",
+      snippet: "Geleceğin setlerinde teknoloji devrede.",
+      image: "https://picsum.photos/id/1012/600/400",
+      details: `Son teknoloji robotlar, dizi setlerinde oyunculara kahve ve atıştırmalık servis ediyor. Yönetmen şaşkın, oyuncular ise "Robot barista" ile tanışmaktan mutlu.`,
+    },
+    // Spor Haberleri
+    {
+      id: 4,
+      category: "Spor",
+      title: "Futbolcu Can, Topu Gol Yerine Maça Çağırdı",
+      snippet: "Top bile maça gelmek istedi.",
+      image: "https://picsum.photos/id/1020/600/400",
+      details: `Can, futbol antrenmanında topa çok sevgi gösterdi, o kadar ki topu gol yerine maça çağırdı. Takım arkadaşları bu davranışa önce şaşırdı sonra güldü. Antrenör 'İnsan mı top mu belli değil' dedi.`,
+    },
+    {
+      id: 5,
+      category: "Spor",
+      title: "Basketbol Takımı Oyuncuları, Maçta Top Yerine Havuç Kullandı",
+      snippet: "Sağlıklı spor modası yayılıyor.",
+      image: "https://picsum.photos/id/1025/600/400",
+      details: `Sağlık sezonu başladı! Oyuncular, maçta top yerine havuç kullandı. Hakem ilk başta anlamadı ama seyirciler bayıldı. Havuçlu basketbol sosyal medyada trend oldu.`,
+    },
+    {
+      id: 6,
+      category: "Spor",
+      title: "Tenisçi Zeynep, Raket Yerine Dev Tavuk Kullandı",
+      snippet: "Oyuncu alışılmadık yöntemleri seviyor.",
+      image: "https://picsum.photos/id/1029/600/400",
+      details: `Zeynep, raket yerine dev tavukla oynadığı tenis maçında şaşkınlık yarattı. Rakip takım önce güldü, sonra pes etti. Turnuva yetkilileri bu durumu incelemeye aldı.`,
+    },
+    // Ekonomi Haberleri
+    {
+      id: 7,
+      category: "Ekonomi",
+      title: "Şirketler Çalışanlarına Ücretsiz Kahve Yerine Çay Dağıtmaya Başladı",
+      snippet: "Çayla verimlilik artıyor mu?",
+      image: "https://picsum.photos/id/1035/600/400",
+      details: `Son araştırmalar, çayın kahveden daha çok verimlilik sağladığını gösterdi. Bazı şirketler bu yüzden ücretsiz kahve servisini bırakıp çay dağıtmaya başladı. Çalışanlar ise "Çay kokusu motivasyon" dedi.`,
+    },
+    {
+      id: 8,
+      category: "Ekonomi",
+      title: "Ekonomist Hasan, Bitcoin Yerine Elma Ticareti Yapıyor",
+      snippet: "Kripto yerine meyve sektörüne yöneldi.",
+      image: "https://picsum.photos/id/1036/600/400",
+      details: `Hasan, kripto piyasasındaki dalgalanmalardan bıkarak elma ticaretine başladı. "Bitcoin zor ama elma kolay" diyerek bahçesine yatırım yaptı. Yerel pazarlar şaşkın ama elma severler mutlu.`,
+    },
+    {
+      id: 9,
+      category: "Ekonomi",
+      title: "Yeni Girişimci, Uçan Taksi Yerine Uçan Makarna Projesi Başlattı",
+      snippet: "İnovasyon sınıfta kalabilir mi?",
+      image: "https://picsum.photos/id/1039/600/400",
+      details: `Genç girişimci, uçan taksilerden sıkılarak uçan makarna projesi başlattı. "Gökyüzünde spagetti devrimi" sloganıyla projeyi tanıttı. Yemekseverler heyecanlı ama mühendisler şaşkın.`,
+    },
+    // Arkadaşlar ve absürt komik haberler (ekstra 140+ haber eklenecek JS ile)
   ];
 
-  function getRandomText() {
-    const phrases = [
-      "Bu olay sosyal medyada büyük yankı uyandırdı.",
-      "Uzmanlar bu konuda ikiye bölündü.",
-      "Görgü tanıkları hâlâ olayın etkisinde.",
-      "Bazı vatandaşlar şaşkın, bazıları ise memnun.",
-      "Bu gelişme tüm ülkenin gündemine oturdu.",
+  // Rastgele 150+ haber oluşturmak için arkadaş ve kategori listeleri
+  const friends = ["Eyüp", "Barış", "Zeki", "Eşref", "Mevlüt", "Ayşe", "Murat", "Zeynep", "Hasan", "Can", "Selin", "Deniz", "Ozan", "Emre", "Burak"];
+  const categories = ["Magazin", "Spor", "Ekonomi", "Teknoloji", "Gündem"];
+  const funnyActions = [
+    "patatesle sohbet etti",
+    "kahve yerine çay içmeye başladı",
+    "evde drone ile kahvaltı servisi yaptı",
+    "yeni bir dil icat etti ama kimse anlamadı",
+    "telefonunu tost makinesine çevirdi",
+    "kendi kendine maraton koştu ama yerde kaldı",
+    "köpeğiyle maratonda yarıştı ama köpek kazandı",
+    "uykusuzluktan astronot oldu",
+    "pizza siparişi verirken 10 defa yanlış adres verdi",
+    "telefon sinyalini yakalamak için dağa tırmandı",
+    "bilgisayarıyla dans etti ve virüs aldı",
+    "internet bağlantısını bisiklete bağladı",
+    "yeni müzik aleti icat etti, adı 'Tostofon'",
+    "komşusunun kedisini başkan yaptı",
+    "yeni şarkı sözü yazdı ama herkes anlamadı",
+    "kendi arabasını tamir etmek isterken evin kapısını kırdı",
+    "sosyal medyada kediye kafa tuttu",
+    "uzaydan mesaj bekliyor ama sadece fatura geldi",
+    "sabahları sabah sporunu yatağında yaptı",
+    "yeni spor dalı olarak yastık savaşı başlattı",
+    "telefonunu şarj etmek için güneş enerjisi kullandı ama karanlıkta kaldı"
+  ];
+
+  // Helper function rastgele integer
+  function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  // Dinamik uzun haber detayları oluşturma
+  function generateLongDetail(name, action) {
+    const templates = [
+      `${name} geçtiğimiz hafta boyunca ${action}. Komşuları önce şaşırdı, sonra bu olayı sosyal medyada paylaştılar. Olay viral oldu ve herkes bu yeni hareketi konuşmaya başladı. Haber yayılınca ${name} mahallenin en popüler kişisi oldu. Haftalarca gündemde kaldı.`,
+      `Son gelişmelere göre, ${name} gizlice ${action}. Bu sıra dışı davranışı, çevresindekileri hem güldürdü hem düşündürdü. Uzmanlar bu tür komik olayların psikolojik etkileri üzerine araştırma başlattı. ${name}, "Amacım herkesi mutlu etmek" dedi.`,
+      `${name} dün gece saatlerinde ${action}. Bu esnada çevrede bulunanlar olayı kaydetti ve YouTube’a yükledi. Video kısa sürede milyonlarca kez izlendi. Uzun süre hafızalardan silinmeyecek bu hareket için sosyal medya kullanıcıları hashtag açtı.`,
+      `${name}, ${action} hikayesiyle mahallede yeni bir efsane oldu. Günlerce herkes bu konuyu konuştu ve hatta haber kanalları bile ilgilendi. Kendisi şu an küçük bir ünlü gibi davranıyor ve hayranlarıyla fotoğraf çekiliyor.`,
+      `${name} sıradan bir gününde ${action}. Ancak bu sıradanlık dışı hareketi, hayatına farklı renkler kattı. Mahallede gülüşmeler yükseldi, çocuklar bile bu hareketi oyunlarına dahil etti. Sosyal medya fenomenleri bu hareketi 'mizahın zirvesi' olarak tanımladı.`
     ];
-    return Array(8).fill('').map(() => phrases[Math.floor(Math.random() * phrases.length)]).join(" ");
+    return templates[randomInt(0, templates.length -1)];
   }
 
-  for (let i = 0; i < 150; i++) {
-    const cat = categories[i % 3];
-    const title = exampleTitles[cat][Math.floor(Math.random() * exampleTitles[cat].length)];
+  // 150+ haber listesine ekleme (magazin/spor/ekonomi/teknoloji/gündem ve arkadaş isimleriyle)
+  for(let i=newsData.length+1; i<=160; i++) {
+    let cat = categories[randomInt(0, categories.length-1)];
+    let friend = friends[randomInt(0, friends.length-1)];
+    let action = funnyActions[randomInt(0, funnyActions.length-1)];
     newsData.push({
+      id: i,
       category: cat,
-      title: `${title} #${i+1}`,
-      img: exampleImages[i % exampleImages.length],
-      content: getRandomText()
+      title: `${friend} ${action}`,
+      snippet: generateLongDetail(friend, action).slice(0, 110) + "...",
+      image: `https://picsum.photos/seed/${i}/600/400`,
+      details: generateLongDetail(friend, action),
     });
   }
 
-  function renderNews() {
-    newsData.forEach(news => {
-      const div = document.createElement("div");
-      div.className = "news-card";
-      div.innerHTML = `
-        <img src="${news.img}" alt="${news.title}">
-        <div class="content">
-          <div class="category">${news.category.toUpperCase()}</div>
-          <h3>${news.title}</h3>
-          <p>${news.content.slice(0, 100)}...</p>
-        </div>`;
-      div.onclick = () => showDetail(news);
-      document.getElementById(`${news.category}-news`).appendChild(div);
+  // Haberları kategoriye göre filtrele ve container'lara yerleştir
+  function displayNews() {
+    const sections = {
+      anasayfa: document.getElementById('news-anasayfa'),
+      magazin: document.getElementById('news-magazin'),
+      spor: document.getElementById('news-spor'),
+      ekonomi: document.getElementById('news-ekonomi'),
+      sondakika: document.getElementById('news-sondakika'),
+      populer: document.getElementById('news-populer'),
+    };
+
+    // Temizle
+    for (const key in sections) {
+      sections[key].innerHTML = '';
+    }
+
+    // Popüler haberler için en çok id'si yüksek haberleri seçelim (son eklenenler)
+    let populerHaberler = [...newsData].sort((a,b) => b.id - a.id).slice(0, 12);
+
+    // Son dakika haberleri için de son 12 haber
+    let sondakikaHaberler = [...newsData].slice(-12);
+
+    // Ana sayfa tüm haberleri gösterir (ilk 30)
+    let anasayfaHaberler = [...newsData].slice(0, 30);
+
+    // Kategorilere göre filtreleme
+    let magazinHaberler = newsData.filter(n => n.category === "Magazin").slice(0, 30);
+    let sporHaberler = newsData.filter(n => n.category === "Spor").slice(0, 30);
+    let ekonomiHaberler = newsData.filter(n => n.category === "Ekonomi").slice(0, 30);
+
+    // Haber oluşturma fonksiyonu
+    function createCard(haber) {
+      const card = document.createElement('article');
+      card.classList.add('news-card');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-pressed', 'false');
+      card.setAttribute('aria-label', `${haber.category} haberi: ${haber.title}`);
+
+      card.innerHTML = `
+        <img src="${haber.image}" alt="${haber.title}" class="news-image" loading="lazy" />
+        <div class="news-content">
+          <span class="news-category">${haber.category}</span>
+          <h3 class="news-title">${haber.title}</h3>
+          <p class="news-snippet">${haber.snippet}</p>
+          <button class="read-more-btn" aria-label="Haber detayını oku">Detay</button>
+        </div>
+      `;
+
+      // Detay butonuna ve kartın kendisine tıklanınca modal aç
+      const btn = card.querySelector('.read-more-btn');
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(haber);
+      });
+      card.addEventListener('click', () => openModal(haber));
+      card.addEventListener('keypress', e => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(haber);
+        }
+      });
+
+      return card;
+    }
+
+    // Ekleme işlemi
+    anasayfaHaberler.forEach(h => sections.anasayfa.appendChild(createCard(h)));
+    magazinHaberler.forEach(h => sections.magazin.appendChild(createCard(h)));
+    sporHaberler.forEach(h => sections.spor.appendChild(createCard(h)));
+    ekonomiHaberler.forEach(h => sections.ekonomi.appendChild(createCard(h)));
+    sondakikaHaberler.forEach(h => sections.sondakika.appendChild(createCard(h)));
+    populerHaberler.forEach(h => sections.populer.appendChild(createCard(h)));
+  }
+
+  // Modal yönetimi
+  const modal = document.getElementById('modal');
+  const modalImage = modal.querySelector('.modal-image');
+  const modalTitle = modal.querySelector('.modal-title');
+  const modalText = modal.querySelector('.modal-text');
+  const modalCloseBtn = modal.querySelector('.modal-close-btn');
+
+  function openModal(haber) {
+    modalImage.src = haber.image.replace(/600\/400/, "1000/600");
+    modalImage.alt = haber.title;
+    modalTitle.textContent = haber.title;
+    modalText.textContent = haber.details;
+    modal.classList.add('active');
+    modalCloseBtn.focus();
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  modalCloseBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) closeModal();
+  });
+  window.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // Menü ve bölüm geçişleri
+  const buttons = document.querySelectorAll('nav button');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-section');
+      document.querySelectorAll('main section').forEach(sec => {
+        sec.style.display = (sec.id === target) ? 'block' : 'none';
+      });
+      // Scroll to top for better UX
+      window.scrollTo({top: 0, behavior: 'smooth'});
     });
-  }
+  });
 
-  function showDetail(news) {
-    document.getElementById("detailImage").src = news.img;
-    document.getElementById("detailTitle").textContent = news.title;
-    document.getElementById("detailContent").textContent = news.content;
-    document.getElementById("detailView").style.display = "flex";
-  }
-
-  function closeDetail() {
-    document.getElementById("detailView").style.display = "none";
-  }
-
-  renderNews();
+  // Sayfa ilk yüklendiğinde ana sayfa gösterilsin
+  window.addEventListener('DOMContentLoaded', () => {
+    displayNews();
+    document.querySelectorAll('main section').forEach(sec => {
+      sec.style.display = (sec.id === 'anasayfa') ? 'block' : 'none';
+    });
+  });
 </script>
+
+<footer>
+  &copy; 2025 Komik Haberler. Tüm hakları saklıdır. Mizah bizde, ciddiyet sizde.
+</footer>
 
 </body>
 </html>
-<!-- SON -->
