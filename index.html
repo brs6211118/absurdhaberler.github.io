@@ -178,19 +178,19 @@
       'Barış bir CNC ile dünya rekoru kırdı',
       'Ali CEO’luk yerine taksi şöförlüğünü seçti',
       'Yatırımcı Mevlüt, kriptoyu bırakıp tavuk çiftliği kurdu',
-      'Ankara'da bir çöp kutusundan Einstein notları çıktı',
+      'Ankara\'da bir çöp kutusundan Einstein notları çıktı',
       'Kedi Twitter hesabıyla borsa manipüle etti',
-      'Tost makinesiyle uzaya çıkan adam NASA'ya dava açtı',
-      'Sincan'da düzenlenen sakal yeme yarışması olaylı bitti',
+      'Tost makinesiyle uzaya çıkan adam NASA\'ya dava açtı',
+      'Sincan\'da düzenlenen sakal yeme yarışması olaylı bitti',
       'Taklıt çiğ köfteyle bitcoin madenciliği yaptı'
     ];
 
-    const haberler = Array.from({ length: 60 }, (_, i) => {
+    const haberler = Array.from({ length: 40 }, (_, i) => {
       const baslik = komikBasliklar[i % komikBasliklar.length];
       return {
         baslik: `Haber ${i + 1} - ${baslik}`,
         resim: `https://picsum.photos/seed/${i}/500/300`,
-        detay: `Bu haber tamamen komik ve uydurmadır. ${'Ne alaka dediğinizi duyar gibiyiz ama evet bu da oldu. '.repeat(30)} Mizahın dibine vuran bu haber, sosyal medyada da gülücük krizi yarattı.`
+        detay: `Bu haber tamamen komik ve uydurmadır. ${'Ne alaka dediğinizi duyar gibiyiz ama evet bu da oldu. '.repeat(50)} Mizahın dibine vuran bu haber, sosyal medyada da gülücük krizi yarattı.`
       };
     });
 
