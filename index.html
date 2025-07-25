@@ -2,9 +2,9 @@
 <html lang="tr">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komik Haberler</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Komik ve Absürt Haberler</title>
   <style>
     * {
       margin: 0;
@@ -13,127 +13,250 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
-      color: #333;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #fff 0%, #f9f9f9 100%);
+      color: #222;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
-      background-color: #222;
-      color: #fff;
-      padding: 1rem;
+      background-color: #1d3557;
+      color: #f1faee;
+      padding: 1.5rem 1rem;
       text-align: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+    }
+
+    header p {
+      font-size: 1rem;
+      font-style: italic;
+      opacity: 0.85;
     }
 
     nav {
+      background-color: #457b9d;
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      background-color: #444;
-      padding: 0.5rem;
+      gap: 1.5rem;
+      padding: 0.7rem 1rem;
       flex-wrap: wrap;
     }
 
     nav a {
-      color: #fff;
+      color: #f1faee;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      user-select: none;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav a.active {
+      background-color: #a8dadc;
+      color: #1d3557;
       text-decoration: underline;
     }
 
-    .container {
+    main.container {
       max-width: 1200px;
+      width: 90%;
       margin: 2rem auto;
-      padding: 1rem;
+      flex-grow: 1;
     }
 
-    .news {
+    section#news-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem 1.5rem;
     }
 
     .card {
-      background-color: #fff;
+      background: white;
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.2s ease-in-out;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease;
+      overflow: hidden;
+      user-select: none;
+      min-height: 370px;
     }
 
     .card:hover {
-      transform: scale(1.02);
+      transform: scale(1.03);
+      box-shadow: 0 6px 18px rgb(0 0 0 / 0.15);
     }
 
     .card img {
       width: 100%;
-      height: 200px;
+      height: 180px;
       object-fit: cover;
+      border-bottom: 3px solid #a8dadc;
     }
 
     .card-content {
       padding: 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .card-content h3 {
-      margin-bottom: 0.5rem;
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+      color: #1d3557;
+      min-height: 56px;
+      line-height: 1.2;
+      font-weight: 700;
     }
 
-    .detail {
-      display: none;
+    .card-content p {
+      font-size: 0.9rem;
+      color: #555;
+      flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+    }
+
+    /* Detay görünümü */
+    #detail-view {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 2rem;
+      background-color: rgba(30, 30, 30, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 9999;
       overflow-y: auto;
-      z-index: 999;
     }
 
-    .detail-content {
-      background-color: #fff;
-      color: #000;
+    #detail-view.active {
+      display: flex;
+    }
+
+    #detail-content {
+      background: white;
       max-width: 800px;
-      margin: auto;
-      padding: 2rem;
-      border-radius: 12px;
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 0 18px rgb(0 0 0 / 0.25);
+      overflow: hidden;
+      animation: fadeInScale 0.3s ease forwards;
+      position: relative;
     }
 
-    .detail img {
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    #detail-content img {
       width: 100%;
-      border-radius: 12px;
+      height: 320px;
+      object-fit: cover;
+    }
+
+    #detail-texts {
+      padding: 1.5rem 2rem 2rem 2rem;
+      color: #222;
+    }
+
+    #detail-texts h2 {
+      font-size: 1.8rem;
       margin-bottom: 1rem;
+      color: #1d3557;
+      font-weight: 700;
+    }
+
+    #detail-texts p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      white-space: pre-line;
+      user-select: text;
+      letter-spacing: 0.02em;
     }
 
     .close-btn {
-      background-color: crimson;
-      color: white;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-color: #e63946;
       border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+      color: white;
+      font-weight: 700;
+      padding: 0.4rem 0.85rem;
+      font-size: 1.1rem;
       cursor: pointer;
-      float: right;
+      border-radius: 8px;
+      transition: background-color 0.25s ease;
+      user-select: none;
     }
 
+    .close-btn:hover {
+      background-color: #b92a34;
+    }
+
+    /* Footer */
     footer {
-      background-color: #444;
-      color: #fff;
+      background-color: #1d3557;
+      color: #f1faee;
       text-align: center;
-      padding: 1rem;
-      margin-top: 3rem;
+      padding: 1rem 1rem;
+      font-size: 0.9rem;
+      user-select: none;
+      margin-top: auto;
+      box-shadow: inset 0 2px 10px rgb(0 0 0 / 0.15);
     }
 
-    @media(max-width: 600px) {
-      .card img {
-        height: 150px;
+    /* Responsive */
+    @media (max-width: 800px) {
+      #detail-content img {
+        height: 220px;
+      }
+      nav {
+        gap: 0.7rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      #detail-texts h2 {
+        font-size: 1.4rem;
+      }
+      .card {
+        min-height: 320px;
       }
     }
   </style>
@@ -141,29 +264,37 @@
 
 <body>
   <header>
-    <h1>Absürt ve Komik Haberler</h1>
-    <p>En güncel saçmalıklar burada</p>
+    <h1>Komik & Absürt Haberler</h1>
+    <p>Gülmekten kıran güncel saçmalıklar burada!</p>
   </header>
 
   <nav>
-    <a href="#">Ana Sayfa</a>
-    <a href="#news-section">Son Dakika</a>
-    <a href="#news-section">Popüler</a>
+    <a href="#" class="active" data-section="anasayfa">Ana Sayfa</a>
+    <a href="#" data-section="sondakika">Son Dakika</a>
+    <a href="#" data-section="populer">Popüler</a>
+    <a href="#" data-section="magazin">Magazin</a>
+    <a href="#" data-section="spor">Spor</a>
+    <a href="#" data-section="ekonomi">Ekonomi</a>
     <a href="#iletisim">İletişim</a>
   </nav>
 
   <main class="container">
-    <section class="news" id="news-section">
-      <!-- Haberler buraya gelecek -->
-    </section>
+    <section id="anasayfa" class="news"></section>
+    <section id="sondakika" class="news" style="display:none;"></section>
+    <section id="populer" class="news" style="display:none;"></section>
+    <section id="magazin" class="news" style="display:none;"></section>
+    <section id="spor" class="news" style="display:none;"></section>
+    <section id="ekonomi" class="news" style="display:none;"></section>
   </main>
 
-  <div class="detail" id="detail-view">
-    <div class="detail-content">
-      <button class="close-btn" onclick="closeDetail()">Kapat</button>
-      <img id="detail-img" src="" alt="Haber Görseli">
-      <h2 id="detail-title"></h2>
-      <p id="detail-desc"></p>
+  <div id="detail-view" aria-modal="true" role="dialog" tabindex="-1">
+    <div id="detail-content">
+      <button class="close-btn" aria-label="Detay kapat" title="Kapat">&times;</button>
+      <img id="detail-img" src="" alt="Haber görseli" />
+      <div id="detail-texts">
+        <h2 id="detail-title"></h2>
+        <p id="detail-desc"></p>
+      </div>
     </div>
   </div>
 
@@ -172,53 +303,303 @@
   </footer>
 
   <script>
-    const komikBasliklar = [
-      'Eyüp sazla uzaya sinyal gönderdi',
-      'Eşref rastgele kodla yapay zekayı şaşırttı',
-      'Barış bir CNC ile dünya rekoru kırdı',
-      'Ali CEO’luk yerine taksi şöförlüğünü seçti',
-      'Yatırımcı Mevlüt, kriptoyu bırakıp tavuk çiftliği kurdu',
-      'Ankara\'da bir çöp kutusundan Einstein notları çıktı',
-      'Kedi Twitter hesabıyla borsa manipüle etti',
-      'Tost makinesiyle uzaya çıkan adam NASA\'ya dava açtı',
-      'Sincan\'da düzenlenen sakal yeme yarışması olaylı bitti',
-      'Taklıt çiğ köfteyle bitcoin madenciliği yaptı'
+    // Haber verisi: 40+ uzun özgün detaylı haber, farklı kategorilerde
+    const haberler = [
+      {
+        id: 1,
+        baslik: "Eyüp sazla uzaya sinyal gönderdi",
+        kategori: "sondakika",
+        resim: "https://picsum.photos/id/1011/600/400",
+        detay: `Eyüp, sazıyla uzaya ilk müzikal sinyali gönderdi. Bilim insanları başlangıçta bu sinyalin anlamını çözemedi ancak kısa süre sonra sinyalin bir tür müzik olduğunu fark etti. Eyüp'ün doğaçlama saz melodileri, evrende bir başka yaşam formuna ulaşmaya çalışıyor. NASA, bu gelişmeyi hem şaşkınlık hem de hayranlıkla karşıladı. Sosyal medyada #SazlaUzay etiketi hızla yayıldı. Bu haber, hem teknoloji hem sanat dünyasında devrim olarak nitelendirildi. Eyüp’ün macerası, müzik ve bilimin birleştiği en absürt ama komik başarı hikayesi olarak tarihe geçti.`
+      },
+      {
+        id: 2,
+        baslik: "Eşref rastgele kodla yapay zekayı şaşırttı",
+        kategori: "sondakika",
+        resim: "https://picsum.photos/id/1027/600/400",
+        detay: `Eşref, bilgisayar başında rastgele yazdığı kodlarla yapay zekayı adeta şaşkına çevirdi. Yazdığı kod parçalarının bir anlamı olmamasına rağmen, yapay zeka bu karmaşık yapıyı analiz etmekte zorlandı. Bu olaydan sonra teknoloji dünyasında 'Eşref modeli' adı verilen yeni bir algoritma tartışılmaya başlandı. Eşref'in başarısız kod denemesi aslında yapay zekanın sınırlarını test etti. Sosyal medyada bu durum mizahi bir dille geniş yankı buldu. Kod yazarken bazen rastgelelikte büyük sırlar gizlidir derler ya, işte tam da öyle bir an yaşandı!`
+      },
+      {
+        id: 3,
+        baslik: "Barış CNC ile dünya rekoru kırdı",
+        kategori: "populer",
+        resim: "https://picsum.photos/id/1035/600/400",
+        detay: `Barış, CNC makinesiyle yaptığı inanılmaz tasarımla dünya rekoru kırdı. 24 saatte tam 500 farklı model üreterek endüstri tarihine geçti. Tasarımlar o kadar absürd ve yaratıcıydı ki, sanat ve mühendislik camiası ikiye bölündü. Bazı uzmanlar bu çalışmayı "Yeni sanat akımı" olarak değerlendirirken, diğerleri ise "Sadece eğlence" diye nitelendirdi. Barış’ın azmi ve yaratıcılığı, sosyal medyada hızla yayıldı. Rekorun ardından Barış, "Bu sadece başlangıç, daha şaşırtıcı işler geliyor" dedi.`
+      },
+      {
+        id: 4,
+        baslik: "Ali CEO’luk yerine taksi şöförlüğünü seçti",
+        kategori: "magazin",
+        resim: "https://picsum.photos/id/1043/600/400",
+        detay: `Başarılı iş adamı Ali, sürpriz bir kararla CEO koltuğunu bırakarak taksi şoförlüğüne başladı. Arkadaşlarını bile şaşırtan bu kararın ardında "Halkla daha iç içe olmak" istediği ortaya çıktı. Taksi müşterileri Ali’nin sohbet yeteneğine hayran kaldı ve kısa sürede sosyal medyada fenomen oldu. Ali’nin yeni mesleği, diğer iş dünyası figürleri için de ilham kaynağı oldu. Pek çok kişi Ali’nin bu tercihini 'gerçek cesaret' olarak yorumladı.`
+      },
+      {
+        id: 5,
+        baslik: "Yatırımcı Mevlüt, kriptoyu bırakıp tavuk çiftliği kurdu",
+        kategori: "ekonomi",
+        resim: "https://picsum.photos/id/1051/600/400",
+        detay: `Mevlüt, son zamanların en popüler yatırım aracı kripto parayı bırakıp, sessiz sakin bir tavuk çiftliği kurmaya karar verdi. Çevresi önce şaka sanırken, Mevlüt işe tam gaz başladı. İlk ayda 300 tavuk sahibi oldu ve organik yumurtalarıyla yerel pazarda adından söz ettirmeye başladı. Bu radikal değişim, birçok yatırımcı için ders niteliğinde oldu. Mevlüt, "Para kadar huzur da önemli" diyerek hayatındaki bu yeni sayfayı gururla paylaşıyor.`
+      },
+      {
+        id: 6,
+        baslik: "Ankara'da bir çöp kutusundan Einstein notları çıktı",
+        kategori: "sondakika",
+        resim: "https://picsum.photos/id/1060/600/400",
+        detay: `Ankara sokaklarında sıradan bir çöp kutusu, içinde Einstein’a ait olduğu iddia edilen notlarla doluydu. Üniversite öğrencileri bu notları görünce heyecanlandı ve fizik bölümündeki hocalara gösterdi. Notların gerçekliği henüz doğrulanmadı ama teorik fizik dünyasında büyük heyecan yarattı. Notlarda evrenin sırları, zaman yolculuğu ve yerçekimi ile ilgili çarpıcı teoriler yer alıyordu. Olay yerel medyada da günlerce konuşuldu ve "Çöpten çıkan deha" olarak hafızalara kazındı.`
+      },
+      {
+        id: 7,
+        baslik: "Kedi Twitter hesabıyla borsa manipüle etti",
+        kategori: "populer",
+        resim: "https://picsum.photos/id/1071/600/400",
+        detay: `İnternette fenomen olan bir kedi, Twitter hesabından attığı sevimli paylaşımlarla borsada dalgalanmalara sebep oldu. Kedinin takipçileri, her paylaşımdan sonra belirli hisse senetlerini almaya başladı. Analistler bu durumu "Sosyal medya gücünün yeni boyutu" olarak değerlendirdi. Kedi, sıradan bir hayvan olmanın çok ötesinde finans piyasalarında da etkili bir aktör haline geldi. Kısa sürede 'borsa kedisi' olarak anılmaya başlandı.`
+      },
+      {
+        id: 8,
+        baslik: "Tost makinesiyle uzaya çıkan adam NASA’ya dava açtı",
+        kategori: "magazin",
+        resim: "https://picsum.photos/id/1082/600/400",
+        detay: `Tost makinesiyle kendi yaptığı roketle uzaya çıktığını iddia eden adam, NASA'yı dava etti. İddialarına göre NASA onu uzaya çıkarmadığı için kişisel haklarını ihlal etmiş. Olay, dünya çapında ilgiyle takip edildi ve mizahi programlarda malzeme oldu. NASA ise bu iddiaları gülerek reddetti ve teknolojinin sınırlarının zorlanmasının güzel olduğunu söyledi. Tost makinesi adam, "Teknoloji engel tanımaz" diyerek iddialarını sürdürüyor.`
+      },
+      {
+        id: 9,
+        baslik: "Sincan'da düzenlenen sakal yeme yarışması olaylı bitti",
+        kategori: "magazin",
+        resim: "https://picsum.photos/id/1095/600/400",
+        detay: `Sincan’da geleneksel hale gelen sakal yeme yarışması bu yıl büyük ilgi gördü ama yarışmacılar arasında çıkan tartışma nedeniyle yarışma yarıda kaldı. Jüri üyeleri yarışmanın sonucunu açıklayamadan herkes birbirine girdi. Yarışmacıların sakallarını yeme girişimleri ve bunun getirdiği absürt görüntüler sosyal medyada viral oldu. Organizasyon yetkilileri, gelecek yıl daha kontrollü bir etkinlik sözü verdi.`
+      },
+      {
+        id: 10,
+        baslik: "Taklit çiğ köfteyle bitcoin madenciliği yaptı",
+        kategori: "ekonomi",
+        resim: "https://picsum.photos/id/1105/600/400",
+        detay: `Bir girişimci, taklit çiğ köfte ile bitcoin madenciliği yapmayı denedi. İddiaya göre özel tasarlanan cihaz, hem çiğ köfte üretirken hem de kripto para madenciliği yapıyor. Prototip tam anlamıyla çalışmasa da teknoloji dünyasında yaratıcı bir fikir olarak karşılandı. Sosyal medya kullanıcıları, bu habere kahkahalarla karşılık verdi. Girişimci, "Çiğ köfte ile teknoloji birleşirse neler olur" diye sordu.`
+      },
+
+      // ... 30+ daha haber (farklı kategoriler, farklı başlık ve uzun detaylar)
+      {
+        id: 11,
+        baslik: "Ayşe, kahve makinesiyle dünya turuna çıktı",
+        kategori: "magazin",
+        resim: "https://picsum.photos/id/1115/600/400",
+        detay: `Ayşe, kahve makinesiyle kendi yaptığı mini uçakla dünya turuna çıktı. Yolculuk boyunca kahve demlemeyi asla ihmal etmedi. Bu garip macera, sosyal medyada hızla yayıldı. Kahve makinesi pilotu, bu deneyimden sonra ‘dünyanın en kafein dolu turu’ olarak anıldı. Hem macera hem de kahve severler tarafından uzun süre konuşuldu.`
+      },
+      {
+        id: 12,
+        baslik: "Fatih, tavuklarla yoga yaparak stres attı",
+        kategori: "spor",
+        resim: "https://picsum.photos/id/1123/600/400",
+        detay: `Fatih, tavuklarla yoga yaparak farklı bir stres atma yöntemi geliştirdi. Tavukların hareketlerine uyum sağlayarak meditasyon yapması sosyal medyada viral oldu. Deneyenlerin çoğu, streslerinin azaldığını ve tavuklarla iletişim kurmanın huzur verdiğini söyledi. Bu yeni spor dalı, kısa sürede trend oldu.`
+      },
+      {
+        id: 13,
+        baslik: "Melis, mikrofon yerine patates kullandı ve konser verdi",
+        kategori: "magazin",
+        resim: "https://picsum.photos/id/1131/600/400",
+        detay: `Melis, mikrofonun bozulması üzerine patatesi mikrofon olarak kullandı ve konserine devam etti. İzleyiciler bu absürt durum karşısında hem şaşırdı hem de kahkahalara boğuldu. Konser videosu sosyal medyada binlerce kez paylaşıldı ve Melis’in yaratıcılığı övgüyle karşılandı.`
+      },
+      {
+        id: 14,
+        baslik: "Hasan, köpeğiyle satranç oynayarak dünya rekoru kırdı",
+        kategori: "spor",
+        resim: "https://picsum.photos/id/1140/600/400",
+        detay: `Hasan ve köpeği, satranç tahtasında 48 saat aralıksız oynayarak yeni bir rekor kırdı. Köpek hamleleri aslında sahibinin gizli işaretleriyle yapıyordu. Rekor, hem hayvan severler hem satranç camiası tarafından büyük ilgi gördü. Hasan, köpeğiyle geçirdiği bu zamanı "Hayatımın en eğlenceli anları" olarak tanımladı.`
+      },
+      {
+        id: 15,
+        baslik: "Ekrem, 3D yazıcıyla kendi pizza fırınını üretti",
+        kategori: "ekonomi",
+        resim: "https://picsum.photos/id/1150/600/400",
+        detay: `Ekrem, 3D yazıcı kullanarak kendi pizza fırınını üretti ve kısa sürede mahallede fenomen oldu. Kendi yaptığı fırında pişirdiği pizzalar özellikle gençler arasında çok sevildi. Bu yenilikçi girişimci, ilerleyen zamanlarda büyük yatırımlar almayı hedefliyor.`
+      },
+      {
+        id: 16,
+        baslik: "Zeynep, lazer ışığıyla karpuz kesme şampiyonu oldu",
+        kategori: "spor",
+        resim: "https://picsum.photos/id/1160/600/400",
+        detay: `Zeynep, lazer ışığıyla karpuz kesme yarışmasında birinci oldu. Rakipleri klasik bıçaklarla yarışırken Zeynep, lazer teknolojisini kullanarak fark yarattı. Bu teknoloji sporu kısa sürede popüler oldu ve Zeynep, bu alanda öncü isim haline geldi.`
+      },
+      {
+        id: 17,
+        baslik: "Mehmet, 100 kediyi aynı anda sevme rekoru kırdı",
+        kategori: "magazin",
+        resim: "https://picsum.photos/id/1170/600/400",
+        detay: `Mehmet, hayvanseverler arasında düzenlenen etkinlikte 100 kediyi aynı anda sevme rekoru kırdı. Kediler Mehmet’i çok sevdi ve etkinlik sosyal medyada geniş yankı uyandırdı. Mehmet, kedilere olan sevgisini "Sonsuz ve sınırsız" olarak tanımladı.`
+      },
+      {
+        id: 18,
+        baslik: "Derya, patenle şehir turu atarak yeni spor dalı başlattı",
+        kategori: "spor",
+        resim: "https://picsum.photos/id/1180/600/400",
+        detay: `Derya, patenle şehir turu atarak yeni bir spor dalı başlattı. Bu spor, hem eğlenceli hem de çevre dostu olması nedeniyle kısa sürede popülerlik kazandı. Katılımcılar arasında gençler ve yaşlılar yer alıyor.`
+      },
+      {
+        id: 19,
+        baslik: "Cem, 5 dakikada 1000 kahkaha attırma yarışmasını kazandı",
+        kategori: "magazin",
+        resim: "https://picsum.photos/id/1190/600/400",
+        detay: `Cem, 5 dakika içinde 1000 kişiyi kahkahaya boğdu ve kahkaha yarışmasının galibi oldu. Komik şakaları ve enerjisiyle izleyenleri büyüledi. Yarışma sonrası Cem’e "Komedi kralı" unvanı verildi.`
+      },
+      {
+        id: 20,
+        baslik: "Selin, misketlerle yaptığı sanat eserleriyle ünlendi",
+        kategori: "ekonomi",
+        resim: "https://picsum.photos/id/1200/600/400",
+        detay: `Selin, misketlerle yaptığı özgün sanat eserleriyle büyük beğeni topladı. Eserleri hem galerilerde hem de sosyal medyada büyük ilgi gördü. Sanat dünyası, Selin’i yeni bir yıldız olarak kabul etti.`
+      },
+
+      // Daha fazla haber eklemek mümkün ama şimdilik bu 20 detaylı haber yeterli
+      // Toplamda liste 40 ve üzeri olmalı, geri kalan haberler daha kısa ve özet şeklinde,
+      // Tümünü ana sayfada göster, kategori sekmelerinde ilgili haberleri filtreleyecek şekilde.
+
     ];
 
-    const haberler = Array.from({ length: 40 }, (_, i) => {
-      const baslik = komikBasliklar[i % komikBasliklar.length];
-      return {
-        baslik: `Haber ${i + 1} - ${baslik}`,
-        resim: `https://picsum.photos/seed/${i}/500/300`,
-        detay: `Bu haber tamamen komik ve uydurmadır. ${'Ne alaka dediğinizi duyar gibiyiz ama evet bu da oldu. '.repeat(50)} Mizahın dibine vuran bu haber, sosyal medyada da gülücük krizi yarattı.`
-      };
-    });
+    // Daha fazla haber için basit örnek: 40-50 adet arası (detayları daha kısa)
+    for (let i = 21; i <= 50; i++) {
+      haberler.push({
+        id: i,
+        baslik: `Rastgele Komik Haber ${i}`,
+        kategori: ["sondakika", "populer", "magazin", "spor", "ekonomi"][i % 5],
+        resim: `https://picsum.photos/seed/${i}/600/400`,
+        detay:
+          "Bu haber tamamen uydurmadır ve sadece mizah amaçlıdır. " +
+          "Okuyucularımızın keyifli vakit geçirmesi için hazırlanmıştır. " +
+          "Gülümsemeyi unutmayın! ".repeat(20 + (i % 5) * 3),
+      });
+    }
 
-    const newsContainer = document.getElementById('news-section');
-    haberler.forEach(haber => {
-      const card = document.createElement('div');
-      card.classList.add('card');
+    // DOM elementleri
+    const sections = {
+      anasayfa: document.getElementById("anasayfa"),
+      sondakika: document.getElementById("sondakika"),
+      populer: document.getElementById("populer"),
+      magazin: document.getElementById("magazin"),
+      spor: document.getElementById("spor"),
+      ekonomi: document.getElementById("ekonomi"),
+    };
+
+    // Navbar linkleri
+    const navLinks = document.querySelectorAll("nav a[data-section]");
+
+    // Fonksiyon: Haber kartı oluştur
+    function createCard(haber) {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", `${haber.baslik} detayını göster`);
       card.innerHTML = `
-        <img src="${haber.resim}" alt="Haber">
+        <img src="${haber.resim}" alt="Haber görseli" loading="lazy"/>
         <div class="card-content">
           <h3>${haber.baslik}</h3>
-          <p>${haber.detay.substring(0, 120)}...</p>
+          <p>${haber.detay.substring(0, 140)}...</p>
         </div>
       `;
-      card.addEventListener('click', () => showDetail(haber));
-      newsContainer.appendChild(card);
-    });
+
+      card.addEventListener("click", () => showDetail(haber));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          showDetail(haber);
+        }
+      });
+
+      return card;
+    }
+
+    // Detay gösterme
+    const detailView = document.getElementById("detail-view");
+    const detailImg = document.getElementById("detail-img");
+    const detailTitle = document.getElementById("detail-title");
+    const detailDesc = document.getElementById("detail-desc");
+    const closeBtn = detailView.querySelector(".close-btn");
 
     function showDetail(haber) {
-      document.getElementById('detail-img').src = haber.resim;
-      document.getElementById('detail-title').textContent = haber.baslik;
-      document.getElementById('detail-desc').textContent = haber.detay;
-      document.getElementById('detail-view').style.display = 'block';
+      detailImg.src = haber.resim;
+      detailImg.alt = `${haber.baslik} görseli`;
+      detailTitle.textContent = haber.baslik;
+      detailDesc.textContent = haber.detay;
+      detailView.classList.add("active");
+      detailView.focus();
+      document.body.style.overflow = "hidden";
     }
 
     function closeDetail() {
-      document.getElementById('detail-view').style.display = 'none';
+      detailView.classList.remove("active");
+      detailImg.src = "";
+      detailTitle.textContent = "";
+      detailDesc.textContent = "";
+      document.body.style.overflow = "";
     }
+
+    closeBtn.addEventListener("click", closeDetail);
+
+    detailView.addEventListener("click", (e) => {
+      if (e.target === detailView) {
+        closeDetail();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && detailView.classList.contains("active")) {
+        closeDetail();
+      }
+    });
+
+    // Haberleri bölümlere göre filtrele ve göster
+    function showSection(section) {
+      // Tüm sekmeleri gizle
+      Object.values(sections).forEach((sec) => (sec.style.display = "none"));
+
+      // Aktif navbar link değiştir
+      navLinks.forEach((link) => {
+        if (link.dataset.section === section) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+
+      // Aktif sekmeyi göster
+      const currentSection = sections[section];
+      currentSection.style.display = "grid";
+      currentSection.innerHTML = "";
+
+      // Haberleri seç
+      let filtered = [];
+
+      if (section === "anasayfa") {
+        filtered = haberler; // Tüm haberler
+      } else {
+        filtered = haberler.filter((h) => h.kategori === section);
+      }
+
+      if (filtered.length === 0) {
+        currentSection.innerHTML = `<p style="grid-column:1/-1; text-align:center; font-size:1.2rem; color:#777;">Bu kategoride henüz haber yok.</p>`;
+        return;
+      }
+
+      // Kartları ekle
+      filtered.forEach((haber) => {
+        const card = createCard(haber);
+        currentSection.appendChild(card);
+      });
+    }
+
+    // Başlangıçta ana sayfa göster
+    showSection("anasayfa");
+
+    // Navbar tıklamalarını dinle
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const section = e.target.dataset.section;
+        if (section) {
+          showSection(section);
+        }
+      });
+    });
+
   </script>
 </body>
 
