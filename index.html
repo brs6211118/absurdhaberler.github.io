@@ -5,13 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Absürd Haberler</title>
-  <meta name="description" content="Absürd, komik ve sıradışı haberlerin adresi. Barış, Eyüp, Eşref, Mevlüt ve daha fazlası burada!">
+  <meta name="description" content="Absürd, komik ve sıradışı haberlerin adresi. Yepyeni isimlerle absürd haberler burada!" />
   <meta property="og:title" content="Absürd Haberler" />
   <meta property="og:description" content="Absürd, komik ve sıradışı haberlerin adresi." />
   <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Absurd+News" />
   <meta property="og:type" content="website" />
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/21/21601.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
     * {
       margin: 0;
@@ -32,40 +33,47 @@
     header {
       background-color: #1e293b;
       color: white;
-      padding: 2rem 1rem;
+      padding: 1.8rem 1rem;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     header h1 {
       font-size: 2rem;
+      margin-bottom: 0.4rem;
     }
 
     nav {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
 
     nav a {
       color: #fff;
       margin: 0 1rem;
       text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: color 0.3s ease;
     }
 
-    nav a:hover,
-    nav a.active {
-      text-decoration: underline;
+    nav a:hover {
       color: #facc15;
+      text-decoration: underline;
     }
 
     .ticker {
       background: #facc15;
       color: #1f2937;
       padding: 0.5rem 1rem;
-      font-weight: bold;
+      font-weight: 700;
       overflow: hidden;
       white-space: nowrap;
-      animation: slide 30s linear infinite;
+      animation: slide 35s linear infinite;
+      font-size: 1rem;
+      user-select: none;
     }
 
     @keyframes slide {
@@ -79,122 +87,94 @@
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 980px;
       margin: 2rem auto;
       padding: 0 1rem;
-      flex: 1;
+      flex-grow: 1;
       display: flex;
+      flex-direction: row;
       gap: 2rem;
-      flex-wrap: wrap;
     }
 
     .main-content {
-      flex: 1 1 700px;
+      flex: 3;
+      min-width: 0;
     }
 
     .search-box {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.8rem;
+      position: sticky;
+      top: 72px;
+      background: #fff;
+      padding-bottom: 1rem;
+      z-index: 5;
     }
 
     .search-box input {
       width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
+      padding: 0.8rem 1rem;
+      border: 2px solid #ccc;
       border-radius: 8px;
-      font-size: 1rem;
+      font-size: 1.1rem;
+      transition: border-color 0.3s ease;
     }
 
-    .category-filter {
-      margin-bottom: 1.5rem;
-      display: flex;
-      gap: 0.7rem;
-      flex-wrap: wrap;
-    }
-
-    .category-btn {
-      background: #1e293b;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s;
-    }
-
-    .category-btn.active,
-    .category-btn:hover {
-      background: #facc15;
-      color: #1f2937;
+    .search-box input:focus {
+      outline: none;
+      border-color: #1e40af;
+      box-shadow: 0 0 8px #93c5fd;
     }
 
     #haber-listesi {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
     }
 
     .card {
       background: white;
-      border-radius: 10px;
-      padding: 0;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 6px 12px rgb(0 0 0 / 0.08);
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s;
+      transition: box-shadow 0.3s ease;
+      border: 1px solid transparent;
     }
 
     .card:hover {
-      transform: scale(1.03);
+      box-shadow: 0 8px 16px rgb(0 0 0 / 0.15);
+      border-color: #facc15;
     }
 
     .card img {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
-      border-radius: 10px 10px 0 0;
-    }
-
-    .card-content {
-      padding: 1rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .category-label {
-      background: #facc15;
-      color: #1f2937;
-      font-weight: 700;
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
-      width: fit-content;
-      border-radius: 12px;
-      margin-bottom: 0.5rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
       user-select: none;
     }
 
     .card h2 {
       color: #1e40af;
-      font-size: 1.1rem;
-      margin-bottom: 0.3rem;
-      flex-grow: 1;
+      font-size: 1.4rem;
+      margin-bottom: 0.2rem;
     }
 
     .card .date {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: #6b7280;
       margin-bottom: 0.7rem;
+      font-style: italic;
     }
 
     .card p {
-      font-size: 0.95rem;
-      color: #374151;
-      line-height: 1.3;
+      font-size: 1rem;
+      color: #333;
+      line-height: 1.4;
     }
-
-    /* Modal */
 
     .modal {
       display: none;
@@ -203,179 +183,203 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.82);
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      z-index: 10000;
       padding: 1rem;
       overflow-y: auto;
-    }
-
-    .modal.show {
-      display: flex;
     }
 
     .modal-content {
       background: white;
       padding: 2rem;
-      border-radius: 10px;
-      max-width: 700px;
-      width: 100%;
+      border-radius: 12px;
+      max-width: 650px;
       max-height: 90vh;
       overflow-y: auto;
       position: relative;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.2);
     }
 
     .modal-close {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #444;
+      top: 12px;
+      right: 15px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #666;
       cursor: pointer;
+      transition: color 0.3s ease;
       user-select: none;
     }
 
-    .modal-content img {
-      max-width: 100%;
-      margin: 1rem 0;
-      border-radius: 8px;
-    }
-
-    .modal-content h2 {
-      margin-bottom: 0.3rem;
+    .modal-close:hover {
       color: #1e40af;
     }
 
-    .modal-content .date {
-      font-size: 0.85rem;
-      color: #6b7280;
-      margin-bottom: 1rem;
+    footer {
+      background-color: #1e293b;
+      color: #fff;
+      padding: 1.8rem 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: auto;
+      user-select: none;
     }
 
-    .modal-content p {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: #333;
+    footer a {
+      color: #facc15;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
 
     /* Sidebar */
 
-    .sidebar {
-      flex: 1 1 250px;
-      background-color: #f9fafb;
+    aside.sidebar {
+      flex: 1;
+      min-width: 260px;
+      background: white;
       border-radius: 10px;
-      padding: 1rem 1.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 3px 9px rgb(0 0 0 / 0.07);
       height: fit-content;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
+      position: sticky;
+      top: 140px;
+      font-size: 1rem;
     }
 
-    .sidebar h3 {
-      font-size: 1.2rem;
-      color: #111827;
+    aside.sidebar h3 {
       margin-bottom: 1rem;
-      text-align: center;
+      font-size: 1.3rem;
+      color: #1d4ed8;
+      border-bottom: 2px solid #facc15;
+      padding-bottom: 0.4rem;
+      user-select: none;
     }
 
-    .sidebar ul {
+    aside.sidebar ul {
       list-style: none;
+      margin-left: 0;
       padding-left: 0;
     }
 
-    .sidebar ul li {
+    aside.sidebar ul li {
       margin-bottom: 0.8rem;
     }
 
-    .sidebar ul li a {
-      text-decoration: none;
+    aside.sidebar ul li a {
       color: #1d4ed8;
+      text-decoration: none;
       font-weight: 600;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
-    .sidebar ul li a:hover {
+    aside.sidebar ul li a:hover {
+      text-decoration: underline;
       color: #facc15;
     }
 
-    /* Team */
+    /* Comment Section */
+
+    .comment-section {
+      background: #f9fafb;
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-top: 2rem;
+      box-shadow: 0 3px 9px rgb(0 0 0 / 0.04);
+      user-select: none;
+    }
+
+    .comment-section h4 {
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+
+    .comment-section textarea {
+      width: 100%;
+      height: 100px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 0.7rem 1rem;
+      resize: none;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .comment-section textarea:focus {
+      outline: none;
+      border-color: #1e40af;
+      box-shadow: 0 0 8px #93c5fd;
+    }
+
+    .comment-section button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.6rem;
+      background-color: #1e40af;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .comment-section button:hover {
+      background-color: #facc15;
+      color: #1f2937;
+    }
+
+    /* Team Section */
 
     .team {
-      margin-top: 3rem;
       background: #f1f5f9;
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+      border-radius: 12px;
+      user-select: none;
     }
 
     .team h3 {
+      text-align: center;
       margin-bottom: 1rem;
       color: #0f172a;
+      font-weight: 700;
+      font-size: 1.6rem;
     }
 
     .team ul {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
+      gap: 1.5rem;
       list-style: none;
       padding-left: 0;
     }
 
     .team li {
       background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      width: 140px;
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgb(0 0 0 / 0.08);
+      width: 190px;
+      text-align: center;
       font-weight: 600;
-      color: #334155;
-    }
-
-    /* Comment section */
-
-    .comment-section {
-      margin-top: 2rem;
-      background: #fff;
-      border-radius: 8px;
-      padding: 1rem 1.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .comment-section h4 {
-      margin-bottom: 1rem;
-      color: #1e293b;
-    }
-
-    .comment-section textarea {
-      width: 100%;
-      height: 100px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-      resize: none;
       font-size: 1rem;
+      color: #334155;
+      transition: box-shadow 0.3s ease;
     }
 
-    .comment-section button {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #1e40af;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background-color 0.3s;
-    }
-
-    .comment-section button:hover {
-      background-color: #153e7a;
+    .team li:hover {
+      box-shadow: 0 10px 18px rgb(0 0 0 / 0.12);
     }
 
     /* Responsive */
@@ -383,22 +387,36 @@
     @media (max-width: 900px) {
       .container {
         flex-direction: column;
-        max-width: 100%;
+        padding: 1rem;
       }
 
-      .main-content,
-      .sidebar {
-        flex: none;
-        width: 100%;
+      aside.sidebar {
+        position: relative;
+        top: auto;
+        min-width: auto;
+        margin-top: 2rem;
       }
 
-      .team ul {
-        flex-direction: column;
-        align-items: center;
+      .search-box {
+        position: relative;
+        top: auto;
+        padding-bottom: 0;
+        margin-bottom: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav a {
+        margin: 0 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .card img {
+        height: 150px;
       }
 
       .team li {
-        width: 70%;
+        width: 100%;
       }
     }
   </style>
@@ -408,67 +426,70 @@
   <header>
     <h1>Absürd Haberler</h1>
     <nav>
-      <a href="#" class="nav-link active" data-category="all">Ana Sayfa</a>
-      <a href="#" class="nav-link" data-category="son-dakika">Son Dakika</a>
-      <a href="#" class="nav-link" data-category="populer">Popüler</a>
-      <a href="#" class="nav-link" data-category="iletisim">İletişim</a>
+      <a href="#">Ana Sayfa</a>
+      <a href="#son-dakika">Son Dakika</a>
+      <a href="#populer">Popüler</a>
+      <a href="#iletisim">İletişim</a>
     </nav>
   </header>
 
-  <div class="ticker" aria-live="polite" aria-atomic="true">
-    Son Dakika: Eyüp Mars'ta saz çaldı! | Mevlüt uzaya CNC makinesi gönderdi! | Barış, yapay zekaya karşı satranç kazandı!
+  <div class="ticker" aria-label="Son dakika haberleri ticker">
+    Son Dakika: Çınar'ın kedisi internete 7 saatte hükmetti! | Sude, kahveyle kod yazdı, hata olmadı! | Kaan,
+    uzayda tavşanla maç yaptı!
   </div>
 
-  <main class="container" role="main">
-    <section class="main-content">
+  <div class="container">
+    <main class="main-content">
+
       <div class="search-box" role="search">
-        <input type="text" id="searchInput" placeholder="Haberde ara..." aria-label="Haberde ara" />
+        <input id="searchInput" type="text" placeholder="Haberde ara..." aria-label="Haberde ara" />
       </div>
 
-      <div class="category-filter" role="list" aria-label="Haber Kategorileri">
-        <button class="category-btn active" data-category="all">Tümü</button>
-        <button class="category-btn" data-category="eyup">Eyüp</button>
-        <button class="category-btn" data-category="mevlut">Mevlüt</button>
-        <button class="category-btn" data-category="esat">Esat</button>
-        <button class="category-btn" data-category="esref">Eşref</button>
-        <button class="category-btn" data-category="fehmi">Fehmi</button>
-        <button class="category-btn" data-category="ali">Ali</button>
-        <button class="category-btn" data-category="baris">Barış</button>
-      </div>
+      <section id="haber-listesi" aria-live="polite" aria-relevant="additions"></section>
 
-      <div id="haber-listesi" aria-live="polite" aria-atomic="true"></div>
+      <section id="son-dakika" class="sidebar" aria-label="Son dakika haberleri">
+        <h3>Son Dakika Haberleri</h3>
+        <ul id="sonDakikaList"></ul>
+      </section>
 
-      <div class="comment-section" aria-label="Yorumlar">
-        <h4>Yorum Yap</h4>
-        <textarea id="commentText" placeholder="Yorumunuzu yazın..." aria-label="Yorumunuzu yazın"></textarea>
-        <button id="commentBtn" aria-label="Yorumu gönder">Gönder</button>
-        <ul id="commentList" style="margin-top:1rem; list-style:none; padding-left:0;"></ul>
-      </div>
-    </section>
-
-    <aside class="sidebar" role="complementary" aria-label="Popüler ve Ekibimiz">
-      <div>
+      <section id="populer" class="sidebar" aria-label="Popüler haberler">
         <h3>Popüler Haberler</h3>
-        <ul>
-          <li><a href="#" tabindex="0">Barış 1 saatte 7 tost yedi</a></li>
-          <li><a href="#" tabindex="0">Mevlüt CNC ile döner kesti</a></li>
-          <li><a href="#" tabindex="0">Eyüp sazla meteor yönlendirdi</a></li>
-          <li><a href="#" tabindex="0">Ali, Matrix'e giriş yaptı</a></li>
-        </ul>
-      </div>
+        <ul id="populerList"></ul>
+      </section>
 
-      <div class="team" aria-label="Ekibimiz">
+      <section id="iletisim" class="team" aria-label="İletişim bilgileri">
+        <h3>İletişim</h3>
+        <p style="text-align:center;">
+          Her türlü öneri, gırgır haber veya geri bildirim için bize ulaşın:
+        </p>
+        <ul style="flex-direction: column; list-style: none; padding-left: 0; max-width: 400px; margin: auto;">
+          <li><strong>Email:</strong> absurdyazilim@hayalgucu.com</li>
+          <li><strong>Instagram:</strong> @absurdhaberler</li>
+          <li><strong>Telefon:</strong> 0 (505) 123 45 67</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <aside class="sidebar" aria-label="Popüler haberler ve yorum">
+      <section class="comment-section" aria-label="Yorum yap">
+        <h4>Yorum Yap</h4>
+        <textarea id="commentInput" placeholder="Yorumunuzu yazın..." aria-label="Yorumunuzu yazın"></textarea>
+        <button id="commentBtn" type="button">Gönder</button>
+      </section>
+
+      <section class="team" aria-label="Ekibimiz">
         <h3>Ekibimiz</h3>
         <ul>
           <li><strong>CEO:</strong> Ali</li>
-          <li><strong>CTO:</strong> Barış</li>
-          <li><strong>Yazılımcı:</strong> Eşref</li>
-          <li><strong>CNC Uzmanı:</strong> Mevlüt</li>
-          <li><strong>Yatırımcı:</strong> Murat</li>
+          <li><strong>CTO:</strong> Can</li>
+          <li><strong>Yazılımcı:</strong> Derya</li>
+          <li><strong>CNC Uzmanı:</strong> Selim</li>
+          <li><strong>Yatırımcı:</strong> Melis</li>
         </ul>
-      </div>
+      </section>
     </aside>
-  </main>
+  </div>
 
   <footer>
     &copy; 2025 Absürd Haberler | <a href="#">KVKK</a> | <a href="#">Gizlilik</a>
@@ -476,159 +497,164 @@
 
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
     <div class="modal-content">
-      <span class="modal-close" id="modalClose" aria-label="Kapat">&times;</span>
-      <div id="modal-icerik"></div>
+      <button class="modal-close" aria-label="Kapat">&times;</button>
+      <div id="modalIcerik"></div>
     </div>
   </div>
 
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const haberListesi = document.getElementById('haber-listesi');
-      const modal = document.getElementById('modal');
-      const modalIcerik = document.getElementById('modal-icerik');
-      const modalClose = document.getElementById('modalClose');
-      const searchInput = document.getElementById('searchInput');
-      const categoryButtons = document.querySelectorAll('.category-btn');
-      const commentBtn = document.getElementById('commentBtn');
-      const commentText = document.getElementById('commentText');
-      const commentList = document.getElementById('commentList');
+    // Haber veri kümesi (rastgele özgün absürd isimler ve içerikler)
+    const haberler = [];
+    const sonDakikaHaberler = [];
+    const populerHaberler = [];
 
-      let currentCategory = 'all';
-      let haberler = [];
+    // Özgün absürd isimler ve başlıklar
+    const isimler = [
+      "Çınar", "Sude", "Kaan", "Lina", "Baran", "Elif", "Onur", "Duru", "Berk", "Asya",
+      "Mert", "Ege", "Deniz", "Defne", "Tuna", "Yasemin", "Kubra", "Emir", "Selin", "Can"
+    ];
 
-      const kategoriler = ['eyup', 'mevlut', 'esat', 'esref', 'fehmi', 'ali', 'baris'];
+    const absurdFiiller = [
+      "internete hükmetti", "kahveyle kod yazdı", "uzayda tavşanla maç yaptı", "yapay zekaya meydan okudu",
+      "marslılarla saz düellosu yaptı", "gizemli tost rekoru kırdı", "meteorları yönetti", "evrenin sırlarını çözdü",
+      "uçan halıyla İstanbul'u dolaştı", "zamanda yolculuk yaptı", "yapay zeka ile satranç oynadı",
+      "uyuyan kodu uyandırdı", "dünyayı tersine çevirdi", "bilgisayarı tost makinesine dönüştürdü",
+      "gizli mesajlar gönderdi", "hayvanlarla telepati kurdu", "internet hızını saniyede 1000 kat artırdı"
+    ];
 
-      // Haberleri oluşturuyoruz
-      for (let i = 1; i <= 150; i++) {
-        const cat = kategoriler[i % kategoriler.length];
-        haberler.push({
-          id: i,
-          baslik: `Absürd Haber ${i} - ${cat.charAt(0).toUpperCase() + cat.slice(1)}`,
-          tarih: `${25 - (i % 25)} Temmuz 2025`,
-          ozet: `Bu, ${cat.charAt(0).toUpperCase() + cat.slice(1)} ile ilgili absürd haberlerin ${i}. örneğidir.`,
-          detay: `Detaylı içerik: Bu ${i}. haber ${cat} ile ilgili gelişmeleri anlatmaktadır. Bolca absürd ve eğlenceli anekdotlar içerir. Barış, Eyüp, Mevlüt, Eşref ve ekip olarak büyük bir kaos yaratıldı.`,
-          kategori: cat,
-          resim: `https://picsum.photos/seed/haber${i}/800/400`
-        });
+    // 150 haber oluştur
+    for (let i = 1; i <= 150; i++) {
+      const isim = isimler[Math.floor(Math.random() * isimler.length)];
+      const fiil = absurdFiiller[Math.floor(Math.random() * absurdFiiller.length)];
+      haberler.push({
+        id: i,
+        baslik: `${isim} ${fiil}`,
+        tarih: `${(25 - (i % 25))} Temmuz 2025`,
+        ozet: `${isim} bugün çok absürd bir iş yaptı: ${fiil}. Tüm dünya şaşkın!`,
+        detay: `${isim} tam olarak şöyle anlattı: “Bugün ${fiil}. Kimse inanamadı ama gerçek bu.”`,
+        img: `https://picsum.photos/800/400?random=${i}`
+      });
+    }
+
+    // Rastgele seçilen 5 haber son dakika
+    while (sonDakikaHaberler.length < 5) {
+      const rnd = haberler[Math.floor(Math.random() * haberler.length)];
+      if (!sonDakikaHaberler.includes(rnd)) sonDakikaHaberler.push(rnd);
+    }
+
+    // Rastgele seçilen 5 haber popüler
+    while (populerHaberler.length < 5) {
+      const rnd = haberler[Math.floor(Math.random() * haberler.length)];
+      if (!populerHaberler.includes(rnd) && !sonDakikaHaberler.includes(rnd)) populerHaberler.push(rnd);
+    }
+
+    // DOM referansları
+    const haberListesi = document.getElementById('haber-listesi');
+    const sonDakikaList = document.getElementById('sonDakikaList');
+    const populerList = document.getElementById('populerList');
+    const modal = document.getElementById('modal');
+    const modalIcerik = document.getElementById('modalIcerik');
+    const modalCloseBtn = document.querySelector('.modal-close');
+    const searchInput = document.getElementById('searchInput');
+    const commentInput = document.getElementById('commentInput');
+    const commentBtn = document.getElementById('commentBtn');
+
+    // Haberleri göster fonksiyonu (filtreli)
+    function gosterHaberler(liste) {
+      haberListesi.innerHTML = '';
+      if (liste.length === 0) {
+        haberListesi.innerHTML = '<p>Aramanıza uygun haber bulunamadı.</p>';
+        return;
       }
-
-      // Haberleri gösterme fonksiyonu
-      function gosterHaberler(filtre = '') {
-        haberListesi.innerHTML = '';
-        const filtreli = haberler.filter(haber => {
-          const aramaMetni = filtre.toLowerCase();
-          const kategoriKontrol = currentCategory === 'all' || haber.kategori === currentCategory;
-          const aramaKontrol = haber.baslik.toLowerCase().includes(aramaMetni) || haber.kategori.toLowerCase().includes(aramaMetni);
-          return kategoriKontrol && aramaKontrol;
+      liste.forEach(haber => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-pressed', 'false');
+        card.innerHTML = `
+          <img src="${haber.img}" alt="Haber görseli: ${haber.baslik}" loading="lazy" />
+          <h2>${haber.baslik}</h2>
+          <div class="date">${haber.tarih}</div>
+          <p>${haber.ozet}</p>
+        `;
+        card.addEventListener('click', () => {
+          acModal(haber);
         });
-
-        if (filtreli.length === 0) {
-          haberListesi.innerHTML = '<p style="text-align:center; color:#64748b; font-weight:600; margin-top:2rem;">Aramanıza uygun haber bulunamadı.</p>';
-          return;
-        }
-
-        filtreli.forEach(haber => {
-          const card = document.createElement('article');
-          card.className = 'card';
-          card.tabIndex = 0;
-          card.setAttribute('role', 'button');
-          card.setAttribute('aria-pressed', 'false');
-          card.innerHTML = `
-            <img src="${haber.resim}" alt="${haber.baslik}" loading="lazy" />
-            <div class="card-content">
-              <div class="category-label">${haber.kategori.toUpperCase()}</div>
-              <h2>${haber.baslik}</h2>
-              <div class="date">${haber.tarih}</div>
-              <p>${haber.ozet}</p>
-            </div>
-          `;
-
-          card.addEventListener('click', () => {
-            modalIcerik.innerHTML = `
-              <h2 id="modalTitle">${haber.baslik}</h2>
-              <p class="date" id="modalDesc"><strong>${haber.tarih}</strong></p>
-              <img src="${haber.resim}" alt="${haber.baslik}" />
-              <p>${haber.detay}</p>
-            `;
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden'; // Arka plan kaydırmasını engelle
-          });
-
-          card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              card.click();
-            }
-          });
-
-          haberListesi.appendChild(card);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            acModal(haber);
+          }
         });
+        haberListesi.appendChild(card);
+      });
+    }
+
+    // Modal açma fonksiyonu
+    function acModal(haber) {
+      modalIcerik.innerHTML = `
+        <h2 id="modalTitle">${haber.baslik}</h2>
+        <p><em>${haber.tarih}</em></p>
+        <img src="${haber.img}" alt="Haber görseli: ${haber.baslik}" style="width:100%;border-radius:8px;margin:1rem 0" />
+        <p id="modalDesc">${haber.detay}</p>
+      `;
+      modal.style.display = 'flex';
+      modal.querySelector('.modal-close').focus();
+    }
+
+    modalCloseBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
       }
+    });
 
-      // Modal kapatma
-      modalClose.addEventListener('click', () => {
-        modal.classList.remove('show');
-        document.body.style.overflow = 'auto';
-      });
+    // Search işlemi
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase().trim();
+      const filtered = haberler.filter(h =>
+        h.baslik.toLowerCase().includes(query) || h.ozet.toLowerCase().includes(query)
+      );
+      gosterHaberler(filtered);
+    });
 
-      window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.classList.remove('show');
-          document.body.style.overflow = 'auto';
-        }
-      });
-
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('show')) {
-          modal.classList.remove('show');
-          document.body.style.overflow = 'auto';
-        }
-      });
-
-      // Arama işlemi
-      searchInput.addEventListener('input', (e) => {
-        gosterHaberler(e.target.value);
-      });
-
-      // Kategori seçimi
-      categoryButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          categoryButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentCategory = btn.dataset.category;
-          gosterHaberler(searchInput.value);
+    // Son Dakika ve Popüler haberleri listeleme
+    function listeleSidebar(list, container) {
+      container.innerHTML = '';
+      list.forEach(haber => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = "#";
+        a.textContent = haber.baslik;
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          acModal(haber);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+        li.appendChild(a);
+        container.appendChild(li);
       });
+    }
 
-      // Yorumlar
+    listeleSidebar(sonDakikaHaberler, sonDakikaList);
+    listeleSidebar(populerHaberler, populerList);
 
-      function yorumlariYukle() {
-        const yorumlar = JSON.parse(localStorage.getItem('yorumlar') || '[]');
-        commentList.innerHTML = '';
-        yorumlar.forEach(yorum => {
-          const li = document.createElement('li');
-          li.style.borderBottom = '1px solid #ccc';
-          li.style.padding = '0.5rem 0';
-          li.textContent = yorum;
-          commentList.appendChild(li);
-        });
+    // Başlangıçta tüm haberleri göster
+    gosterHaberler(haberler);
+
+    // Yorum gönderme (yalnızca görsel demo)
+    commentBtn.addEventListener('click', () => {
+      const val = commentInput.value.trim();
+      if (!val) {
+        alert('Lütfen yorum yazın.');
+        return;
       }
-
-      commentBtn.addEventListener('click', () => {
-        const text = commentText.value.trim();
-        if (text.length < 3) {
-          alert('Lütfen en az 3 karakterlik bir yorum yazınız.');
-          return;
-        }
-        const yorumlar = JSON.parse(localStorage.getItem('yorumlar') || '[]');
-        yorumlar.push(text);
-        localStorage.setItem('yorumlar', JSON.stringify(yorumlar));
-        commentText.value = '';
-        yorumlariYukle();
-      });
-
-      yorumlariYukle();
-      gosterHaberler();
+      alert('Yorumunuz alındı, teşekkürler!');
+      commentInput.value = '';
     });
   </script>
 </body>
