@@ -1,130 +1,275 @@
+<!-- BAŞLANGIÇ -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="En absürd ve eğlenceli haberlerin adresi! Gündemin dibini biz kazıyoruz." />
-  <meta name="keywords" content="haber, absürd, gündem, mizah, eğlence" />
-  <meta property="og:title" content="Absürd Haberler - Gündemin Dibi" />
-  <meta property="og:description" content="En absürd ve eğlenceli haberlerin adresi! Gündemin dibini biz kazıyoruz." />
-  <meta property="og:image" content="https://example.com/og-image.jpg" />
-  <title>Absürd Haberler - Gündemin Dibi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Absürd Komik Haberler</title>
   <style>
-    * {box-sizing: border-box; margin: 0; padding: 0;}
-    body {font-family: 'Rubik', sans-serif; line-height: 1.6; background: linear-gradient(to bottom right, #fafafa, #e0e0e0); color: #333;}
-    header {background: #222; color: #fff; padding: 20px 0; text-align: center;}
-    nav {background: #444; padding: 10px 0; text-align: center;}
-    nav a {color: #fff; margin: 0 15px; text-decoration: none; font-weight: 500;}
-    nav a:hover {text-decoration: underline;}
-    .container {max-width: 1200px; margin: auto; padding: 20px;}
-    .news-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;}
-    .news {background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; cursor: pointer; transition: transform 0.3s;}
-    .news:hover {transform: scale(1.02);}
-    .news img {width: 100%; height: auto;}
-    .news h3 {padding: 10px; font-size: 20px;}
-    .news p {padding: 0 10px 10px;}
-    .news-category {position: absolute; background: crimson; color: #fff; padding: 4px 8px; font-size: 12px; top: 10px; left: 10px; border-radius: 4px;}
-    .modal {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; overflow: auto;}
-    .modal-content {background: #fff; padding: 20px; border-radius: 10px; width: 90%; max-width: 800px; position: relative;}
-    .modal-content img {width: 100%; height: auto; margin-bottom: 15px; border-radius: 6px;}
-    .modal-content h3 {margin-bottom: 10px; font-size: 24px;}
-    .modal-content p {font-size: 18px; line-height: 1.8;}
-    .close-btn {position: absolute; top: 10px; right: 15px; font-size: 28px; color: #333; cursor: pointer;}
-    footer {background: #333; color: #fff; text-align: center; padding: 20px; margin-top: 40px;}
-    @media(max-width: 600px){.news h3{font-size: 18px;} .modal-content p{font-size: 16px;}}
+    /* RESET */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #ff6f61;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #222;
+    }
+
+    nav a {
+      color: white;
+      padding: 15px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      background: #444;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .news-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .news-card:hover {
+      transform: scale(1.02);
+    }
+
+    .news-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .news-card .content {
+      padding: 15px;
+    }
+
+    .news-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .news-card p {
+      font-size: 0.95rem;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    .category {
+      font-size: 0.8rem;
+      color: #888;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .detail-view {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      padding: 30px;
+    }
+
+    .detail-box {
+      background: white;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .detail-box img {
+      width: 100%;
+      height: auto;
+    }
+
+    .detail-box .text {
+      padding: 20px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #333;
+    }
+
+    @media(max-width: 600px) {
+      nav a {
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+
+      .news-card img {
+        height: 150px;
+      }
+
+      .detail-box .text {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Absürd Haberler</h1>
-    <p>Gündemin dibine kazıyoruz!</p>
-  </header>
-  <nav>
-    <a href="#home">Ana Sayfa</a>
-    <a href="#son-dakika">Son Dakika</a>
-    <a href="#populer">Popüler</a>
-    <a href="#iletisim">İletişim</a>
-  </nav>
-  <div class="container" id="home">
-    <h2 style="margin-bottom: 20px;">Ana Sayfa</h2>
-    <div class="news-grid">
-      <div class="news" onclick="openModal('modal1')">
-        <span class="news-category">Müzik</span>
-        <img src="https://picsum.photos/id/237/600/400" alt="haber">
-        <h3>Eyüp, Sazıyla Taksim Meydanı'nı Trafiğe Kapattı</h3>
-        <p>Kendini müzikle ifade eden Eyüp, Taksim'de spontane bir konser verdi.</p>
-      </div>
-      <div class="news" onclick="openModal('modal2')">
-        <span class="news-category">Teknoloji</span>
-        <img src="https://picsum.photos/id/1015/600/400" alt="haber">
-        <h3>Barış, Kodla Uzaya Mesaj Gönderdi</h3>
-        <p>"Merhaba uzaylı dostlar!" mesajı dünya dışına ulaştı mı?</p>
-      </div>
-      <div class="news" onclick="openModal('modal3')">
-        <span class="news-category">Spor</span>
-        <img src="https://picsum.photos/id/1021/600/400" alt="haber">
-        <h3>Zeki, Halı Saha Maçında Drone'la Hakemlik Yaptı</h3>
-        <p>Teknoloji spora da el attı! Zeki’nin sıra dışı çözümü gündem oldu.</p>
-      </div>
+
+<header>
+  <h1>Absürd ve Komik Haberler</h1>
+  <p>Magazin | Spor | Ekonomi</p>
+</header>
+
+<nav>
+  <a href="#magazin">Magazin</a>
+  <a href="#spor">Spor</a>
+  <a href="#ekonomi">Ekonomi</a>
+</nav>
+
+<div class="container">
+  <section id="magazin">
+    <h2>Magazin</h2>
+    <div class="news-grid" id="magazin-news"></div>
+  </section>
+
+  <section id="spor">
+    <h2>Spor</h2>
+    <div class="news-grid" id="spor-news"></div>
+  </section>
+
+  <section id="ekonomi">
+    <h2>Ekonomi</h2>
+    <div class="news-grid" id="ekonomi-news"></div>
+  </section>
+</div>
+
+<!-- HABER DETAY PENCERESİ -->
+<div class="detail-view" id="detailView">
+  <div class="detail-box">
+    <span class="close-btn" onclick="closeDetail()">×</span>
+    <img id="detailImage" src="" alt="Haber görseli">
+    <div class="text">
+      <h2 id="detailTitle"></h2>
+      <p id="detailContent"></p>
     </div>
   </div>
+</div>
 
-  <div class="modal" id="modal1">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
-      <img src="https://picsum.photos/id/237/1000/600" alt="haber">
-      <h3>Eyüp, Sazıyla Taksim Meydanı'nı Trafiğe Kapattı</h3>
-      <p>Eyüp, Taksim Meydanı'nda sabah 7'de elinde sazıyla belirdi. Müziği o kadar etkileyiciydi ki insanlar yolları kapattı ve tüm trafik akışı durdu. Belediye zabıtaları bile eşlik etti. O sırada çalan "Çökertme" türküsü sosyal medyada viral oldu. Etkinlik yaklaşık 3 saat sürdü. Eyüp daha sonra "Sadece içimden geldi" açıklamasında bulundu.</p>
-    </div>
-  </div>
+<footer>
+  <p>&copy; 2025 Absürd Komik Haberler. Tüm hakları saklıdır.</p>
+</footer>
 
-  <div class="modal" id="modal2">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
-      <img src="https://picsum.photos/id/1015/1000/600" alt="haber">
-      <h3>Barış, Kodla Uzaya Mesaj Gönderdi</h3>
-      <p>Gecenin bir vakti yazdığı Python scripti ile Barış, dünya dışı medeniyetlere "Selam" demeye karar verdi. Anten olarak televizyon kablosunu kullandı. Komşular sinyal aldıklarını iddia etti. Henüz yanıt gelmedi ama umutlu bekleyiş sürüyor. NASA'nın bile radarına girmeyi başaran bu olay, Reddit'te gündem oldu.</p>
-    </div>
-  </div>
+<script>
+  const newsData = [];
+  const categories = ['magazin', 'spor', 'ekonomi'];
+  const exampleTitles = {
+    magazin: ["Ünlü Şarkıcı Kediyle Röportaj Yaptı", "Barış Manço'nun Gizli Pizza Tarifi Bulundu", "Moda Haftasında Terlik Fırtınası"],
+    spor: ["Futbolcu Sahada Yoga Yaparak Gol Attı", "Basketbolcu Patenle Maça Çıktı", "E-sporcu Fareyle Dünya Rekoru Kırdı"],
+    ekonomi: ["Dolar Yerine Simit Takas Sistemi Başladı", "Yatırımcılar Tavuk Yumurta Hisselerine Yöneldi", "Altın Fiyatları Tavuk Suyuna Çorba ile Kıyaslandı"]
+  };
 
-  <div class="modal" id="modal3">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
-      <img src="https://picsum.photos/id/1021/1000/600" alt="haber">
-      <h3>Zeki, Halı Saha Maçında Drone'la Hakemlik Yaptı</h3>
-      <p>Halı saha maçında tarafsızlığı sağlamak isteyen Zeki, drone ile maçın üstünden hakemlik yaptı. Drone'un kamerası tüm pozisyonları kaydetti. Bazı oyuncular gökyüzünden gelen sarı kartlara şaşırdı. Sistem başarıyla çalıştı ve maçın sonunda herkes memnundu. Spor tarihine geçecek bir deneyim oldu.</p>
-    </div>
-  </div>
+  const exampleImages = [
+    "https://picsum.photos/seed/h1/400/250",
+    "https://picsum.photos/seed/h2/400/250",
+    "https://picsum.photos/seed/h3/400/250",
+    "https://picsum.photos/seed/h4/400/250",
+    "https://picsum.photos/seed/h5/400/250",
+    "https://picsum.photos/seed/h6/400/250",
+  ];
 
-  <div class="container" id="son-dakika">
-    <h2>Son Dakika</h2>
-    <p>Yeni gelen absürd haberler burada listeleniyor. Gelişmeleri anlık takip edin. Şehirde bir vatandaş, kendini güneşe karşı savunmak için şemsiye yerine peynir kullanmaya başladı. Detaylar birazdan!</p>
-  </div>
+  function getRandomText() {
+    const phrases = [
+      "Bu olay sosyal medyada büyük yankı uyandırdı.",
+      "Uzmanlar bu konuda ikiye bölündü.",
+      "Görgü tanıkları hâlâ olayın etkisinde.",
+      "Bazı vatandaşlar şaşkın, bazıları ise memnun.",
+      "Bu gelişme tüm ülkenin gündemine oturdu.",
+    ];
+    return Array(8).fill('').map(() => phrases[Math.floor(Math.random() * phrases.length)]).join(" ");
+  }
 
-  <div class="container" id="populer">
-    <h2>Popüler Haberler</h2>
-    <p>En çok konuşulan, en çok tıklanan haberler burada. Örneğin "Barış'ın Uzaylı Projesi" sosyal medyada 1 milyon izlenmeye ulaştı!</p>
-  </div>
+  for (let i = 0; i < 150; i++) {
+    const cat = categories[i % 3];
+    const title = exampleTitles[cat][Math.floor(Math.random() * exampleTitles[cat].length)];
+    newsData.push({
+      category: cat,
+      title: `${title} #${i+1}`,
+      img: exampleImages[i % exampleImages.length],
+      content: getRandomText()
+    });
+  }
 
-  <div class="container" id="iletisim">
-    <h2>İletişim</h2>
-    <p>Bize ulaşmak için <a href="mailto:info@absurdhaber.com">info@absurdhaber.com</a> adresine e-posta gönderebilirsiniz. Ayrıca Instagram'da <strong>@absurdhaber</strong> hesabımızı takip edebilirsiniz.</p>
-  </div>
+  function renderNews() {
+    newsData.forEach(news => {
+      const div = document.createElement("div");
+      div.className = "news-card";
+      div.innerHTML = `
+        <img src="${news.img}" alt="${news.title}">
+        <div class="content">
+          <div class="category">${news.category.toUpperCase()}</div>
+          <h3>${news.title}</h3>
+          <p>${news.content.slice(0, 100)}...</p>
+        </div>`;
+      div.onclick = () => showDetail(news);
+      document.getElementById(`${news.category}-news`).appendChild(div);
+    });
+  }
 
-  <footer>
-    <p>&copy; 2025 Absürd Haberler. Tüm hakları absürd şekilde saklıdır.</p>
-  </footer>
+  function showDetail(news) {
+    document.getElementById("detailImage").src = news.img;
+    document.getElementById("detailTitle").textContent = news.title;
+    document.getElementById("detailContent").textContent = news.content;
+    document.getElementById("detailView").style.display = "flex";
+  }
 
-  <script>
-    function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
-    }
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
-    }
-  </script>
+  function closeDetail() {
+    document.getElementById("detailView").style.display = "none";
+  }
+
+  renderNews();
+</script>
+
 </body>
 </html>
+<!-- SON -->
