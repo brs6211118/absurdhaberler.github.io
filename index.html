@@ -1,5 +1,4 @@
-<!DOCTYPE h
-tml>
+<!DOCTYPE html>
 <html lang="tr">
 
 <head>
@@ -96,6 +95,7 @@ tml>
       color: #fff;
       padding: 2rem;
       overflow-y: auto;
+      z-index: 999;
     }
 
     .detail-content {
@@ -123,6 +123,14 @@ tml>
       float: right;
     }
 
+    footer {
+      background-color: #444;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
     @media(max-width: 600px) {
       .card img {
         height: 150px;
@@ -139,9 +147,9 @@ tml>
 
   <nav>
     <a href="#">Ana Sayfa</a>
-    <a href="#">Son Dakika</a>
-    <a href="#">Popüler</a>
-    <a href="#">İletişim</a>
+    <a href="#news-section">Son Dakika</a>
+    <a href="#news-section">Popüler</a>
+    <a href="#iletisim">İletişim</a>
   </nav>
 
   <main class="container">
@@ -159,12 +167,32 @@ tml>
     </div>
   </div>
 
+  <footer id="iletisim">
+    <p>Bu site tamamen mizahidir. İletişim: komikhaber@uydurma.com</p>
+  </footer>
+
   <script>
-    const haberler = Array.from({ length: 60 }, (_, i) => ({
-      baslik: `Haber ${i + 1} - ${['Eyüp sazla uzaya sinyal gönderdi', 'Eşref rastgele kodla yapay zekayı şaşırttı', 'Barış bir CNC ile dünya rekoru kırdı', 'Ali CEO’luk yerine taksi şoförlüğüne başladı', 'Yatırımcı Mevlüt, kriptoyu bırakıp tavuk çiftliği kurdu'][i % 5]}`,
-      resim: `https://picsum.photos/seed/${i}/500/300`,
-      detay: `Bu haber tamamen komik ve uydurmadır. ${'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '.repeat(10)} Ne kadar saçma olursa o kadar iyi!`
-    }));
+    const komikBasliklar = [
+      'Eyüp sazla uzaya sinyal gönderdi',
+      'Eşref rastgele kodla yapay zekayı şaşırttı',
+      'Barış bir CNC ile dünya rekoru kırdı',
+      'Ali CEO’luk yerine taksi şöförlüğünü seçti',
+      'Yatırımcı Mevlüt, kriptoyu bırakıp tavuk çiftliği kurdu',
+      'Ankara'da bir çöp kutusundan Einstein notları çıktı',
+      'Kedi Twitter hesabıyla borsa manipüle etti',
+      'Tost makinesiyle uzaya çıkan adam NASA'ya dava açtı',
+      'Sincan'da düzenlenen sakal yeme yarışması olaylı bitti',
+      'Taklıt çiğ köfteyle bitcoin madenciliği yaptı'
+    ];
+
+    const haberler = Array.from({ length: 60 }, (_, i) => {
+      const baslik = komikBasliklar[i % komikBasliklar.length];
+      return {
+        baslik: `Haber ${i + 1} - ${baslik}`,
+        resim: `https://picsum.photos/seed/${i}/500/300`,
+        detay: `Bu haber tamamen komik ve uydurmadır. ${'Ne alaka dediğinizi duyar gibiyiz ama evet bu da oldu. '.repeat(30)} Mizahın dibine vuran bu haber, sosyal medyada da gülücük krizi yarattı.`
+      };
+    });
 
     const newsContainer = document.getElementById('news-section');
     haberler.forEach(haber => {
@@ -174,7 +202,7 @@ tml>
         <img src="${haber.resim}" alt="Haber">
         <div class="card-content">
           <h3>${haber.baslik}</h3>
-          <p>${haber.detay.substring(0, 100)}...</p>
+          <p>${haber.detay.substring(0, 120)}...</p>
         </div>
       `;
       card.addEventListener('click', () => showDetail(haber));
