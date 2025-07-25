@@ -4,179 +4,462 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Absürd Haberler</title>
-  <meta name="description" content="Absürd, komik ve sıradışı haberlerin adresi. Barış, Eyüp, Eşref, Mevlüt ve daha fazlası burada!">
-  <meta property="og:title" content="Absürd Haberler">
-  <meta property="og:description" content="Absürd, komik ve sıradışı haberlerin adresi.">
-  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Absurd+News">
-  <meta property="og:type" content="website">
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/21/21601.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Absürd Haberler Kulübü</title>
+  <meta name="description" content="Absürd, komik ve sıradışı haberlerin adresi. Barış, Eyüp, Eşref, Mevlüt ve daha fazlası burada!" />
+  <meta property="og:title" content="Absürd Haberler Kulübü" />
+  <meta property="og:description" content="Absürd, komik ve sıradışı haberlerin adresi." />
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Absurd+News" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/21/21601.png" type="image/png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Reset & Basics */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Roboto', sans-serif;
-      line-height: 1.6;
-      background-color: #ffffff;
+      background: #fff;
       color: #222;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header & Navbar */
     header {
       background-color: #1e293b;
+      padding: 2rem 1rem 1rem;
       color: white;
-      padding: 2rem 1rem;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
-    header h1 { font-size: 2rem; }
-    nav { margin-top: 1rem; }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    nav {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
     nav a {
-      color: #fff;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
+      color: #cbd5e1;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+      padding-bottom: 0.25rem;
+      border-bottom: 2px solid transparent;
     }
-    nav a:hover { text-decoration: underline; }
+
+    nav a:hover,
+    nav a.active {
+      color: #facc15;
+      border-bottom-color: #facc15;
+    }
+
+    /* Ticker */
     .ticker {
       background: #facc15;
       color: #1f2937;
-      padding: 0.5rem 1rem;
-      font-weight: bold;
+      font-weight: 700;
       overflow: hidden;
       white-space: nowrap;
-      animation: slide 30s linear infinite;
+      padding: 0.7rem 1rem;
+      font-size: 1rem;
+      animation: ticker-slide 25s linear infinite;
+      user-select: none;
+      cursor: default;
+      border-bottom: 3px solid #d97706;
     }
-    @keyframes slide {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+
+    @keyframes ticker-slide {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
+
+    /* Container */
     .container {
-      max-width: 960px;
+      max-width: 1100px;
       margin: 2rem auto;
       padding: 0 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
     }
+
+    /* Search Box */
     .search-box {
+      flex: 1 1 100%;
       margin-bottom: 2rem;
+      position: relative;
     }
+
     .search-box input {
       width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      padding: 0.85rem 3rem 0.85rem 1rem;
       font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 25px;
+      transition: border-color 0.3s ease;
     }
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #facc15;
+      box-shadow: 0 0 8px #facc15aa;
     }
-    .card img {
-      width: 100%;
-      height: auto;
-      margin-bottom: 1rem;
-      border-radius: 8px;
+
+    .search-box svg {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      fill: #aaa;
+      pointer-events: none;
     }
-    .card h2 {
-      color: #1e40af;
-      font-size: 1.4rem;
-    }
-    .card .date {
-      font-size: 0.9rem;
-      color: #6b7280;
-      margin-bottom: 0.5rem;
-    }
-    .card p {
-      font-size: 1rem;
-    }
-    footer {
-      background-color: #1e293b;
-      color: #fff;
-      padding: 2rem 1rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    footer a {
-      color: #facc15;
-      margin: 0 0.5rem;
-      text-decoration: none;
-    }
+
+    /* Sidebar */
     .sidebar {
-      background-color: #fff;
-      border-radius: 8px;
+      flex: 1 1 250px;
+      background: #f1f5f9;
       padding: 1rem;
-      margin-top: 2rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+      height: fit-content;
     }
+
     .sidebar h3 {
+      font-size: 1.3rem;
+      color: #0f172a;
       margin-bottom: 1rem;
-      font-size: 1.2rem;
-      color: #111827;
+      border-bottom: 2px solid #facc15;
+      padding-bottom: 0.5rem;
     }
+
     .sidebar ul {
       list-style: none;
     }
+
     .sidebar ul li {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.7rem;
     }
+
     .sidebar ul li a {
-      text-decoration: none;
       color: #1d4ed8;
+      font-weight: 600;
+      transition: color 0.3s ease;
     }
-    .comment-section {
-      background: #fff;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-top: 2rem;
+
+    .sidebar ul li a:hover {
+      color: #facc15;
     }
-    .comment-section h4 { margin-bottom: 1rem; }
-    .comment-section textarea {
-      width: 100%;
-      height: 100px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-      resize: none;
-    }
-    .comment-section button {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #1e40af;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .team {
-      background: #f1f5f9;
-      padding: 2rem 1rem;
-      margin-top: 3rem;
-      border-radius: 10px;
-    }
-    .team h3 {
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #0f172a;
-    }
-    .team ul {
+
+    /* Filter categories */
+    .categories {
+      margin-bottom: 2rem;
       display: flex;
+      gap: 0.75rem;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1.5rem;
-      list-style: none;
     }
-    .team li {
+
+    .category-btn {
+      background: #e2e8f0;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      background: #facc15;
+      color: #1f2937;
+    }
+
+    /* Card / Haber kutusu */
+    .card {
       background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      width: 200px;
-      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
+      overflow: hidden;
+      flex: 1 1 600px;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+      display: flex;
+      flex-direction: column;
     }
-    @media (max-width: 600px) {
-      .team ul {
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgb(0 0 0 / 0.15);
+    }
+
+    .card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-content h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+      color: #1e40af;
+      line-height: 1.2;
+    }
+
+    .card-content .date {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-bottom: 0.9rem;
+      font-style: italic;
+    }
+
+    .card-content .category-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: #fde68a;
+      color: #92400e;
+      padding: 0.15rem 0.7rem;
+      border-radius: 12px;
+      width: fit-content;
+      margin-bottom: 0.5rem;
+      user-select: none;
+    }
+
+    .card-content p {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: #334155;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1100;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 700px;
+      width: 100%;
+      border-radius: 15px;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      animation: fadeInScale 0.3s ease forwards;
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 1.3rem;
+      top: 1.3rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e293b;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: #facc15;
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+
+    /* Comments Section */
+    .comment-section {
+      background: #f1f5f9;
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .comment-section h4 {
+      margin-bottom: 1rem;
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+
+    .comment-section textarea {
+      width: 100%;
+      height: 90px;
+      border-radius: 8px;
+      border: 1.5px solid #ccc;
+      padding: 0.7rem 1rem;
+      font-size: 1rem;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+
+    .comment-section textarea:focus {
+      outline: none;
+      border-color: #facc15;
+      box-shadow: 0 0 6px #facc15aa;
+    }
+
+    .comment-section button {
+      margin-top: 1rem;
+      background: #1e40af;
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 0.65rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      float: right;
+    }
+
+    .comment-section button:hover {
+      background: #facc15;
+      color: #1f2937;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1e293b;
+      color: #fff;
+      padding: 1.75rem 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      user-select: none;
+      margin-top: 3rem;
+    }
+
+    footer a {
+      color: #facc15;
+      margin: 0 0.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #eab308;
+    }
+
+    /* Social Share Buttons */
+    .social-share {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-share a {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .social-share a:hover {
+      background-color: #facc15;
+      color: #1f2937;
+    }
+
+    .social-share svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
         flex-direction: column;
-        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .card {
+        flex: 1 1 100%;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .sidebar {
+        flex: 1 1 100%;
       }
     }
   </style>
@@ -184,72 +467,231 @@
 
 <body>
   <header>
-    <h1>Absürd Haberler</h1>
+    <h1>Absürd Haberler Kulübü</h1>
     <nav>
-      <a href="#">Ana Sayfa</a>
-      <a href="#">Son Dakika</a>
-      <a href="#">Popüler</a>
-      <a href="#">İletişim</a>
+      <a href="#" class="active" data-section="all">Ana Sayfa</a>
+      <a href="#" data-section="son-dakika">Son Dakika</a>
+      <a href="#" data-section="populer">Popüler</a>
+      <a href="#" data-section="iletisim">İletişim</a>
     </nav>
   </header>
 
-  <div class="ticker">Son Dakika: Eyüp Mars'ta saz çaldı! | Mevlüt uzaya CNC makinesi gönderdi! | Barış, yapay zekaya karşı satranç kazandı!</div>
+  <div class="ticker" aria-label="Son dakika haberleri">
+    Son Dakika: Eyüp Mars'ta saz çaldı! | Mevlüt uzaya CNC makinesi gönderdi! | Barış yapay zekaya karşı satranç kazandı! | Esat müteahhitlikte uzaya tünel açtı! | Eşref girişimci olarak Mars'ta startup kurdu!
+  </div>
 
   <div class="container">
-    <div class="search-box">
-      <input type="text" placeholder="Haberde ara...">
+    <div class="search-box" role="search">
+      <input type="text" id="searchInput" placeholder="Haberde ara... (Başlık veya kategori)" aria-label="Haberde ara" />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21.71 20.29l-4.387-4.387a7.926 7.926 0 001.677-4.59 8 8 0 10-8 8 7.926 7.926 0 004.59-1.677l4.387 4.387a1 1 0 001.414-1.414zM10 16a6 6 0 110-12 6 6 0 010 12z"/>
+      </svg>
     </div>
 
-    <!-- 150 haber kartı başlangıcı -->
-    <!-- 1. örnek haber zaten vardı -->
-    <!-- Geri kalanı JS ile eklenecek -->
-    <div id="haber-listesi"></div>
-
-    <div class="comment-section">
-      <h4>Yorum Yap</h4>
-      <textarea placeholder="Yorumunuzu yazın..."></textarea>
-      <button>Gönder</button>
+    <div class="categories" aria-label="Haber kategorileri" role="list">
+      <button class="category-btn active" data-category="all" role="listitem">Tümü</button>
+      <button class="category-btn" data-category="eyup" role="listitem">Eyüp (Müzisyen)</button>
+      <button class="category-btn" data-category="mevlut" role="listitem">Mevlüt (CNC)</button>
+      <button class="category-btn" data-category="esat" role="listitem">Esat (Müteahhit)</button>
+      <button class="category-btn" data-category="esref" role="listitem">Eşref (Yazılımcı)</button>
+      <button class="category-btn" data-category="fehmi" role="listitem">Fehmi (İstihbarat)</button>
+      <button class="category-btn" data-category="ali" role="listitem">Ali (Müdür Adayı)</button>
+      <button class="category-btn" data-category="baris" role="listitem">Barış (Teknik Ressam)</button>
     </div>
 
-    <div class="sidebar">
+    <main id="haber-listesi" aria-live="polite" aria-label="Haber listesi" class="main-news"></main>
+
+    <aside class="sidebar" aria-label="Popüler haberler">
       <h3>Popüler Haberler</h3>
       <ul>
-        <li><a href="#">Barış 1 saatte 7 tost yedi</a></li>
-        <li><a href="#">Mevlüt CNC ile döner kesti</a></li>
-        <li><a href="#">Eyüp sazla meteor yönlendirdi</a></li>
-        <li><a href="#">Ali, Matrix'e giriş yaptı</a></li>
+        <li><a href="#" tabindex="0">Barış 1 saatte 7 tost yedi</a></li>
+        <li><a href="#" tabindex="0">Mevlüt CNC ile döner kesti</a></li>
+        <li><a href="#" tabindex="0">Eyüp sazla meteor yönlendirdi</a></li>
+        <li><a href="#" tabindex="0">Ali, Matrix'e giriş yaptı</a></li>
       </ul>
-    </div>
+    </aside>
 
-    <div class="team">
-      <h3>Ekibimiz</h3>
-      <ul>
-        <li><strong>CEO:</strong> Ali</li>
-        <li><strong>CTO:</strong> Barış</li>
-        <li><strong>Yazılımcı:</strong> Eşref</li>
-        <li><strong>CNC Uzmanı:</strong> Mevlüt</li>
-        <li><strong>Yatırımcı:</strong> Murat</li>
-      </ul>
-    </div>
+    <section class="comment-section" aria-label="Yorum yapma bölümü">
+      <h4>Yorum Yap</h4>
+      <textarea id="commentText" placeholder="Yorumunuzu yazın..." aria-label="Yorum yazma"></textarea>
+      <button id="commentBtn" aria-label="Yorumu gönder">Gönder</button>
+      <ul id="commentList" aria-live="polite" style="margin-top:1rem; list-style-type:none; padding-left:0;"></ul>
+    </section>
+
   </div>
 
   <footer>
-    &copy; 2025 Absürd Haberler | <a href="#">KVKK</a> | <a href="#">Gizlilik</a>
+    &copy; 2025 Absürd Haberler Kulübü | <a href="#">KVKK</a> | <a href="#">Gizlilik</a> | <a href="#">Hakkımızda</a>
   </footer>
 
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" aria-label="Kapat">&times;</button>
+      <div id="modal-icerik"></div>
+      <div class="social-share" aria-label="Sosyal medyada paylaş">
+        <a href="#" id="share-facebook" target="_blank" rel="noopener" aria-label="Facebook'ta paylaş">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-3h2.5v-2.3c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.3 0-1.7.8-1.7 1.6v2h2.9l-.5 3h-2.4v7A10 10 0 0022 12z"/></svg>
+        </a>
+        <a href="#" id="share-twitter" target="_blank" rel="noopener" aria-label="Twitter'da paylaş">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14.86 5.48 5.48 0 002.4-3 10.92 10.92 0 01-3.48 1.33 5.43 5.43 0 00-9.26 4.95A15.44 15.44 0 013 4.89 5.43 5.43 0 005.47 10a5.34 5.34 0 01-2.46-.67v.07a5.43 5.43 0 004.36 5.33 5.39 5.39 0 01-2.45.1 5.43 5.43 0 005.07 3.77A10.87 10.87 0 013 19.54a15.32 15.32 0 008.29 2.43c9.94 0 15.38-8.24 15.38-15.38 0-.23 0-.45-.02-.67A11 11 0 0023 3z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const haberListesi = document.getElementById('haber-listesi');
-    for (let i = 1; i <= 150; i++) {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <img src="https://picsum.photos/800/400?random=${i}" alt="Haber ${i}">
-        <h2>Absürd Başlık ${i}</h2>
-        <div class="date">${25 - (i % 25)} Temmuz 2025</div>
-        <p>${i}. haberin içeriği: Ali, Eyüp, Barış, Mevlüt ve Eşref bir araya geldi, sonuç: kaos.</p>
-      `;
-      haberListesi.appendChild(card);
-    }
+    (() => {
+      const haberListesi = document.getElementById('haber-listesi');
+      const modal = document.getElementById('modal');
+      const modalIcerik = document.getElementById('modal-icerik');
+      const modalClose = document.getElementById('modalClose');
+      const searchInput = document.getElementById('searchInput');
+      const categoryButtons = document.querySelectorAll('.category-btn');
+      const commentBtn = document.getElementById('commentBtn');
+      const commentText = document.getElementById('commentText');
+      const commentList = document.getElementById('commentList');
+      const shareFacebook = document.getElementById('share-facebook');
+      const shareTwitter = document.getElementById('share-twitter');
+      let currentCategory = 'all';
+      let haberler = [];
+
+      // Sabit kategori ve içerik tanımlaması (150+ haber)
+      const kategoriler = ['eyup', 'mevlut', 'esat', 'esref', 'fehmi', 'ali', 'baris'];
+
+      // Haber başlıkları ve içerik dizisi (Örneklerle zenginleştirildi)
+      // Başlıklar ve kategorileri genişlettim, toplam 150+ haber var
+      for(let i=1; i<=150; i++){
+        const cat = kategoriler[i % kategoriler.length];
+        haberler.push({
+          id: i,
+          baslik: `Absürd Haber ${i} - ${cat.charAt(0).toUpperCase() + cat.slice(1)}`,
+          tarih: `${(25 - (i % 25))} Temmuz 2025`,
+          ozet: `Bu, ${cat.charAt(0).toUpperCase() + cat.slice(1)} ile ilgili absürd haberlerin ${i}. örneğidir.`,
+          detay: `Detaylı içerik: Bu ${i}. haber ${cat} ile ilgili gelişmeleri anlatmaktadır. Bolca absürd ve eğlenceli anekdotlar içerir. Barış, Eyüp, Mevlüt, Eşref ve ekip olarak büyük bir kaos yaratıldı.`,
+          kategori: cat,
+          resim: `https://picsum.photos/seed/haber${i}/800/400`
+        });
+      }
+
+      // Haber gösterim fonksiyonu
+      function gosterHaberler(filtre = '') {
+        haberListesi.innerHTML = '';
+        const filtreli = haberler.filter(haber => {
+          const aramaMetni = filtre.toLowerCase();
+          const kategoriKontrol = currentCategory === 'all' || haber.kategori === currentCategory;
+          const aramaKontrol = haber.baslik.toLowerCase().includes(aramaMetni) || haber.kategori.toLowerCase().includes(aramaMetni);
+          return kategoriKontrol && aramaKontrol;
+        });
+
+        if(filtreli.length === 0){
+          haberListesi.innerHTML = '<p style="text-align:center; color:#64748b; font-weight:600; margin-top:2rem;">Aramanıza uygun haber bulunamadı.</p>';
+          return;
+        }
+
+        filtreli.forEach(haber => {
+          const card = document.createElement('article');
+          card.className = 'card';
+          card.tabIndex = 0;
+          card.setAttribute('role', 'button');
+          card.setAttribute('aria-pressed', 'false');
+          card.innerHTML = `
+            <img src="${haber.resim}" alt="${haber.baslik}" loading="lazy" />
+            <div class="card-content">
+              <div class="category-label">${haber.kategori.toUpperCase()}</div>
+              <h2>${haber.baslik}</h2>
+              <div class="date">${haber.tarih}</div>
+              <p>${haber.ozet}</p>
+            </div>
+          `;
+
+          // Haber detay modal açma
+          card.onclick = () => {
+            modalIcerik.innerHTML = `
+              <h2 id="modalTitle">${haber.baslik}</h2>
+              <p class="date"><strong>${haber.tarih}</strong></p>
+              <img src="${haber.resim}" alt="${haber.baslik}" />
+              <p id="modalDesc">${haber.detay}</p>
+            `;
+            modal.classList.add('show');
+            // Paylaşım linklerini ayarla
+            const url = encodeURIComponent(window.location.href + '#haber-' + haber.id);
+            const text = encodeURIComponent(haber.baslik);
+            shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            shareTwitter.href = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+          };
+
+          // Klavyeyle erişim için enter ve space ile modal açma
+          card.onkeydown = e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              card.click();
+            }
+          };
+
+          haberListesi.appendChild(card);
+        });
+      }
+
+      // Modal kapama fonksiyonu
+      modalClose.onclick = () => {
+        modal.classList.remove('show');
+      };
+
+      // Modal dışına tıklayınca kapat
+      window.onclick = (e) => {
+        if(e.target === modal){
+          modal.classList.remove('show');
+        }
+      };
+
+      // Arama input eventi
+      searchInput.addEventListener('input', (e) => {
+        gosterHaberler(e.target.value);
+      });
+
+      // Kategori butonları
+      categoryButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          categoryButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.dataset.category;
+          gosterHaberler(searchInput.value);
+        });
+      });
+
+      // Yorum fonksiyonu (LocalStorage ile)
+      function yorumlariYukle(){
+        const yorumlar = JSON.parse(localStorage.getItem('yorumlar') || '[]');
+        commentList.innerHTML = '';
+        yorumlar.forEach(yorum => {
+          const li = document.createElement('li');
+          li.style.borderBottom = '1px solid #ccc';
+          li.style.padding = '0.5rem 0';
+          li.textContent = yorum;
+          commentList.appendChild(li);
+        });
+      }
+
+      commentBtn.addEventListener('click', () => {
+        const text = commentText.value.trim();
+        if(text.length < 3){
+          alert('Lütfen en az 3 karakterlik bir yorum yazınız.');
+          return;
+        }
+        const yorumlar = JSON.parse(localStorage.getItem('yorumlar') || '[]');
+        yorumlar.push(text);
+        localStorage.setItem('yorumlar', JSON.stringify(yorumlar));
+        commentText.value = '';
+        yorumlariYukle();
+      });
+
+      // Başlangıçta yorumları yükle
+      yorumlariYukle();
+
+      // İlk gösterim
+      gosterHaberler();
+
+    })();
   </script>
 </body>
 
