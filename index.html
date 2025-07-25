@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr
+">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,22 +44,23 @@
     }
     .news-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
     }
     .news {
       background: #f4f4f4;
-      padding: 15px;
-      border-radius: 8px;
+      padding: 20px;
+      border-radius: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       transition: 0.3s;
       cursor: pointer;
     }
     .news:hover {
-      transform: scale(1.02);
+      transform: scale(1.03);
     }
     .news img {
       max-width: 100%;
+      height: auto;
       border-radius: 5px;
       margin-bottom: 10px;
     }
@@ -76,7 +78,16 @@
     .modal-content {
       background: white;
       padding: 20px;
-      max-width: 500px;
+      max-width: 700px;
+      width: 95%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 10px;
+    }
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
       border-radius: 10px;
     }
     .close-btn {
@@ -133,8 +144,9 @@
   <div class="modal" id="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal()">&times;</span>
+      <img id="modal-img" src="" alt="" />
       <h3 id="modal-title"></h3>
-      <p id="modal-content"></p>
+      <p id="modal-content-text"></p>
     </div>
   </div>
 
@@ -145,11 +157,14 @@
   <script>
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modal-title");
-    const modalContent = document.getElementById("modal-content");
+    const modalContent = document.getElementById("modal-content-text");
+    const modalImg = document.getElementById("modal-img");
 
-    function openModal(title, content) {
+    function openModal(title, content, imgSrc) {
       modalTitle.innerText = title;
       modalContent.innerText = content;
+      modalImg.src = imgSrc;
+      modalImg.alt = title;
       modal.style.display = "flex";
     }
     function closeModal() {
@@ -157,23 +172,23 @@
     }
 
     const names = ["Eyüp", "Barış", "Eşref", "Mevlüt", "Ali", "Cem", "Burcu", "Merve"];
-    const professions = ["saz çaldı", "bozuk tost yedi", "evde kertenkele besledi", "çatıya çıktı", "robot yaptı"];
+    const professions = ["bugün parkta kaykay gösterisi yaptı", "fırından çıkan ekmekleri numaralandırdı", "robotik kedi eğitimi verdi", "sokak lambası ile tartıştı", "kendi gölgesini takip etti"];
 
     const lastMinuteNews = Array.from({length: 20}, (_, i) => {
       const name = names[i % names.length];
       const prof = professions[i % professions.length];
       return {
-        title: `Son Dakika ${i+1}: ${name} ${prof}!`,
-        img: "https://picsum.photos/300/200?random=" + i,
-        content: `${name} bugün gündeme bomba gibi düştü. ${prof} olayı sırasında mahalleli şaşkınlık yaşadı. Görgü tanıkları olayı şöyle anlattı: "Böyle bir şey daha önce görmedik!" Haberin ayrıntılarına göre olay yerinde yaşanan gelişmeler herkesi şok etti. ${i+1}. haberin sonunda, uzmanlar bu olayın benzerlerinin yaşanabileceğini söylüyor.`
+        title: `Son Dakika ${i+1}: ${name} ${prof}`,
+        img: "https://picsum.photos/600/400?random=" + i,
+        content: `${name} yine gündem yarattı. Olay şu şekilde gelişti: ${prof}. Tanıkların ifadesine göre olay saat ${9+i}:00 civarında meydana geldi. Yerel halk şaşkınlık içinde olan biteni izlerken, olayın sosyal medyada yankısı büyük oldu. Bu gelişme, kentte daha önce benzeri görülmemiş bir durum olarak kayıtlara geçti.`
       };
     });
 
     const popularNews = Array.from({length: 20}, (_, i) => {
       return {
-        title: `Popüler Haber ${i+1}: ${i % 2 === 0 ? "Penguenlere Ehliyet Verildi" : "Çamaşır Makinesiyle Seyahat"}`,
-        img: "https://picsum.photos/300/200?random=" + (i + 100),
-        content: `Bu haber sosyal medyada büyük yankı uyandırdı. Vatandaşlar "Böyle bir şey mümkün mü?" diye sorarken, yetkililer araştırma başlattı. ${i+1}. habere göre, olay yerinde çekilen videolar milyonlarca kez izlendi. Uzmanlar bu durumu açıklamakta zorlanıyor.`
+        title: `Popüler Haber ${i+1}: ${i % 2 === 0 ? "Dronla Tavla Oynayan Adam" : "Dalgıçlar Metroda Su Altı Partisi Verdi"}`,
+        img: "https://picsum.photos/600/400?random=" + (i + 100),
+        content: `Bu haber gündeme damgasını vurdu. İnsanlar olayın gerçek olup olmadığını sorgularken yetkililer açıklama yapmakta gecikmedi. Sosyal medya bu gelişmeyle çalkalandı. Görüntüler kısa sürede viral oldu. Haberin detaylarına göre, olay yerinde toplanan kalabalık büyük coşku yaşadı.`
       }
     });
 
@@ -187,7 +202,7 @@
           <h3>${news.title}</h3>
           <p>${news.content.slice(0, 100)}...</p>
         `;
-        el.onclick = () => openModal(news.title, news.content);
+        el.onclick = () => openModal(news.title, news.content, news.img);
         grid.appendChild(el);
       });
     }
